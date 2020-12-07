@@ -27,5 +27,7 @@ source "$DOTFILES_PATH/shell/init.sh"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+source "$DOTFILES_PATH/modules/z/z.sh"
+
 source "$DOTFILES_PATH/shell/bash/themes/charly.sh"
 

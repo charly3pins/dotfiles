@@ -15,3 +15,5 @@ source "$DOTFILES_PATH/shell/zsh/key-bindings.zsh"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+source "$DOTFILES_PATH/modules/z/z.sh"
+
