@@ -1,10 +1,9 @@
-[submodule "modules/dotboit"]
-	path = modules/dotbot
-	url = https://github.com/anishathalye/dotbot
-	ignore = dirty
 [submodule "modules/fonts"]
 	path = modules/fonts
 	url = https://github.com/powerline/fonts
+[submodule "modules/dotbot"]
+	path = modules/dotbot
+	url = https://github.com/anishathalye/dotbot
 [submodule "modules/z"]
 	path = modules/z
 	url = https://github.com/rupa/z.git
