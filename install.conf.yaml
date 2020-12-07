@@ -1,0 +1,22 @@
+- clean: ['~']
+
+- shell:
+    - [git submodule update --init --recursive, Installing submodules]
+    - [exec modules/fonts/install.sh, Installing Powerline Fonts]
+
+- link:
+    ~/.gitconfig : git/.gitconfig
+    ~/.gitignore_global: git/.gitignore_global
+    ~/.vimrc: editors/vim/.vimrc
+    ~/.zimrc: shell/zsh/.zimrc
+    ~/.zlogin: shell/zsh/.zlogin
+    ~/.zshenv: shell/zsh/.zshenv
+    ~/.zshrc: shell/zsh/.zshrc
+    ~/.bashrc: shell/bash/.bashrc
+    ~/.bash_profile: shell/bash/.bash_profile
+    ~/.profile: shell/bash/.profile
+    ~/.config/autostart: os/linux/autostart
+    ~/.config/Code/User/settings.json: editors/code/settings.json
+    ~/.config/Code/User/snippets: editors/code/snippets
+    ~/.config/terminator/config: linux/terminator/config
+
