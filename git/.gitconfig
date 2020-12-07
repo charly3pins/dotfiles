@@ -1,0 +1,28 @@
+[user]
+  email = charlyfb90@gmail.com
+  name = charly3pins
+
+[url "git@github.com:"]
+  insteadOf = https://github.com/
+
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+
+[core]
+  excludesfile = ~/.gitignore
+  autocrlf = input
+  editor = vim
+
+[fetch]
+  prune = true
+
+[diff]
+  tool = vimdiff
+
+[difftool]
+  prompt = false
+
+[apply]
+  whitespace = fix

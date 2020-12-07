@@ -25,4 +25,5 @@ alias gps="git push"
 alias gpsf="git push --force"
 alias gpl="git pull"
 alias gl="git log --oneline"
-
+alias glo="git log --graph --decorate --pretty=oneline --abbrev-commit"
+alias gri="git rebase -i"
