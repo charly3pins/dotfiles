@@ -1,0 +1,20 @@
+{
+    "workbench.startupEditor": "newUntitledFile",
+    "breadcrumbs.enabled": true,
+    "window.zoomLevel": 0,
+    "explorer.confirmDelete": false,
+    "update.mode": "start",
+    "extensions.ignoreRecommendations": false,
+    "go.gopath": "/home/charly/Code/go",
+    "go.goroot": "/usr/local/go",
+    "go.inferGopath": true,
+    "go.formatTool": "goimports",
+    "go.gocodeAutoBuild": true,
+    "go.enableCodeLens": {
+        
+        "references": false,
+        "runtest": true
+    },
+    "dart.flutterSdkPath": "/usr/local/flutter",
+    "terminal.integrated.shell.linux": "/bin/zsh",
+}
