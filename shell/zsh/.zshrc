@@ -9,11 +9,14 @@ source ${ZIM_HOME}/init.zsh
 ZSH_AUTOSUGGEST_USE_ASYNC=true
 ZSH_HIGHLIGHT_MAXLENGTH=300
 
+# Init my shell configuration (alias, exports)
 source "$DOTFILES_PATH/shell/init.sh"
 
-source "$DOTFILES_PATH/shell/zsh/key-bindings.zsh"
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
+# Load z module
 source "$DOTFILES_PATH/modules/z/z.sh"
 
+# Execute the history line, without verification
+unsetopt HIST_VERIFY
+
+# Load fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
