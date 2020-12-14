@@ -1,6 +1,7 @@
 # Go
 export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/Code/go
+export GOBIN=$GOPATH/bin
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
@@ -11,4 +12,5 @@ export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
 export PATH=$PATH:$HOME/bin
+export PATH=$PATH:$GOBIN
 
