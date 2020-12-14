@@ -17,4 +17,5 @@
     },
     "dart.flutterSdkPath": "/usr/local/flutter",
     "terminal.integrated.shell.linux": "/bin/zsh",
+    "workbench.colorTheme": "Default Dark+",
 }
