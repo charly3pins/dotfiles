@@ -25,9 +25,10 @@
 [plugins]
 [profiles]
   [[default]]
-    background_color = "#2e3436"
+    background_color = "#141322"
     cursor_color = "#aaaaaa"
     cursor_shape = ibeam
     custom_command = /bin/zsh
-    foreground_color = "#e9b96e"
+    foreground_color = "#7c9c9e"
+    palette = "#30317d:#ff5395:#d8ff4e:#fffc7e:#7dd9e4:#fa61b8:#a8ffef:#cff0e8:#391ab5:#ff427b:#c8ff00:#f8d846:#84f9fe:#d5358f:#83fee8:#cbfff2"
     use_custom_command = True
