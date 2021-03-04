@@ -11,11 +11,20 @@
     "go.formatTool": "goimports",
     "go.gocodeAutoBuild": true,
     "go.enableCodeLens": {
-        
         "references": false,
         "runtest": true
     },
     "dart.flutterSdkPath": "/usr/local/flutter",
     "terminal.integrated.shell.linux": "/bin/zsh",
-    "workbench.colorTheme": "Default Dark+",
+    "editor.fontFamily": "Fira Code",
+    "window.title": "${dirty}${activeEditorShort}${separator}${rootPath}",
+    "editor.cursorBlinking": "expand",
+    "todo-tree.tree.showScanModeButton": false,
+    "workbench.colorTheme": "Radical",
+    "bracket-pair-colorizer-2.colors": [
+        "#DFF959",
+        "#F834BB",
+        "#2BF5E9",
+        "#D831D7"
+    ],
 }
