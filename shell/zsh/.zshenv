@@ -7,5 +7,9 @@
 : ${ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim}
 # }}} End configuration added by Zim install
 
+# Prompt colors
+export DIRTY_COLOR=magenta
+export STATUS_COLOR=black
+
 export DOTFILES_PATH=$HOME/.dotfiles
 
