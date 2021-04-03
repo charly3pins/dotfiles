@@ -19,4 +19,5 @@
     ~/.config/Code/User/settings.json: editors/code/settings.json
     ~/.config/Code/User/snippets: editors/code/snippets
     ~/.config/terminator/config: linux/terminator/config
-
+    /user/share/themes/Nordic-darker: linux/themes/Nordic-darker
+    /user/share/icons/Nordic-Darker: linux/icons/Nordic-Darker
