@@ -27,7 +27,7 @@
         "#D831D7"
     ],
     "liveshare.authenticationProvider": "GitHub",
-    "workbench.colorTheme": "Radical",
+    "workbench.colorTheme": "Nord",
     "todo-tree.general.tags": [
         "BUG",
         "HACK",
@@ -38,4 +38,5 @@
         "[x]"
     ],
     "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
+    "go.toolsManagement.autoUpdate": true,
 }
