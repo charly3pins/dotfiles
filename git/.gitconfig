@@ -26,3 +26,5 @@
 
 [apply]
   whitespace = fix
+[init]
+	defaultBranch = main
