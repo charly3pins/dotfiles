@@ -12,6 +12,7 @@ alias arx="cd ~/Code/arex"
 alias arxdev="cd ~/Code/arex/dev-dependencies"
 alias arxg="cd ~/Code/go/src/github.com/arexio/"
 alias c3p="cd ~/Code/go/src/github.com/charly3pins"
+alias macafu="cd ~/Code/go/src/github.com/macafu"
 
 # Git
 alias ga="git add"
