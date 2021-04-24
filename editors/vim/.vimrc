@@ -42,3 +42,5 @@ let g:go_highlight_generate_tags = 1
 
 " NERDTree plugin specific commands
 :nnoremap <C-g> :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
+
