@@ -27,7 +27,7 @@
         "#D831D7"
     ],
     "liveshare.authenticationProvider": "GitHub",
-    "workbench.colorTheme": "Nord",
+    "workbench.colorTheme": "Dracula",
     "todo-tree.general.tags": [
         "BUG",
         "HACK",

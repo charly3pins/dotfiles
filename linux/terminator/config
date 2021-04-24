@@ -5,15 +5,15 @@
   title_hide_sizetext = True
   title_inactive_bg_color = "#4C566A"
   title_inactive_fg_color = "#D8DEE9"
-  title_receive_bg_color = "#8FBCBB"
+  title_receive_bg_color = "#e64747"
   title_receive_fg_color = "#2E3440"
-  title_transmit_bg_color = "#88C0D0"
+  title_transmit_bg_color = "#e64747"
   title_transmit_fg_color = "#2E3440"
   title_use_system_font = False
   window_state = maximise
 [keybindings]
-  close_term = <Primary>w
-  close_window = <Primary>q
+  close_term = <Alt>w
+  close_window = <Alt>q
   split_horiz = <Primary><Shift>Down
   split_vert = <Primary><Shift>Right
 [layouts]
@@ -28,12 +28,12 @@
 [plugins]
 [profiles]
   [[default]]
-    background_color = "#2E3440"
+    background_color = "#383a59"
     cursor_color = "#D8DEE9"
     cursor_shape = ibeam
-    foreground_color = "#D8DEE9"
-    palette = "#3B4252:#BF616A:#A3BE8C:#EBCB8B:#81A1C1:#B48EAD:#88C0D0:#E5E9F0:#4C566A:#BF616A:#A3BE8C:#EBCB8B:#81A1C1:#B48EAD:#8FBCBB:#ECEFF4"
+    custom_command = /bin/zsh
     font = Hermit 11
+    foreground_color = "#f8f8f2"
+    palette = "#262626:#e356a7:#42e66c:#e4f34a:#9b6bdf:#e64747:#75d7ec:#efa554:#7a7a7a:#ff79c6:#50fa7b:#f1fa8c:#bd93f9:#ff5555:#8be9fd:#ffb86c"
     use_custom_command = True
     use_system_font = False
-    custom_command = /bin/zsh
