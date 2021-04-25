@@ -5,23 +5,18 @@ export GOBIN=$GOPATH/bin
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh    "  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_D    IR/bash_completion"  # This loads nvm bash_comp    letion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # LANG
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
-# SPICETIFY
-export SPICETIFY="/usr/local/spicetify-cli/spicetify"
-export PATH="$SPICETIFY:$PATH"
-
-# FZF by https://github.com/ianchesal/nord-fzf
-export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
-    --color=fg:#e5e9f0,bg:#3b4252,hl:#81a1c1
-    --color=fg+:#e5e9f0,bg+:#3b4252,hl+:#81a1c1
-    --color=info:#eacb8a,prompt:#bf6069,pointer:#b48dac
-    --color=marker:#a3be8b,spinner:#b48dac,header:#a3be8b'
+# FZF dracula theme
+export FZF_DEFAULT_OPTS='
+  --color fg:255,bg:236,hl:84,fg+:255,bg+:236,hl+:215
+  --color info:141,prompt:84,spinner:212,pointer:212,marker:212
+'
 
 export PATH=$PATH:$HOME/bin
 export PATH=$PATH:$GOBIN
