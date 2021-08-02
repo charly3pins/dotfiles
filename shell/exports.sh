@@ -18,5 +18,7 @@ export FZF_DEFAULT_OPTS='
   --color info:141,prompt:84,spinner:212,pointer:212,marker:212
 '
 
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
+
 export PATH=$PATH:$HOME/bin
 export PATH=$PATH:$GOBIN
