@@ -21,6 +21,10 @@ unsetopt HIST_VERIFY
 # Load fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# Completion for zsh in Mac
+autoload -Uz compinit
+compinit
+
 # Enable terraform autocomplete
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/terraform terraform

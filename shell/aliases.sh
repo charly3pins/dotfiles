@@ -28,6 +28,3 @@ alias gpl="git pull"
 alias gl="git log --oneline"
 alias glo="git log --graph --decorate --pretty=oneline --abbrev-commit"
 alias gri="git rebase -i"
-
-# Utils
-alias spicetify="/usr/local/spicetify-cli/spicetify"
