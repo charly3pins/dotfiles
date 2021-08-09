@@ -2,7 +2,7 @@
 alias sudo='sudo '
 
 # Dir
-alias ls="ls --color=auto"
+alias ls="ls -G"
 alias ll="ls -l"
 alias la="ls -la"
 
