@@ -7,6 +7,10 @@ export GOBIN=$GOPATH/bin
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#NVM Mac
+export NVM_DIR="$HOME/.nvm"
+[ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && . "$(brew --prefix)/opt/nvm/nvm.sh" # This loads nvm
+[ -s "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" ] && . "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
 
 # LANG
 export LANG="en_US.UTF-8"
@@ -18,7 +22,12 @@ export FZF_DEFAULT_OPTS='
   --color info:141,prompt:84,spinner:212,pointer:212,marker:212
 '
 
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
+# JAVA
+export PATH="/usr/local/opt/openjdk@8/bin:$PATH"
+export JAVA_HOME=$(/usr/libexec/java_home)
+#export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
 
+# PATH
+export PATH=$PATH:$HOME/Code/flutter/bin
 export PATH=$PATH:$HOME/bin
 export PATH=$PATH:$GOBIN
