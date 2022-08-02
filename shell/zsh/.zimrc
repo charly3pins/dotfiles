@@ -2,7 +2,7 @@
 
 zmodule zimfw/environment
 zmodule zimfw/git-info
-zmodule zimfw/history
+#zmodule zimfw/history
 zmodule zimfw/input
 
 zmodule zsh-users/zsh-autosuggestions
