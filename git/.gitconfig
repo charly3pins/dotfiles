@@ -1,6 +1,9 @@
-[user]
-  email = charlyfb90@gmail.com
-  name = charly3pins
+[includeIf "gitdir:~/Code/"]
+    path = ~/.gitconfig_personal
+[includeIf "gitdir:~/Code/arex/"]
+    path = ~/.gitconfig_arex
+[includeIf "gitdir:~/Code/go/src/github.com/arexio/"]
+    path = ~/.gitconfig_arex
 
 [url "git@github.com:"]
 	insteadOf = https://github.com/
@@ -26,5 +29,7 @@
 
 [apply]
   whitespace = fix
+
 [init]
 	defaultBranch = main
+
