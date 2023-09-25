@@ -15,8 +15,15 @@ set expandtab
 set completeopt-=preview
 set completeopt+=menuone,noinsert
 
+" plugins
+call plug#begin('~/.vim/plugged')
+Plug 'dracula/vim', { 'as': 'dracula' }
+call plug#end()
+
 " theme
-packadd! dracula
+if v:version < 802
+    packadd! dracula
+endif
 syntax enable
 colorscheme dracula
 
