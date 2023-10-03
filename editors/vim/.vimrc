@@ -17,7 +17,9 @@ set completeopt+=menuone,noinsert
 
 " plugins
 call plug#begin('~/.vim/plugged')
-Plug 'dracula/vim', { 'as': 'dracula' }
+    Plug 'dracula/vim', { 'as': 'dracula' }
+    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+    Plug 'preservim/nerdtree'
 call plug#end()
 
 " theme
@@ -48,6 +50,6 @@ let g:go_highlight_build_constraints = 1
 let g:go_highlight_generate_tags = 1
 
 " NERDTree plugin specific commands
-:nnoremap <C-g> :NERDTreeToggle<CR>
+:nnoremap <C-n> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 
