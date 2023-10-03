@@ -1,4 +1,11 @@
-[includeIf "gitdir:~/Code/"]
+[user]
+    email = charlyfb90@gmail.com
+    name = charly3pins
+[commit]
+    gpgsign = true
+[gpg]
+    program = gpg
+[include]
     path = ~/.gitconfig_personal
 [includeIf "gitdir:~/Code/arex/"]
     path = ~/.gitconfig_arex
@@ -32,10 +39,6 @@
 
 [init]
 	defaultBranch = main
-
-[user]
-	name = charly3pins
-    email = charlyfb90@gmail.com
 
 # COLORS
 # ------
