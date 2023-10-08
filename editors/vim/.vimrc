@@ -2,7 +2,7 @@ filetype plugin indent on
 set encoding=utf-8
 
 set noswapfile
-set number
+set number relativenumber
 
 " tabs setup
 set tabstop=4 
