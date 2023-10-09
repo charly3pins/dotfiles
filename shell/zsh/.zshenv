@@ -4,7 +4,7 @@
 
 # Prompt colors (eriner zim theme)
 export STATUS_COLOR=black
-export PWD_COLOR=blue
+export PWD_COLOR=cyan
 export CLEAN_COLOR=green
 export DIRTY_COLOR=yellow
 
