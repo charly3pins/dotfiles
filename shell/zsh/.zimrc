@@ -2,11 +2,10 @@
 
 zmodule zimfw/environment
 zmodule zimfw/git-info
-#zmodule zimfw/history
 zmodule zimfw/input
+zmodule zimfw/prompt-pwd
 
 zmodule zsh-users/zsh-autosuggestions
-zmodule zsh-users/zsh-syntax-highlighting
 
 zhighlighters=(main brackets)
 
