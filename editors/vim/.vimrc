@@ -17,17 +17,9 @@ set completeopt+=menuone,noinsert
 
 " plugins
 call plug#begin('~/.vim/plugged')
-    Plug 'dracula/vim', { 'as': 'dracula' }
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     Plug 'preservim/nerdtree'
 call plug#end()
-
-" theme
-if v:version < 802
-    packadd! dracula
-endif
-syntax enable
-colorscheme dracula
 
 " autocomplete called when . is typped
 au filetype go inoremap <buffer> . .<C-x><C-o>
