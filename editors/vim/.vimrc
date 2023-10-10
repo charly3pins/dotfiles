@@ -22,6 +22,7 @@ colorscheme molokai
 call plug#begin('~/.vim/plugged')
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     Plug 'preservim/nerdtree'
+    Plug 'preservim/nerdcommenter'
     Plug 'vim-airline/vim-airline'
 call plug#end()
 
