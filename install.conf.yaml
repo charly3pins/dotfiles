@@ -45,19 +45,13 @@
       stdout: true
       stderr: true
 
-    - command: mkdir -p ~/.vim/pack/themes/start && cd ~/.vim/pack/themes/start && git clone https://github.com/dracula/vim.git dracula
-      description: Dracula theme for Vim
-      stdout: true
-      stderr: true
-    # slack colors from here? #282A36,#44475A,#44475A,#8BE9FD,#6272A4,#FFFFFF,#50FA7B,#FF5555
-
 - link:
-    ~/.gitconfig : git/.gitconfig
+    ~/.gitconfig: git/.gitconfig
     ~/.gitignore_global: git/.gitignore_global
     ~/.vimrc: editors/vim/.vimrc
+    ~/.vim/colors: editors/vim/colors
     ~/.zimrc: shell/zsh/.zimrc
     ~/.zlogin: shell/zsh/.zlogin
     ~/.zshenv: shell/zsh/.zshenv
     ~/.zshrc: shell/zsh/.zshrc
     ~/Library/Application\ Support/Code/User/settings.json: editors/code/settings.json
-#    ~/.config/terminator/config: linux/terminator/config

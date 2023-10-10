@@ -1,6 +1,5 @@
 filetype plugin indent on
 set encoding=utf-8
-
 set noswapfile
 set number relativenumber
 
@@ -15,10 +14,15 @@ set expandtab
 set completeopt-=preview
 set completeopt+=menuone,noinsert
 
+" theme
+syntax on
+colorscheme molokai
+
 " plugins
 call plug#begin('~/.vim/plugged')
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     Plug 'preservim/nerdtree'
+    Plug 'vim-airline/vim-airline'
 call plug#end()
 
 " autocomplete called when . is typped
