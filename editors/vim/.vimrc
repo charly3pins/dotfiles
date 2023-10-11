@@ -21,9 +21,10 @@ inoremap <Down> <Nop>
 inoremap <Left> <Nop>
 inoremap <Right> <Nop>
 
+" autocomplete called when . is typped
+au filetype go inoremap <buffer> . .<C-x><C-o>
 
 " completion popup menu config
-" remove the preview
 set completeopt-=preview
 set completeopt+=menuone,noinsert
 
@@ -43,14 +44,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'vim-airline/vim-airline'
 call plug#end()
 
-" autocomplete called when . is typped
-au filetype go inoremap <buffer> . .<C-x><C-o>
-
 " vim-go config
-" Enable auto formatting on save
-let g:go_fmt_autosave = 1
-" Run goimports on every save
-let g:go_fmt_command = "goimports"
+" highlight all uses of the identifier under the cursor
+let g:go_auto_sameids = 1
 " Status line for types and signatures
 let g:go_auto_type_info = 1
 " Syntax Highlighting
@@ -62,6 +58,7 @@ let g:go_highlight_operators = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_generate_tags = 1
+let g:go_highlight_format_strings = 1
 
 " NERDTree plugin specific commands
 :nnoremap <C-n> :NERDTreeToggle<CR>
