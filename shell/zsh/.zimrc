@@ -9,6 +9,6 @@ zmodule zsh-users/zsh-autosuggestions
 
 zhighlighters=(main brackets)
 
-# eriner's prompt theme
 #zmodule eriner
-zmodule romkatv/powerlevel10k --use degit
+#zmodule romkatv/powerlevel10k --use degit
+zmodule charly3pins/c3prompt
