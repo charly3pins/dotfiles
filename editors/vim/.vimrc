@@ -1,13 +1,21 @@
 filetype plugin indent on
 set encoding=utf-8
 set noswapfile
+
+" hybrid line numbers
 set number relativenumber
 
-" tabs setup
+" indentation
+set autoindent
+set noexpandtab
 set tabstop=4 
 set shiftwidth=4
-set softtabstop=4
-set expandtab
+
+" remap arrow keys
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
 
 " completion popup menu config
 " remove the preview
@@ -17,6 +25,10 @@ set completeopt+=menuone,noinsert
 " theme
 syntax on
 colorscheme molokai
+
+" change split direction
+set splitright
+set splitbelow
 
 " plugins
 call plug#begin('~/.vim/plugged')
@@ -50,3 +62,7 @@ let g:go_highlight_generate_tags = 1
 :nnoremap <C-n> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 
+" NerdCommenter plugin specific commands
+filetype plugin on
+nnoremap ,c :call NERDComment(0,"toggle")<CR>
+vnoremap ,c :call NERDComment(0,"toggle")<CR>
