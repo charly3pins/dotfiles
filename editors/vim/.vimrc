@@ -42,13 +42,12 @@ call plug#begin('~/.vim/plugged')
     Plug 'preservim/nerdtree'
     Plug 'preservim/nerdcommenter'
     Plug 'vim-airline/vim-airline'
+	Plug 'dense-analysis/ale'
 call plug#end()
 
 " vim-go config
 " highlight all uses of the identifier under the cursor
 let g:go_auto_sameids = 1
-" Status line for types and signatures
-let g:go_auto_type_info = 1
 " Syntax Highlighting
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
@@ -68,3 +67,8 @@ let NERDTreeShowHidden=1
 filetype plugin on
 nnoremap ,c :call NERDComment(0,"toggle")<CR>
 vnoremap ,c :call NERDComment(0,"toggle")<CR>
+
+" ale plugin
+let g:ale_go_golangci_lint_package = 1
+let g:ale_go_staticcheck_lint_package = 1
+
