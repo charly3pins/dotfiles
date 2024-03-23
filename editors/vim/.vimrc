@@ -58,6 +58,8 @@ let g:go_highlight_extra_types = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_generate_tags = 1
 let g:go_highlight_format_strings = 1
+"let g:go_auto_type_info = 1
+let g:go_updatetime = 100
 
 " NERDTree plugin specific commands
 :nnoremap <C-n> :NERDTreeToggle<CR>
