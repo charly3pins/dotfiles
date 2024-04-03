@@ -30,7 +30,8 @@ set completeopt+=menuone,noinsert
 
 " theme
 syntax on
-colorscheme molokai
+" colorscheme molokai
+autocmd vimenter * ++nested colorscheme gruvbox
 
 " change split direction
 set splitright
@@ -43,6 +44,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'preservim/nerdcommenter'
     Plug 'vim-airline/vim-airline'
 	Plug 'dense-analysis/ale'
+	Plug 'morhetz/gruvbox'
 call plug#end()
 
 " vim-go config
