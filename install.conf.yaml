@@ -55,3 +55,4 @@
     ~/.zshenv: shell/zsh/.zshenv
     ~/.zshrc: shell/zsh/.zshrc
     ~/Library/Application\ Support/Code/User/settings.json: editors/code/settings.json
+    ~/.wezterm.lua: mac/WezTerm/.wezterm.lua

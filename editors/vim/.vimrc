@@ -30,8 +30,10 @@ set completeopt+=menuone,noinsert
 
 " theme
 syntax on
-" colorscheme molokai
+ "colorscheme molokai
 autocmd vimenter * ++nested colorscheme gruvbox
+set background=dark    " Setting dark mode
+
 
 " change split direction
 set splitright
