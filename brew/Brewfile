@@ -1,7 +1,7 @@
 tap "homebrew/cask-fonts"
 brew "node"
 brew "npm"
-brew "nvm"
+brew "neovim"
 brew "go"
 brew "hugo"
 brew "kubectl"
