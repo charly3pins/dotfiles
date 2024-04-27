@@ -3,3 +3,4 @@
 -- Add any additional options here
 --
 vim.filetype.add({ extension = { templ = "templ" } })
+vim.g.mkdp_browser = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
