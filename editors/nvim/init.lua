@@ -1,2 +1,2 @@
--- bootstrap lazy.nvim, LazyVim and your plugins
-require("config.lazy")
+require("charly3pins.core")
+require("charly3pins.lazy")
