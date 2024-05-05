@@ -5,25 +5,30 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# History
-setopt HIST_IGNORE_ALL_DUPS
-setopt HIST_FCNTL_LOCK
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# Start zim
-source ${ZIM_HOME}/init.zsh
+# history setup
+HISTFILE=$HOME/.zhistory
+SAVEHIST=1000
+HISTSIZE=999
+setopt share_history 
+setopt hist_expire_dups_first
+setopt hist_ignore_dups
+setopt hist_verify
 
-# Async mode for autocompletion
-ZSH_AUTOSUGGEST_USE_ASYNC=true
-ZSH_HIGHLIGHT_MAXLENGTH=300
+# completion using arrow keys (based on history)
+bindkey '^[[A' history-search-backward
+bindkey '^[[B' history-search-forward
+
+# ---- eza (better ls) -----
+alias ls="eza --color=always --long --no-filesize --icons=always --no-time --no-user --no-permissions"
+
+# ---- Zoxide (better cd) ----
+eval "$(zoxide init zsh)"
 
 # Init my shell configuration (alias, exports)
 source "$DOTFILES_PATH/shell/init.sh"
-
-# Load z module
-source "$DOTFILES_PATH/modules/z/z.sh"
-
-# Execute the history line, without verification
-unsetopt HIST_VERIFY
 
 # Load fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -36,5 +41,5 @@ compinit
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/terraform terraform
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+source ~/powerlevel10k/powerlevel10k.zsh-theme
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh

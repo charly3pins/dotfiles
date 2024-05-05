@@ -2,7 +2,8 @@
 alias sudo='sudo '
 
 # Dir
-alias ls="ls -G"
+# alias ls="eza --color=always --long --no-filesize --icons=always --no-time --no-user --no-permissions"
+alias ls="eza --icons=always"
 alias ll="ls -l"
 alias la="ls -la"
 
