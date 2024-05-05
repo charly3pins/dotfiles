@@ -21,9 +21,6 @@ setopt hist_verify
 bindkey '^[[A' history-search-backward
 bindkey '^[[B' history-search-forward
 
-# ---- eza (better ls) -----
-alias ls="eza --color=always --long --no-filesize --icons=always --no-time --no-user --no-permissions"
-
 # ---- Zoxide (better cd) ----
 eval "$(zoxide init zsh)"
 
