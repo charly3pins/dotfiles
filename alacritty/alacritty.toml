@@ -11,12 +11,12 @@ startup_mode = "Maximized"
 
 # decorations = "Buttonless"
 
-opacity = 0.5
-blur = true
+# opacity = 0.5
+# blur = true
 
 # option_as_alt = "Both"
 
 [font]
 normal.family = "MesloLGS Nerd Font Mono"
 
-size = 15
+size = 14
