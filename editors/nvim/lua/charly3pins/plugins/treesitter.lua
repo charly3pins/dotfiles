@@ -36,6 +36,8 @@ return {
 				"gitignore",
 				"query",
 				"vimdoc",
+				"dart",
+				"python",
 			},
 			incremental_selection = {
 				enable = true,

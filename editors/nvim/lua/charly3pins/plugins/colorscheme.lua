@@ -1,10 +1,10 @@
-return {
-	"ellisonleao/gruvbox.nvim",
-	priority = 1000, -- make sure to load this before all the other start plugins
-	config = function()
-		vim.cmd("colorscheme gruvbox")
-	end,
-}
+-- return {
+-- 	"ellisonleao/gruvbox.nvim",
+-- 	priority = 1000, -- make sure to load this before all the other start plugins
+-- 	config = function()
+-- 		vim.cmd("colorscheme gruvbox")
+-- 	end,
+-- }
 -- return {
 -- 	"folke/tokyonight.nvim",
 -- 	priority = 1000, -- Make sure to load this before all the other start plugins.
@@ -15,3 +15,12 @@ return {
 -- 		vim.cmd.colorscheme("tokyonight-night")
 -- 	end,
 -- }
+return {
+	"craftzdog/solarized-osaka.nvim",
+	lazy = false,
+	priority = 1000,
+	opts = {},
+	config = function()
+		vim.cmd("colorscheme solarized-osaka")
+	end,
+}
