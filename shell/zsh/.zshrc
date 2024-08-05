@@ -43,3 +43,4 @@ complete -o nospace -C /usr/bin/terraform terraform
 
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+

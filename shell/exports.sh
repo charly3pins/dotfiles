@@ -27,6 +27,10 @@ export PATH="/usr/local/opt/openjdk@8/bin:$PATH"
 export JAVA_HOME=$(/usr/libexec/java_home)
 #export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
 
+# FABRIC
+export PATH="$PATH:/Users/charly/.local/bin"
+if [ -f "/Users/charly/.config/fabric/fabric-bootstrap.inc" ]; then . "/Users/charly/.config/fabric/fabric-bootstrap.inc"; fi
+
 # PATH
 export PATH=$PATH:$HOME/Code/flutter/bin
 export PATH=$PATH:$HOME/bin
