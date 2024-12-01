@@ -35,7 +35,7 @@ return {
 				"templ",
 				"tailwindcss",
 				"astro",
-				"tsserver",
+				-- "tsserver",
 			},
 		})
 
