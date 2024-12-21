@@ -45,6 +45,11 @@
       stdout: true
       stderr: true
 
+    - command: brew install --cask alacritty
+      description: Installing Alacritty terminal
+      stdout: true
+      stderr: true
+
 - link:
     ~/.gitconfig: git/.gitconfig
     ~/.gitignore_global: git/.gitignore_global
@@ -57,3 +62,4 @@
     ~/Library/Application\ Support/Code/User/settings.json: editors/code/settings.json
     ~/.wezterm.lua: mac/WezTerm/.wezterm.lua
     ~/.config/nvim: editors/nvim
+    ~/.config/alactitty: alacritty 
