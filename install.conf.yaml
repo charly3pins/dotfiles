@@ -63,3 +63,4 @@
     ~/.wezterm.lua: mac/WezTerm/.wezterm.lua
     ~/.config/nvim: editors/nvim
     ~/.config/alactitty: alacritty 
+    ~/Library/Application\ Support/com.mitchellh.ghostty/config: ghostty-config  
