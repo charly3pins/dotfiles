@@ -29,13 +29,14 @@ return {
 			-- list of servers for mason to install
 			ensure_installed = {
 				"gopls",
-				-- "html",
+				"html",
 				"htmx",
 				"lua_ls",
 				"templ",
 				"tailwindcss",
 				"astro",
 				-- "tsserver",
+				"terraformls",
 			},
 		})
 
