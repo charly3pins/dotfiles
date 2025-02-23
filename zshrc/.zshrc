@@ -28,7 +28,7 @@ eval "$(zoxide init zsh)"
 export DOTFILES_PATH=$HOME/.dotfiles
 
 # Init my shell configuration (alias, exports)
-source "$DOTFILES_PATH/shell/init.sh"
+source "$DOTFILES_PATH/zshrc/init.sh"
 
 # Load fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
