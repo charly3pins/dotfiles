@@ -25,7 +25,7 @@ bindkey '^[[B' history-search-forward
 eval "$(zoxide init zsh)"
 
 # Dotfiles path
-export DOTFILES_PATH=$HOME/.dotfiles
+export DOTFILES_PATH=$HOME/dotfiles
 
 # Init my shell configuration (alias, exports)
 source "$DOTFILES_PATH/zshrc/init.sh"
