@@ -1,3 +1,3 @@
-source "$DOTFILES_PATH/shell/aliases.sh"
-source "$DOTFILES_PATH/shell/exports.sh"
-source "$DOTFILES_PATH/shell/privates.sh"
+source "$DOTFILES_PATH/zshrc/aliases.sh"
+source "$DOTFILES_PATH/zshrc/exports.sh"
+source "$DOTFILES_PATH/zshrc/privates.sh"
