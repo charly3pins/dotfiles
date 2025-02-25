@@ -61,7 +61,7 @@ cmd-keypadPlus = 'resize smart +70'
 cmd-q = [
   'close --quit-if-last-window'
 ]
-cmd-w = []
+# cmd-w = []
 
 # All possible keys:
 # - Letters.        a, b, c, ..., z
@@ -89,19 +89,19 @@ cmd-h = 'focus --boundaries all-monitors-outer-frame --boundaries-action stop le
 cmd-j = 'focus --boundaries all-monitors-outer-frame --boundaries-action stop down'
 cmd-k = 'focus --boundaries all-monitors-outer-frame --boundaries-action stop up'
 cmd-l = 'focus --boundaries all-monitors-outer-frame --boundaries-action stop right'
-cmd-left = 'focus --boundaries all-monitors-outer-frame --boundaries-action stop left'
-cmd-down = 'focus --boundaries all-monitors-outer-frame --boundaries-action stop down'
-cmd-up = 'focus --boundaries all-monitors-outer-frame --boundaries-action stop up'
-cmd-right = 'focus --boundaries all-monitors-outer-frame --boundaries-action stop right'
+# cmd-left = 'focus --boundaries all-monitors-outer-frame --boundaries-action stop left'
+# cmd-down = 'focus --boundaries all-monitors-outer-frame --boundaries-action stop down'
+# cmd-up = 'focus --boundaries all-monitors-outer-frame --boundaries-action stop up'
+# cmd-right = 'focus --boundaries all-monitors-outer-frame --boundaries-action stop right'
 
 cmd-shift-h = 'move left'
 cmd-shift-j = 'move down'
 cmd-shift-k = 'move up'
 cmd-shift-l = 'move right'
-cmd-shift-left = 'move left'
-cmd-shift-down = 'move down'
-cmd-shift-up = 'move up'
-cmd-shift-right = 'move right'
+# cmd-shift-left = 'move left'
+# cmd-shift-down = 'move down'
+# cmd-shift-up = 'move up'
+# cmd-shift-right = 'move right'
 
 cmd-1 = 'workspace --auto-back-and-forth 1'  # Terminal 
 cmd-2 = 'workspace --auto-back-and-forth 2'  # Browser 
