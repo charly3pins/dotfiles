@@ -80,7 +80,7 @@ cmd-enter = 'exec-and-forget open -n /Volumes/Macintosh\ HD/Applications/Ghostty
 cmd-m = 'exec-and-forget open -n /Volumes/Macintosh\ HD/Applications/Marta.app'
 
 cmd-shift-f = 'macos-native-fullscreen'
-cmd-f = 'fullscreen'
+alt-f = 'fullscreen'
 
 alt-g = 'split horizontal'
 alt-v = 'split vertical'
@@ -209,6 +209,10 @@ run = ['layout tiling', 'move-node-to-workspace 3']
 
 [[on-window-detected]]
 if.app-id = 'net.whatsapp.WhatsApp'
+run = ['layout tiling', 'move-node-to-workspace 8']
+
+[[on-window-detected]]
+if.app-id = 'org.whispersystems.signal-desktop'
 run = ['layout tiling', 'move-node-to-workspace 8']
 
 [[on-window-detected]]
