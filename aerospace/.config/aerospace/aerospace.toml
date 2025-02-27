@@ -76,7 +76,7 @@ cmd-q = [
 
 # All possible modifiers: cmd, alt, ctrl, shift
 
-cmd-enter = 'exec-and-forget open -n /Volumes/Macintosh\ HD/Applications/Ghostty.app'
+cmd-esc= 'exec-and-forget open -n /Volumes/Macintosh\ HD/Applications/Ghostty.app'
 cmd-m = 'exec-and-forget open -n /Volumes/Macintosh\ HD/Applications/Marta.app'
 
 cmd-shift-f = 'macos-native-fullscreen'
