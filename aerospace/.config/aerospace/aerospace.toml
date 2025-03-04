@@ -58,9 +58,9 @@ cmd-r = [
 cmd-keypadMinus = 'resize smart -70'
 cmd-keypadPlus = 'resize smart +70'
 
-cmd-q = [
-  'close --quit-if-last-window'
-]
+# cmd-q = [
+#   'close --quit-if-last-window'
+# ]
 # cmd-w = []
 
 # All possible keys:
@@ -113,15 +113,15 @@ cmd-7 = 'workspace --auto-back-and-forth 7'  #
 cmd-8 = 'workspace --auto-back-and-forth 8'  # Chat 
 cmd-9 = 'workspace --auto-back-and-forth 9'  # Spotify 
 
-cmd-shift-1 = 'move-node-to-workspace 1'
-cmd-shift-2 = 'move-node-to-workspace 2'
-cmd-shift-3 = 'move-node-to-workspace 3'
-cmd-shift-4 = 'move-node-to-workspace 4'
-cmd-shift-5 = 'move-node-to-workspace 5'
-cmd-shift-6 = 'move-node-to-workspace 6'
-cmd-shift-7 = 'move-node-to-workspace 7'
-cmd-shift-8 = 'move-node-to-workspace 8'
-cmd-shift-9 = 'move-node-to-workspace 9'
+ctrl-shift-1 = 'move-node-to-workspace 1'
+ctrl-shift-2 = 'move-node-to-workspace 2'
+ctrl-shift-3 = 'move-node-to-workspace 3'
+ctrl-shift-4 = 'move-node-to-workspace 4'
+ctrl-shift-5 = 'move-node-to-workspace 5'
+ctrl-shift-6 = 'move-node-to-workspace 6'
+ctrl-shift-7 = 'move-node-to-workspace 7'
+ctrl-shift-8 = 'move-node-to-workspace 8'
+ctrl-shift-9 = 'move-node-to-workspace 9'
 
 cmd-tab = 'workspace-back-and-forth'
 cmd-p = 'move-workspace-to-monitor --wrap-around next'
@@ -197,6 +197,10 @@ run = ['layout floating']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.Preview'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.iCal'
 run = ['layout floating']
 
 [[on-window-detected]]

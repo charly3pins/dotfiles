@@ -45,10 +45,10 @@ return {
 				"goimports", -- go formatter
 				"prettier", -- prettier formatter
 				"stylua", -- lua formatter
-				"isort", -- python formatter
-				"black", -- python formatter
+				-- "isort", -- python formatter
+				-- "black", -- python formatter
 				"golangci-lint", -- go linter
-				"pylint", -- python linter
+				-- "pylint", -- python linter
 				"ts-standard", -- typescript formatter
 			},
 		})
