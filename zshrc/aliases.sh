@@ -9,9 +9,6 @@ alias la="ls -la"
 
 #Jumps
 alias ..="cd .."
-alias arx="cd ~/Code/arex"
-alias arxg="cd ~/Code/go/src/github.com/arexio/"
-alias c3p="cd ~/Code/go/src/github.com/charly3pins"
 
 # Git
 alias ga="git add"
@@ -24,8 +21,6 @@ alias gf="git fetch --all -p"
 alias gps="git push"
 alias gpsf="git push --force"
 alias gpl="git pull"
-alias gplr="git pull --rebase"
 alias gl="git log --oneline"
 alias glo="git log --graph --decorate --pretty=oneline --abbrev-commit"
 alias gri="git rebase -i"
-alias grd="git rebase develop"
