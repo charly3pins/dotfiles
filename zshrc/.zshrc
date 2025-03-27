@@ -46,4 +46,3 @@ source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 export TERM=xterm-256color
 
-neofetch
