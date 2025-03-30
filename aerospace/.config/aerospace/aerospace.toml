@@ -204,6 +204,10 @@ if.app-id = 'com.apple.iCal'
 run = ['layout floating']
 
 [[on-window-detected]]
+if.app-id = 'com.apple.iphonesimulator'
+run = ['layout floating']
+
+[[on-window-detected]]
 if.app-id = 'com.mitchellh.ghostty'
 run = ['layout tiling', 'move-node-to-workspace 1']
 
