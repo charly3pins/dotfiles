@@ -1,10 +1,26 @@
 return {
-	"ellisonleao/gruvbox.nvim",
-	priority = 1000, -- make sure to load this before all the other start plugins
+	"rose-pine/neovim",
+	name = "rose-pine",
 	config = function()
-		vim.cmd("colorscheme gruvbox")
+		require("rose-pine").setup({
+			disable_background = true,
+			styles = {
+				italic = false,
+			},
+		})
+		vim.cmd.colorscheme("rose-pine-moon")
+		vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+		vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 	end,
 }
+--
+-- return {
+-- 	"ellisonleao/gruvbox.nvim",
+-- 	priority = 1000, -- make sure to load this before all the other start plugins
+-- 	config = function()
+-- 		vim.cmd("colorscheme gruvbox")
+-- 	end,
+-- }
 -- return {
 -- 	"folke/tokyonight.nvim",
 -- 	priority = 1000, -- Make sure to load this before all the other start plugins.
