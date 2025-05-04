@@ -14,12 +14,13 @@ return {
     "neovim/nvim-lspconfig",
     lazy = false,
     config = function()
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      local capabilities = require("blink.cmp").get_lsp_capabilities()
 
       local lspconfig = require "lspconfig"
       lspconfig.gopls.setup {
         capabilities = capabilities,
       }
+
       vim.cmd [[autocmd BufWritePre *.go lua vim.lsp.buf.format({ async = true })]]
       vim.api.nvim_create_autocmd("BufWritePre", {
         pattern = "*.go",
