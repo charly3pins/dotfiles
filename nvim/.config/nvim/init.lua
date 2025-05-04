@@ -21,6 +21,7 @@ require "options"
 require "keymaps"
 require "filetypes"
 require "autocmds"
+require "terminal"
 
 -- set up lazy, and load my `lua/plugins/` folder
 require("lazy").setup({ import = "plugins" }, {
