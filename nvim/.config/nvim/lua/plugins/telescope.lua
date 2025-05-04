@@ -5,7 +5,10 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.5",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    },
     config = function()
       local telescope = require "telescope"
       local actions = require "telescope.actions"
@@ -14,23 +17,33 @@ return {
           path_display = { "smart" },
           mappings = {
             i = {
-              ["<C-k>"] = actions.move_selection_previous, -- move to prev result
-              ["<C-j>"] = actions.move_selection_next, -- move to next result
-              ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist, -- send selected items to quickfix list
+              ["<C-k>"] = actions.move_selection_previous,
+              ["<C-j>"] = actions.move_selection_next,
+              ["jk"] = actions.close,
             },
           },
         },
         extensions = {
+          fzf = {},
           ["ui-select"] = {
             require("telescope.themes").get_dropdown {},
           },
         },
       }
-      local builtin = require "telescope.builtin"
-      vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Fuzzy find files in cwd" })
-      vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Find string in cwd" })
 
-      require("telescope").load_extension "ui-select"
+      telescope.load_extension "fzf"
+      telescope.load_extension "ui-select"
+
+      local builtin = require "telescope.builtin"
+
+      vim.keymap.set("n", "<space>fd", builtin.find_files, { desc = "Find files in directory" })
+      vim.keymap.set("n", "<space>en", function()
+        builtin.find_files {
+          cwd = vim.fn.stdpath "config",
+        }
+      end, { desc = "Edit neovim config" })
+      vim.keymap.set("n", "<leader>fg", require "plugins.telescope.multi-ripgrep", { desc = "Find string in cwd" })
+      vim.keymap.set("n", "<space>fh", builtin.help_tags, { desc = "Find in help" })
     end,
   },
 }
