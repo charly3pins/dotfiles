@@ -1,5 +1,11 @@
 font-family = MesloLGS Nerd Font Mono
 font-size = 14
+
 theme = rose-pine-moon 
+background = 000000
+# background-opacity = 0.85
+# background-blur = true
+
 maximize = true
+
 window-save-state = always
