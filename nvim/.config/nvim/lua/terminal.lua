@@ -27,3 +27,10 @@ vim.keymap.set("n", "<leader>st", function()
     vim.api.nvim_feedkeys("i", "n", false)
   end, 50)
 end)
+
+-- Closes terminal with triple <esc>
+vim.keymap.set({ "n", "t" }, "<esc><esc><esc>", function()
+  if vim.bo.buftype == "terminal" then
+    vim.cmd.close()
+  end
+end)
