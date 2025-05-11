@@ -27,10 +27,3 @@ vim.keymap.set("n", "<leader>st", function()
     vim.api.nvim_feedkeys("i", "n", false)
   end, 50)
 end)
-
--- Closes terminal with C-d
-vim.keymap.set({ "n", "t" }, "<C-d>", function()
-  if vim.bo.buftype == "terminal" then
-    vim.cmd.close()
-  end
-end)
