@@ -7,5 +7,7 @@ background = 000000
 # background-blur = true
 
 maximize = true
-
 window-save-state = always
+shell-integration = zsh
+
+gtk-titlebar = false
