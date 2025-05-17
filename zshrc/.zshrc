@@ -4,7 +4,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
 
-plugins=(git)
+plugins=(git zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -36,6 +36,3 @@ source "$DOTFILES_PATH/zshrc/init.sh"
 # Completion for zsh in Mac
 autoload -Uz compinit
 compinit
-
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
