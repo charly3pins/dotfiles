@@ -35,8 +35,8 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 
 # brightness
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20
+# bindsym keycode 224 exec --no-startup-id brightnessctl -d intel_backlight set 10%-
+# bindsym keycode 225 exec --no-startup-id brightnessctl -d intel_backlight set +10%
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
