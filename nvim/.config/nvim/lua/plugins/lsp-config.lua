@@ -82,6 +82,10 @@ return {
       lspconfig.lua_ls.setup {
         capabilities = capabilities,
       }
+      lspconfig.ts_ls.setup {
+        capabilities = capabilities,
+        -- cmd = { "npx", "typescript-language-server", "--stdio" },
+      }
 
       vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show documentation for what is under cursor" })
       vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})

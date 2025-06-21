@@ -25,6 +25,11 @@ return {
           "vimdoc",
           "dart",
           "python",
+          "javascript",
+          "typescript",
+          "sql",
+          "make",
+          "tsx",
         },
         auto_install = false,
         highlight = {
