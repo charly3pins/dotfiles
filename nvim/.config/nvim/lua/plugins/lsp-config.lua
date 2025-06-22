@@ -81,6 +81,16 @@ return {
       }
       lspconfig.lua_ls.setup {
         capabilities = capabilities,
+        settings = {
+          Lua = {
+            diagnostics = {
+              globals = { "vim" },
+            },
+            completion = {
+              callSnippet = "Replace",
+            },
+          },
+        },
       }
       lspconfig.ts_ls.setup {
         capabilities = capabilities,
