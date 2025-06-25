@@ -32,6 +32,7 @@ return {
           "tsx",
         },
         auto_install = false,
+        indent = { enable = true },
         highlight = {
           enable = true,
           disable = function(lang, buf)

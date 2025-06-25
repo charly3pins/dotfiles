@@ -42,6 +42,7 @@ return {
         }
       end, { desc = "Edit neovim config" })
       vim.keymap.set("n", "<leader>fg", require "plugins.telescope.multi-ripgrep", { desc = "Find string in cwd" })
+      vim.keymap.set("n", "<C-p>", builtin.git_files, {})
     end,
   },
 }
