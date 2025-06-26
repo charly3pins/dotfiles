@@ -1,22 +1,35 @@
 return {
-  "stevearc/conform.nvim",
-  opts = {},
-  config = function()
-    require("conform").setup {
+  {
+    "stevearc/conform.nvim",
+    event = { "BufWritePre" },
+    cmd = { "ConformInfo" },
+    keys = {
+      {
+        "<leader>gf",
+        function()
+          require("conform").format { async = true, lsp_fallback = true }
+        end,
+        mode = "",
+        desc = "Format buffer",
+      },
+    },
+    opts = {
       formatters_by_ft = {
         lua = { "stylua" },
-        go = { "gofmt" },
-        javascript = { "prettierd" },
-        typescript = { "prettierd" },
-        json = { "prettierd" },
-        yaml = { "prettierd" },
-        markdown = { "prettierd" },
-        html = { "prettierd" },
+        javascript = { "prettier" },
+        typescript = { "prettier" },
+        javascriptreact = { "prettier" },
+        typescriptreact = { "prettier" },
+        json = { "prettier" },
+        html = { "prettier" },
+        css = { "prettier" },
+        markdown = { "prettier" },
+        go = { "goimports" },
       },
       format_on_save = {
         timeout_ms = 500,
-        lsp_format = "fallback",
+        lsp_fallback = true,
       },
-    }
-  end,
+    },
+  },
 }

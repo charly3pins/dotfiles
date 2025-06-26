@@ -42,7 +42,7 @@ return {
         end,
       })
 
-      require("mason").setup {}
+      require("mason-tool-installer").setup {}
       require("mason-lspconfig").setup {
         ensure_installed = {
           "gopls",
