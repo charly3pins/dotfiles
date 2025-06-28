@@ -1,8 +1,5 @@
 return {
   {
-    "nvim-telescope/telescope-ui-select.nvim",
-  },
-  {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.5",
     dependencies = {
@@ -19,30 +16,18 @@ return {
             i = {
               ["<C-k>"] = actions.move_selection_previous,
               ["<C-j>"] = actions.move_selection_next,
+              ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
             },
-          },
-        },
-        extensions = {
-          fzf = {},
-          ["ui-select"] = {
-            require("telescope.themes").get_dropdown {},
           },
         },
       }
 
       telescope.load_extension "fzf"
-      telescope.load_extension "ui-select"
 
-      local builtin = require "telescope.builtin"
-
-      vim.keymap.set("n", "<space>fd", builtin.find_files, { desc = "Find files in directory" })
-      vim.keymap.set("n", "<space>en", function()
-        builtin.find_files {
-          cwd = vim.fn.stdpath "config",
-        }
-      end, { desc = "Edit neovim config" })
-      vim.keymap.set("n", "<leader>fg", require "plugins.telescope.multi-ripgrep", { desc = "Find string in cwd" })
-      vim.keymap.set("n", "<C-p>", builtin.git_files, {})
+      vim.keymap.set("n", "<leader>fd", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
+      vim.keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Fuzzy find recent files" })
+      vim.keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
+      vim.keymap.set("n", "<leader>fw", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
     end,
   },
 }
