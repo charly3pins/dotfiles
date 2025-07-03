@@ -36,3 +36,6 @@ source "$DOTFILES_PATH/zshrc/init.sh"
 # Completion for zsh in Mac
 autoload -Uz compinit
 compinit
+
+# opencode
+export PATH=/home/c3p/.opencode/bin:$PATH
