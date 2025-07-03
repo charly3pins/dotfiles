@@ -14,3 +14,6 @@ export PATH=$PATH:$GOBIN
 
 # TERM
 export TERM=xterm-256color
+
+# opencode
+export PATH=$HOME/.opencode/bin:$PATH

@@ -24,11 +24,8 @@ bindkey '^[[B' history-search-forward
 # ---- Zoxide (better cd) ----
 eval "$(zoxide init zsh)"
 
-# Dotfiles path
-export DOTFILES_PATH=$HOME/dotfiles
-
 # Init my shell configuration (alias, exports)
-source "$DOTFILES_PATH/zshrc/init.sh"
+source "$HOME/dotfiles/zshrc/init.sh"
 
 # Load fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -37,5 +34,3 @@ source "$DOTFILES_PATH/zshrc/init.sh"
 autoload -Uz compinit
 compinit
 
-# opencode
-export PATH=/home/c3p/.opencode/bin:$PATH
