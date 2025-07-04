@@ -1,2 +1,2 @@
-source "$DOTFILES_PATH/zshrc/aliases.sh"
-source "$DOTFILES_PATH/zshrc/exports.sh"
+source "$HOME/dotfiles/zshrc/aliases.sh"
+source "$HOME/dotfiles/zshrc/exports.sh"
