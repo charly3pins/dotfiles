@@ -33,10 +33,11 @@ return {
           ["<C-Space>"] = cmp.mapping.complete(),
           ["/"] = cmp.mapping.close(),
           ["<Tab>"] = cmp.mapping(function(fallback)
-            local copilot = require "copilot.suggestion"
-            if copilot.is_visible() then
-              copilot.accept()
-            elseif cmp.visible() then
+            -- local copilot = require "copilot.suggestion"
+            -- if copilot.is_visible() then
+            --   copilot.accept()
+            -- else
+            if cmp.visible() then
               cmp.select_next_item()
             else
               fallback()
