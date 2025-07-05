@@ -23,6 +23,7 @@ order += "battery all"
 # order += "load"
 # order += "memory"
 order += "tztime local"
+order += "volume master"
 
 wireless _first_ {
         # format_up = "W: (%quality at %essid) %ip"
@@ -58,4 +59,12 @@ memory {
 tztime local {
         # format = "%Y-%m-%d %H:%M:%S"
         format = "%d/%m/%Y %H:%M:%S"
+}
+
+volume master {
+        format = "%volume"
+        format_muted = "0%"
+        device = "default"
+        mixer = "Master"
+        mixer_idx = 0
 }
