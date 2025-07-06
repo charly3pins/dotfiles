@@ -1,8 +1,10 @@
 font-family = MesloLGS Nerd Font Mono
 font-size = 14
 
-theme = rose-pine-moon 
-background = 000000
+theme = tokyonight
+# background = 000000
+background = 011628
+foreground = CBE0F0
 # background-opacity = 0.85
 # background-blur = true
 
