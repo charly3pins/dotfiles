@@ -3,4 +3,7 @@ log/*.log.*
 npm-debug.log
 vendor
 .vscode
-
+node_modules/
+.env
+*.log
+personal
