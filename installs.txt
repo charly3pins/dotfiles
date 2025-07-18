@@ -1,0 +1,102 @@
+Ubuntu 24.04.2 LTS
+
+install C compiler
+sudo apt update
+sudo apt install build-essential
+sudo apt install make
+
+NERD FONTS
+https://www.nerdfonts.com/font-downloads
+Download MesloLG Nerd Font
+mkdir -p ~/.local/share/fonts
+unzip ~/Downloads/Meslo.zip -d ~/.local/share/fonts
+sudo unzip ~/Downloads/Meslo.zip -d ~/usr/share/fonts
+sudo fc-cache -fv
+
+GIT
+sudo apt install git
+ln -s ~/dotfiles/.config/git ~/.config/git
+
+i3
+sudo apt install i3
+ln -s ~/dotfiles/.config/i3 ~/.config/i3
+ln -s ~/dotfiles/.config/i3status ~/.config/i3status
+
+ZOXIDE (a better cd)
+curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+
+FZF
+sudo apt install fzf
+
+ZSH
+sudo apt install zsh
+chsh -s $(which zsh)
+ln -s ~/dotfiles/.config/zsh ~/.config/zsh
+
+OHMYZSH
+install ohmyzsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+ZSH-AUTOSUGGESTIONS
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+GHOSTTY
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"
+ln -s ~/dotfiles/.config/ghostty ~/.config/ghostty
+
+GO
+curl -LO https://go.dev/dl/go1.24.4.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf go1.24.5.linux-amd64.tar.gz
+rm go1.24.5.linux-amd64.tar.gz
+
+NVM & NODE
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
+source ~/.zshrc
+nvm install node
+
+RUST & CARGO
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+NVIM
+sudo snap install nvim --classic
+ln -s ~/dotfiles/.config/nvim ~/.config/nvim
+
+XCLIP
+sudo apt install xclip
+
+LAZYGIT
+LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
+curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+tar xf lazygit.tar.gz lazygit
+sudo install lazygit -D -t /usr/local/bin/
+rm lazygit.tar.gz
+
+SPOTIFY
+snap install spotify
+
+DOCKER & DOCKER-COMPOSE
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+GIMP
+sudo apt install gimp
+
+DBEAVER
+sudo snap install dbeaver-ce
+
+TMUX
+sudo apt install tmux
+ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
