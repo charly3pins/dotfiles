@@ -41,3 +41,4 @@ export NVM_DIR="$HOME/.nvm"
 
 # TERM
 export TERM=xterm-256color
+. "$HOME/.cargo/env"
