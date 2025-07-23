@@ -26,3 +26,6 @@ eval "$(zoxide init zsh)"
 # Completion for zsh
 autoload -Uz compinit
 compinit
+
+# TMUX
+alias tmux='tmux -f ~/.config/tmux/config'
