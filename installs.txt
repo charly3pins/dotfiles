@@ -101,3 +101,6 @@ TMUX
 sudo apt install tmux
 ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
 ln -s ~/dotfiles/.config/tmux/config ~/.config/tmux/config
+
+FLAMESHOOT
+sudo apt install flameshot
