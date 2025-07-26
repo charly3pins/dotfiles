@@ -104,3 +104,7 @@ ln -s ~/dotfiles/.config/tmux/config ~/.config/tmux/config
 
 FLAMESHOOT
 sudo apt install flameshot
+
+POLYBAR
+sudo apt install polybar
+ln -s ~/dotfiles/.config/polybar ~/.config/polybar
