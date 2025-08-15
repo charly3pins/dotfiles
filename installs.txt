@@ -108,3 +108,8 @@ sudo apt install flameshot
 POLYBAR
 sudo apt install polybar
 ln -s ~/dotfiles/.config/polybar ~/.config/polybar
+
+ROFI
+sudo apt install rofi
+ln -s ~/dotfiles/.config/rofi ~/.config/rofi
+
