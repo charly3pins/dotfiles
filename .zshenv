@@ -42,3 +42,7 @@ export NVM_DIR="$HOME/.nvm"
 # TERM
 export TERM=xterm-256color
 . "$HOME/.cargo/env"
+
+# ALIAS
+alias tunnel-staging='gcloud compute start-iap-tunnel iap-staging-mysql-users 3306 --local-host-port=localhost:3307 --zone=europe-west1-b --project "swordhealth-staging"'
+alias android_emulator='./bin/studio -avd Pixel_8 & adb -d wait-for-device & adb logcat'
