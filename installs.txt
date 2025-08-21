@@ -22,6 +22,10 @@ sudo apt install i3
 ln -s ~/dotfiles/.config/i3 ~/.config/i3
 ln -s ~/dotfiles/.config/i3status ~/.config/i3status
 
+backlight permission
+sudo usermod -aG video $USER 
+sudo chmod g+w /sys/class/backlight/intel_backlight/brightness
+
 ZOXIDE (a better cd)
 curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 
@@ -113,3 +117,5 @@ ROFI
 sudo apt install rofi
 ln -s ~/dotfiles/.config/rofi ~/.config/rofi
 
+ANDROID STUDIO
+sudo apt-get install android-tools-adb android-tools-fastboot
