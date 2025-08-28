@@ -8,7 +8,7 @@ export XDG_STATE_HOME="$HOME/.local/state"
 export PATH="$HOME/.nvim/bin:$PATH" # neovim
 export PATH="$HOME/.cargo/bin:$PATH" # cargo
 export PATH="$HOME/.local/bin:$PATH" # zoxide
-export PATH="$PATH:/usr/local/go/bin" # go
+export PATH="$PATH:/usr/local/go/bin:$HOME/go/bin" # go
 
 # Set up git configuration.
 export GIT_CONFIG_GLOBAL="$XDG_CONFIG_HOME/git/config"
