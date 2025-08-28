@@ -1,0 +1,8 @@
+# Search hidden files.
+--hidden
+
+# Search case-insensitively if pattern is all lowercase.
+--smart-case
+
+# Highlight matches.
+--colors=match:fg:225,18,153

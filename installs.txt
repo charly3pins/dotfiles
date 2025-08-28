@@ -119,3 +119,7 @@ ln -s ~/dotfiles/.config/rofi ~/.config/rofi
 
 ANDROID STUDIO
 sudo apt-get install android-tools-adb android-tools-fastboot
+
+RIPGREP
+sudo apt install ripgrep
+ln -s ~/dotfiles/.config/.ripgreprc ~/.config/.ripgreprc
