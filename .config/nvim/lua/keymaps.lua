@@ -18,3 +18,6 @@ set("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
 -- lua exec
 set("n", "<leader>x", "<cmd>.lua<CR>", { desc = "Execute the current line" })
 set("n", "<leader><leader>x", "<cmd>source %<CR>", { desc = "Execute the current file" })
+
+-- jq
+set("n", "<leader>jq", ":%!jq --tab .<CR>:%s/\\r<CR>//g<CR>", { desc = "Format JSON with jq" })
