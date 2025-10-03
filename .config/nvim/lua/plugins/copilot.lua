@@ -19,6 +19,7 @@ return {
         markdown = true,
         yaml = true,
         go = true,
+        lua = true,
       },
     },
   },
