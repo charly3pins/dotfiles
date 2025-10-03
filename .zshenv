@@ -41,7 +41,11 @@ export NVM_DIR="$HOME/.nvm"
 
 # TERM
 export TERM=xterm-256color
-. "$HOME/.cargo/env"
+
+# Cargo (Rust)
+if [ -f "$HOME/.cargo/env" ]; then
+  . "$HOME/.cargo/env"
+fi
 
 # ALIAS
 alias tunnel-staging='gcloud compute start-iap-tunnel iap-staging-mysql-users 3306 --local-host-port=localhost:3307 --zone=europe-west1-b --project "swordhealth-staging"'
