@@ -33,10 +33,6 @@ sudo apt install i3
 ln -s ~/dotfiles/.config/i3 ~/.config/i3
 ln -s ~/dotfiles/.config/i3status ~/.config/i3status
 
-backlight permission
-sudo usermod -aG video $USER 
-sudo chmod g+w /sys/class/backlight/intel_backlight/brightness
-
 ZOXIDE (a better cd)
 curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 
@@ -148,3 +144,12 @@ sudo apt-get install android-tools-adb android-tools-fastboot
 
 RUST & CARGO
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+BRIGTHNESS AND AUDIO
+sudo apt install -y brightnessctl
+sudo apt install -y pulseaudio-utils
+
+BRIGHTNESS PERMISSION
+sudo usermod -aG video $USER 
+sudo chmod g+w /sys/class/backlight/intel_backlight/brightness
+reboot
