@@ -40,6 +40,7 @@ return {
         "pyright",
         "sqlls",
         "dockerls",
+        "copilot",
       },
     }
 
