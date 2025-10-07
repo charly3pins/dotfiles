@@ -48,3 +48,13 @@ require("lazy").setup({ import = "plugins" }, {
     },
   },
 })
+
+-- Active LSP from Copilot automtically if your Neovim is 0.11 or higher
+if vim.fn.has "nvim-0.11" == 1 then
+  vim.schedule(function()
+    local ok, _ = pcall(vim.lsp.enable, "copilot")
+    if ok then
+      vim.notify("Copilot LSP enabled", vim.log.levels.INFO)
+    end
+  end)
+end
