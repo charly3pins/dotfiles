@@ -55,5 +55,21 @@ return {
         "golangci-lint", -- go linter
       },
     }
+    local lspconfig = require "lspconfig"
+
+    lspconfig.ts_ls.setup {
+      settings = {
+        typescript = {
+          format = {
+            convertQuotes = "single",
+          },
+        },
+        javascript = {
+          format = {
+            convertQuotes = "single",
+          },
+        },
+      },
+    }
   end,
 }

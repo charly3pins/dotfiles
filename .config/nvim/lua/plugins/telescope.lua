@@ -12,6 +12,19 @@ return {
         defaults = {
           path_display = { "smart" },
         },
+        vimgrep_arguments = {
+          "rg",
+          "--color=never",
+          "--no-heading",
+          "--with-filename",
+          "--line-number",
+          "--column",
+          "--smart-case",
+          "--hidden", -- search hidden files
+          "--no-ignore", -- ignore .gitignore and global gitignore
+          "--glob",
+          "!**/node_modules/*", -- avoid node_modules noise
+        },
       }
 
       telescope.load_extension "fzf"

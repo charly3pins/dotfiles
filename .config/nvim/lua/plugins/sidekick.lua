@@ -14,7 +14,7 @@ return {
       function()
         local sk = require "sidekick"
         if not sk.nes_jump_or_apply() then
-          vim.notify("Theree no NES active suggestions", vim.log.levels.INFO)
+          vim.notify("There are no NES active suggestions", vim.log.levels.INFO)
         end
       end,
       mode = { "n", "i" },
