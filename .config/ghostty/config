@@ -1,7 +1,7 @@
 font-family = MesloLGS Nerd Font Mono
 font-size = 14
 
-theme = TokyoNight
+theme = tokyonight
 # background = 000000
 background = 011628
 foreground = CBE0F0
