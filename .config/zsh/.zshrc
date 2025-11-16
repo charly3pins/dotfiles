@@ -34,3 +34,6 @@ alias tmux='tmux -f ~/.config/tmux/config'
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+
+# bun completions
+[ -s "/home/cfuste/.bun/_bun" ] && source "/home/cfuste/.bun/_bun"

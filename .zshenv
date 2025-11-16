@@ -9,6 +9,8 @@ export PATH="$HOME/.nvim/bin:$PATH" # neovim
 export PATH="$HOME/.cargo/bin:$PATH" # cargo
 export PATH="$HOME/.local/bin:$PATH" # zoxide
 export PATH="$PATH:/usr/local/go/bin:$HOME/go/bin" # go
+export BUN_INSTALL="$HOME/.bun" # bun 
+export PATH="$BUN_INSTALL/bin:$PATH" # bun
 
 # Set up git configuration.
 export GIT_CONFIG_GLOBAL="$XDG_CONFIG_HOME/git/config"
@@ -48,5 +50,9 @@ if [ -f "$HOME/.cargo/env" ]; then
 fi
 
 # ALIAS
-alias tunnel-staging='gcloud compute start-iap-tunnel iap-staging-mysql-users 3306 --local-host-port=localhost:3307 --zone=europe-west1-b --project "swordhealth-staging"'
+alias tunnel-staging-mysql='gcloud compute start-iap-tunnel iap-staging-mysql-users 3306 --local-host-port=localhost:3307 --zone=europe-west1-b --project "swordhealth-staging"'
+alias tunnel-staging-postgres='gcloud compute start-iap-tunnel iap-staging-mysql-users 5435 --local-host-port=0.0.0.0:5435 --zone=europe-west1-b --project "swordhealth-staging"'
 alias android_emulator='./bin/studio -avd Pixel_8 & adb -d wait-for-device & adb logcat'
+
+# opencode
+export PATH=/home/cfuste/.opencode/bin:$PATH
