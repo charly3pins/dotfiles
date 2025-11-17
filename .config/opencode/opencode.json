@@ -1,0 +1,6 @@
+{
+  "plugin": [
+    "opencode-skills"
+  ],
+  "$schema": "https://opencode.ai/config.json"
+}
