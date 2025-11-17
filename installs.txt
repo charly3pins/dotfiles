@@ -153,3 +153,7 @@ BRIGHTNESS PERMISSION
 sudo usermod -aG video $USER 
 sudo chmod g+w /sys/class/backlight/intel_backlight/brightness
 reboot
+
+OPENCODE
+curl -fsSL https://opencode.ai/install | bash
+ln -s ~/dotfiles/.config/opencode ~/.config/opencode
