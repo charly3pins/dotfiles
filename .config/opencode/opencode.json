@@ -1,6 +1,6 @@
 {
-  "plugin": [
-    "opencode-skills"
-  ],
+  "plugin": ["opencode-skills"],
+  "model": "github-copilot/gpt-5",
+  "small_model": "github-copilot/gpt-5-mini",
   "$schema": "https://opencode.ai/config.json"
 }
