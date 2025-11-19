@@ -1,6 +1,26 @@
 {
-  "plugin": [
-    "opencode-skills"
-  ],
+  "plugin": ["opencode-skills"],
+  "model": "github-copilot/claude-sonnet-4.5",
+  "small_model": "github-copilot/gpt-5-mini",
+  "mcp": {
+    "atlassian": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "mcp-remote",
+        "https://mcp.atlassian.com/v1/sse"
+      ],
+      "enabled": true
+    },
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "headers": {
+        "CONTEXT7_API_KEY": "{env:CONTEXT7_API_KEY}"
+      }
+    }
+  },
   "$schema": "https://opencode.ai/config.json"
 }
+
