@@ -55,4 +55,4 @@ alias tunnel-staging-postgres='gcloud compute start-iap-tunnel iap-staging-mysql
 alias android_emulator='./bin/studio -avd Pixel_8 & adb -d wait-for-device & adb logcat'
 
 # opencode
-export PATH=/home/cfuste/.opencode/bin:$PATH
+export PATH=$HOME/.opencode/bin:$PATH
