@@ -37,7 +37,8 @@ return {
           vim.keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts)
 
           vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
-          vim.keymap.set({ "n", "x" }, "<F3>", "<cmd>lua vim.lsp.buf.format({async = true})<cr>", opts)
+          -- Formatting is handled by conform.nvim
+          -- Use <leader>gf for formatting
           vim.keymap.set("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
         end,
       })

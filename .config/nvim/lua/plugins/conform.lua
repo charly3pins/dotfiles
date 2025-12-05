@@ -7,7 +7,7 @@ return {
       {
         "<leader>gf",
         function()
-          require("conform").format { async = true, lsp_fallback = true }
+          require("conform").format { async = true, lsp_fallback = false }
         end,
         mode = "",
         desc = "Format buffer",
@@ -16,19 +16,26 @@ return {
     opts = {
       formatters_by_ft = {
         lua = { "stylua" },
-        javascript = { "prettier" },
-        typescript = { "prettier" },
-        javascriptreact = { "prettier" },
-        typescriptreact = { "prettier" },
+        javascript = { "eslint_d" },
+        typescript = { "eslint_d" },
+        javascriptreact = { "eslint_d" },
+        typescriptreact = { "eslint_d" },
         json = { "prettier" },
         html = { "prettier" },
         css = { "prettier" },
         markdown = { "prettier" },
         go = { "goimports" },
       },
+
+      formatters = {
+        eslint_d = {
+          args = { "--fix-to-stdout", "--stdin", "--stdin-filename", "$FILENAME" },
+        },
+      },
+
       format_on_save = {
-        timeout_ms = 500,
-        lsp_fallback = true,
+        timeout_ms = 2000,
+        lsp_fallback = false,
       },
     },
   },
