@@ -21,6 +21,9 @@
       }
     }
   },
+  "keybinds": {
+    "session_child_cycle": "ctrl+right",
+    "session_child_cycle_reverse": "ctrl+left"
+  },
   "$schema": "https://opencode.ai/config.json"
 }
-
