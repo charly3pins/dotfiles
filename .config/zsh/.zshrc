@@ -37,3 +37,5 @@ export NVM_DIR="$HOME/.nvm"
 
 # bun completions
 [ -s "/home/cfuste/.bun/_bun" ] && source "/home/cfuste/.bun/_bun"
+
+. "$HOME/.local/share/../bin/env"

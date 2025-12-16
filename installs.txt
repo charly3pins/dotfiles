@@ -163,3 +163,6 @@ reboot
 OPENCODE
 curl -fsSL https://opencode.ai/install | bash
 ln -s ~/dotfiles/.config/opencode ~/.config/opencode
+
+UV (FOR SERENA MVP)
+curl -LsSf https://astral.sh/uv/install.sh | sh
