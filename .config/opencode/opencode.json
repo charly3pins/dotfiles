@@ -1,5 +1,4 @@
 {
-  "plugin": ["opencode-skills"],
   "model": "github-copilot/claude-sonnet-4.5",
   "small_model": "github-copilot/gpt-5-mini",
   "mcp": {
