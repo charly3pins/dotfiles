@@ -1,5 +1,5 @@
 {
-  "model": "github-copilot/claude-sonnet-4.5",
+  "model": "github-copilot/claude-sonnet-4.6",
   "small_model": "github-copilot/gpt-5-mini",
   "mcp": {
     "atlassian": {
@@ -31,11 +31,11 @@
         "true"
       ],
       "enabled": true
+    },
+    "excalidraw": {
+      "type": "remote",
+      "url": "https://mcp.excalidraw.com"
     }
-  },
-  "keybinds": {
-    "session_child_cycle": "ctrl+right",
-    "session_child_cycle_reverse": "ctrl+left"
   },
   "$schema": "https://opencode.ai/config.json"
 }
