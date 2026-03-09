@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git:*)",
+      "Bash(bun:*)",
+      "Bash(npm:*)",
+      "Bash(pnpm:*)",
+      "Bash(pip:*)",
+      "Bash(cargo:*)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(grep:*)",
+      "Bash(find:*)",
+      "Bash(rg:*)",
+      "Bash(fd:*)",
+      "Bash(nvim:*)",
+      "Bash(stow:*)"
+    ],
+    "deny": ["Bash(rm -rf /:*)", "Bash(sudo rm:*)"]
+  },
+  "env": {
+    "EDITOR": "nvim",
+    "VISUAL": "nvim"
+  }
+}

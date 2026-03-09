@@ -57,3 +57,5 @@ alias android_emulator='./bin/studio -avd Pixel_8 & adb -d wait-for-device & adb
 # opencode
 export PATH=$HOME/.opencode/bin:$PATH
 
+# claude
+export CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME/claude"
