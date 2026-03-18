@@ -1,7 +1,15 @@
 {
-  "model": "github-copilot/claude-sonnet-4.6",
-  "small_model": "github-copilot/gpt-5-mini",
+  "model": "minimax/minimax-m2.5:free",
+  "small_model": "minimax/minimax-m2.5:free",
   "mcp": {
+    "github": {
+      "type": "local",
+      "command": ["npx", "-y", "@modelcontextprotocol/server-github"],
+      "enabled": false,
+      "environment": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "{env:GITHUB_MCP_TOKEN}"
+      }
+    },
     "atlassian": {
       "type": "local",
       "command": [
@@ -10,31 +18,20 @@
         "mcp-remote",
         "https://mcp.atlassian.com/v1/sse"
       ],
-      "enabled": true
+      "enabled": false
     },
     "context7": {
       "type": "remote",
       "url": "https://mcp.context7.com/mcp",
       "headers": {
         "CONTEXT7_API_KEY": "{env:CONTEXT7_API_KEY}"
-      }
-    },
-    "serena": {
-      "type": "local",
-      "command": [
-        "uvx",
-        "--from",
-        "git+https://github.com/oraios/serena",
-        "serena",
-        "start-mcp-server",
-        "--enable-web-dashboard",
-        "true"
-      ],
+      },
       "enabled": true
     },
     "excalidraw": {
       "type": "remote",
-      "url": "https://mcp.excalidraw.com"
+      "url": "https://mcp.excalidraw.com",
+      "enabled": false
     }
   },
   "$schema": "https://opencode.ai/config.json"
