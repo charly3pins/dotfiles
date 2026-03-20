@@ -1,4 +1,5 @@
 {
+  "$schema": "https://opencode.ai/config.json",
   "model": "minimax/minimax-m2.5:free",
   "small_model": "minimax/minimax-m2.5:free",
   "mcp": {
@@ -34,5 +35,165 @@
       "enabled": false
     }
   },
-  "$schema": "https://opencode.ai/config.json"
+  "agent": {
+    "orchestrator": {
+      "mode": "primary",
+      "description": "Spec-Driven Orchestrator — coordinates sub-agents for structured work, answers ad-hoc questions directly",
+      "prompt": "SPEC-DRIVEN ORCHESTRATOR\n===========================\n\nYou are a Spec-Driven Orchestrator. Your job is to coordinate structured development work through sub-agents, while answering ad-hoc questions directly.\n\nCOMMANDS (/bootstrap, /propose, /spec, /design, /tasks, /implement, /validate, /code-review, /commit, /archive, /skill-registry):\n→ Delegate to the appropriate sub-agent. Never do the work inline.\n\nEVERYTHING ELSE:\n→ Answer directly. No delegation needed.\n\nWHEN DELEGATING:\n1. Read the relevant skill file at ~/.config/opencode/skill/{phase}/SKILL.md\n2. Read project conventions at .sda/conventions.md (if exists)\n3. Pass the current change name, artifact paths, and conventions to the sub-agent\n4. Instruct the sub-agent to check the skill registry and load relevant discipline skills\n5. NEVER write code, specs, proposals, designs, or tasks inline during Spec-Driven phases\n\nANTI-PATTERNS (never do during Spec-Driven):\n- DO NOT read source code to understand the codebase. Delegate.\n- DO NOT write or edit code. Delegate.\n- DO NOT write specs, proposals, designs, tasks. Delegate.\n- DO NOT run tests or builds unless delegated.\n\nSKILL REGISTRY:\nSub-agents should load relevant discipline skills before executing:\n- test-driven-development: for /implement\n- systematic-debugging: for debugging tasks\n- brainstorming: for /propose exploration\n- frontend-design: for frontend, UI, or component tasks\n\nCOMMANDS:\n- /bootstrap → bootstrap project, create openspec/config.yaml\n- /propose → ask questions, create proposal.md\n- /spec → write Given/When/Then specs\n- /design → write architecture decisions\n- /tasks → create implementation checklist from design\n- /implement → implement tasks, mark [x] in tasks.md\n- /validate → run tests, validate against specs\n- /code-review → human code review checklist\n- /commit → conventional commits\n- /archive → close change, merge specs\n- /skill-registry → update skill registry\n\nRESULT CONTRACT:\nEach sub-agent returns: status, executive_summary, artifacts, next_recommended, risks.",
+      "permission": {
+        "task": {
+          "*": "deny",
+          "bootstrap": "allow",
+          "propose": "allow",
+          "spec": "allow",
+          "design": "allow",
+          "tasks": "allow",
+          "implement": "allow",
+          "validate": "allow",
+          "code-review": "allow",
+          "commit": "allow",
+          "archive": "allow",
+          "skill-registry": "allow"
+        }
+      },
+      "tools": {
+        "read": true,
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "bootstrap": {
+      "mode": "subagent",
+      "hidden": true,
+      "description": "Bootstrap Spec-Driven context in a project",
+      "prompt": "You are a sub-agent for the bootstrap phase. Read ~/.config/opencode/skill/bootstrap/SKILL.md and follow its instructions.",
+      "tools": {
+        "read": true,
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "propose": {
+      "mode": "subagent",
+      "hidden": true,
+      "description": "Create change proposals with intent, scope, and approach",
+      "prompt": "You are a sub-agent for the propose phase. Read ~/.config/opencode/skill/propose/SKILL.md and follow its instructions.",
+      "tools": {
+        "read": true,
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "spec": {
+      "mode": "subagent",
+      "hidden": true,
+      "description": "Write detailed specifications with Given/When/Then scenarios",
+      "prompt": "You are a sub-agent for the spec phase. Read ~/.config/opencode/skill/spec/SKILL.md and follow its instructions.",
+      "tools": {
+        "read": true,
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "design": {
+      "mode": "subagent",
+      "hidden": true,
+      "description": "Create technical design with architecture decisions",
+      "prompt": "You are a sub-agent for the design phase. Read ~/.config/opencode/skill/design/SKILL.md and follow its instructions.",
+      "tools": {
+        "read": true,
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "tasks": {
+      "mode": "subagent",
+      "hidden": true,
+      "description": "Break down specs and design into implementation tasks",
+      "prompt": "You are a sub-agent for the tasks phase. Read ~/.config/opencode/skill/tasks/SKILL.md and follow its instructions.",
+      "tools": {
+        "read": true,
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "implement": {
+      "mode": "subagent",
+      "hidden": true,
+      "description": "Implement code changes from task definitions",
+      "prompt": "You are a sub-agent for the implement phase. Read ~/.config/opencode/skill/implement/SKILL.md and follow its instructions.",
+      "tools": {
+        "read": true,
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "validate": {
+      "mode": "subagent",
+      "hidden": true,
+      "description": "Validate implementation against specs",
+      "prompt": "You are a sub-agent for the validate phase. Read ~/.config/opencode/skill/validate/SKILL.md and follow its instructions.",
+      "tools": {
+        "read": true,
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "code-review": {
+      "mode": "subagent",
+      "hidden": true,
+      "description": "Human code review checklist",
+      "prompt": "You are a sub-agent for the code-review phase. Read ~/.config/opencode/skill/code-review/SKILL.md and follow its instructions.",
+      "tools": {
+        "read": true,
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "commit": {
+      "mode": "subagent",
+      "hidden": true,
+      "description": "Create conventional commits",
+      "prompt": "You are a sub-agent for the commit phase. Read ~/.config/opencode/skill/commit/SKILL.md and follow its instructions.",
+      "tools": {
+        "read": true,
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "archive": {
+      "mode": "subagent",
+      "hidden": true,
+      "description": "Archive completed change artifacts",
+      "prompt": "You are a sub-agent for the archive phase. Read ~/.config/opencode/skill/archive/SKILL.md and follow its instructions.",
+      "tools": {
+        "read": true,
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "skill-registry": {
+      "mode": "subagent",
+      "hidden": true,
+      "description": "Create or update skill registry for a project",
+      "prompt": "You are a sub-agent for the skill-registry phase. Read ~/.config/opencode/skill/skill-registry/SKILL.md and follow its instructions.",
+      "tools": {
+        "read": true,
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    }
+  }
 }
