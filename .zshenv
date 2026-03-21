@@ -49,13 +49,11 @@ if [ -f "$HOME/.cargo/env" ]; then
   . "$HOME/.cargo/env"
 fi
 
-# ALIAS
-alias tunnel-staging-mysql='gcloud compute start-iap-tunnel iap-staging-mysql-users 3306 --local-host-port=localhost:3307 --zone=europe-west1-b --project "swordhealth-staging"'
-alias tunnel-staging-postgres='gcloud compute start-iap-tunnel iap-staging-mysql-users 5435 --local-host-port=0.0.0.0:5435 --zone=europe-west1-b --project "swordhealth-staging"'
-alias android_emulator='./bin/studio -avd Pixel_8 & adb -d wait-for-device & adb logcat'
-
 # opencode
 export PATH=$HOME/.opencode/bin:$PATH
 
 # claude
 export CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME/claude"
+
+# Local
+[ -f ~/.local.env ] && source ~/.local.env

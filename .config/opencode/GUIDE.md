@@ -36,7 +36,7 @@ The orchestrator delegates heavy work (planning, implementation) to sub-agents w
 ### Solo Dev (Simple Changes)
 
 ```
-/propose → /spec → /tasks → /implement → /validate → /code-review → /commit → /archive
+/propose → /tasks → /implement → /validate → /code-review → /archive
 ```
 
 ### Full Spec-Driven (Complex / Team)

@@ -6,3 +6,6 @@
 .claude.json
 backups/
 cache/
+
+# Local
+~/.local.env
