@@ -1,3 +1,8 @@
 *private*.sh
 .DS_Store
 .zcompdump*
+
+# Claude Code / OpenCode
+.claude.json
+backups/
+cache/

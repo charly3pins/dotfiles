@@ -15,29 +15,28 @@ The orchestrator delegates heavy work (planning, implementation) to sub-agents w
 
 ## Commands
 
-| Command | What it does |
-|---------|-------------|
-| `/bootstrap` | Init project — detect stack, create `openspec/` |
+| Command                 | What it does                                           |
+| ----------------------- | ------------------------------------------------------ |
+| `/bootstrap`            | Init project — detect stack, create `openspec/`        |
 | `/propose {ticket-id?}` | Read external ticket (optional) → create `proposal.md` |
-| `/spec` | Write Given/When/Then specs |
-| `/design` | Write architecture decisions |
-| `/tasks` | Create implementation checklist |
-| `/implement` | Implement tasks (TDD if enabled) |
-| `/validate` | Run tests, validate against specs |
-| `/code-review` | Human code review |
-| `/commit` | Conventional commits |
-| `/archive` | Close change, merge specs to `openspec/specs/` |
-| `/skill-registry` | Update skill registry |
-| `/migrate` | Migrate existing `thoughts/` folder to `openspec/` (one-time) |
+| `/spec`                 | Write Given/When/Then specs                            |
+| `/design`               | Write architecture decisions                           |
+| `/tasks`                | Create implementation checklist                        |
+| `/implement`            | Implement tasks (TDD if enabled)                       |
+| `/validate`             | Run tests, validate against specs                      |
+| `/code-review`          | Human code review                                      |
+| `/commit`               | Conventional commits                                   |
+| `/archive`              | Close change, merge specs to `openspec/specs/`         |
+| `/skill-registry`       | Update skill registry                                  |
 
 ---
 
 ## Workflows
 
-### Migrate Existing Project
+### Solo Dev (Simple Changes)
 
 ```
-/migrate  (one-time, converts thoughts/ → openspec/)
+/propose → /spec → /tasks → /implement → /validate → /code-review → /commit → /archive
 ```
 
 ### Full Spec-Driven (Complex / Team)
@@ -52,12 +51,12 @@ The orchestrator delegates heavy work (planning, implementation) to sub-agents w
 
 Skills are loaded automatically when relevant:
 
-| Trigger | Skill | Purpose |
-|---------|-------|---------|
-| testing, tdd | `test-driven-development` | RED → GREEN → REFACTOR |
-| debugging, bug | `systematic-debugging` | Root cause before fixes |
-| ideas, design | `brainstorming` | Collaborative exploration |
-| frontend, ui, component | `frontend-design` | Distinctive, production-grade interfaces |
+| Trigger                 | Skill                     | Purpose                                  |
+| ----------------------- | ------------------------- | ---------------------------------------- |
+| testing, tdd            | `test-driven-development` | RED → GREEN → REFACTOR                   |
+| debugging, bug          | `systematic-debugging`    | Root cause before fixes                  |
+| ideas, design           | `brainstorming`           | Collaborative exploration                |
+| frontend, ui, component | `frontend-design`         | Distinctive, production-grade interfaces |
 
 ---
 
@@ -72,6 +71,7 @@ openspec/
 ```
 
 Each change creates:
+
 ```
 openspec/changes/{name}/
 ├── proposal.md
@@ -86,10 +86,11 @@ openspec/changes/{name}/
 ## Project Config
 
 During `/bootstrap`, project config is saved to `.sda/project.yaml`:
+
 ```yaml
 issue_tracker:
-  type: github  # github | jira | notion | none
-  project: "123"  # GitHub project number, Jira project key, Notion database ID
+  type: github # github | jira | notion | none
+  project: "123" # GitHub project number, Jira project key, Notion database ID
 ```
 
 This tells `/implement` how to move issues through stages (GitHub → In Progress, Jira → IN PROGRESS, etc.).
@@ -99,6 +100,7 @@ This tells `/implement` how to move issues through stages (GitHub → In Progres
 ## Project Conventions
 
 During `/bootstrap`, project conventions are detected and saved to `.sda/conventions.md`:
+
 - `AGENTS.md`, `CLAUDE.md`, `.cursorrules`, etc.
 - Branch creation, commit conventions, PR workflow
 
@@ -109,6 +111,7 @@ Sub-agents read these conventions before executing. Your existing project workfl
 ## TDD Mode
 
 Enable in `openspec/config.yaml`:
+
 ```yaml
 rules:
   apply:
