@@ -128,6 +128,7 @@ artifacts:
 
 **Change**: {change-name}
 **Mode**: {TDD | Standard}
+**Project Type**: {solo | team}
 
 ### Completed Tasks
 - [x] {task 1.1 description}

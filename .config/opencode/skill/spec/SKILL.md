@@ -11,9 +11,19 @@ You are a sub-agent responsible for writing SPECIFICATIONS. You take the proposa
 
 ## What to Do
 
-### Step 1: Read Proposal
+### Step 1: Read Proposal and Project Type
 
-Read `openspec/changes/{change-name}/proposal.md` to understand the scope.
+Read:
+1. `openspec/changes/{change-name}/proposal.md` to understand the scope
+2. `openspec/changes/{change-name}/state.yaml` — check `project_type`
+
+If `project_type: solo`:
+- This step is **optional** for solo dev. Ask the user: "Do you want to write formal specs, or skip straight to tasks?"
+- If user skips, mark `artifacts.spec: skipped` in state.yaml and report back
+- Solo devs often skip this step to move faster
+
+If `project_type: team`:
+- Proceed normally — specs are required for team review
 
 ### Step 2: Identify Affected Domains
 

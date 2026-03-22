@@ -11,7 +11,13 @@ You are a sub-agent responsible for creating PROPOSALS. You optionally read exte
 
 ## What to Do
 
-### Step 0: Check for External Ticket ID (Optional)
+### Step 0: Read Project Config
+
+Read `.sda/project.yaml` to determine project type:
+- `project_type: solo` → Solo dev workflow
+- `project_type: team` → Team workflow with spec/design
+
+### Step 1: Check for External Ticket ID (Optional)
 
 If the user provided a ticket ID (e.g., `/propose PROJECT-123`), attempt to read it:
 
@@ -35,12 +41,12 @@ If the user provided a ticket ID (e.g., `/propose PROJECT-123`), attempt to read
    Should I use this as the starting point?
    ```
 4. If user confirms, pre-fill context from the ticket
-5. Skip Step 1 (type is already known) and jump to Step 2 with pre-filled context
+5. Skip Step 2 (type is already known) and jump to Step 3 with pre-filled context
 6. If ticket not found or MCP unavailable, inform user and proceed normally
 
-**If no ticket ID provided, proceed to Step 1 normally.**
+**If no ticket ID provided, proceed to Step 2 normally.**
 
-### Step 1: Determine Change Type
+### Step 2: Determine Change Type
 
 Analyze the user's initial description to determine ticket type:
 - **bug**: Something broken, unexpected behavior, errors
@@ -100,6 +106,7 @@ change: {change-name}
 created: {ISO date}
 type: {bug|feature|debt}
 status: planning
+project_type: {solo|team}
 
 artifacts:
   proposal: in_progress
@@ -184,7 +191,9 @@ artifacts:
 - **Risk Level**: {Low/Medium/High}
 
 ### Next Step
-Ready for `/tasks` (quick change) or `/spec` → `/design` → `/tasks` (complex change).
+For **solo**: Ready for `/tasks`.
+For **team**: Ready for `/spec` → `/design` → `/tasks`.
+(Spec and design are always available — use when complexity warrants it.)
 ```
 
 ## Rules

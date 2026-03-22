@@ -25,7 +25,6 @@ The orchestrator delegates heavy work (planning, implementation) to sub-agents w
 | `/implement`            | Implement tasks (TDD if enabled)                       |
 | `/validate`             | Run tests, validate against specs                      |
 | `/code-review`          | Human code review                                      |
-| `/commit`               | Conventional commits                                   |
 | `/archive`              | Close change, merge specs to `openspec/specs/`         |
 | `/skill-registry`       | Update skill registry                                  |
 
@@ -42,8 +41,10 @@ The orchestrator delegates heavy work (planning, implementation) to sub-agents w
 ### Full Spec-Driven (Complex / Team)
 
 ```
-/bootstrap → /propose → /spec → /design → /tasks → /implement → /validate → /code-review → /commit → /archive
+/bootstrap → /propose → /spec → /design → /tasks → /implement → /validate → /code-review → /archive
 ```
+
+> **Note**: `/spec` and `/design` are always available — use them when complexity warrants it, even in solo projects.
 
 ---
 
@@ -88,12 +89,14 @@ openspec/changes/{name}/
 During `/bootstrap`, project config is saved to `.sda/project.yaml`:
 
 ```yaml
+project_type: solo  # solo | team
 issue_tracker:
-  type: github # github | jira | notion | none
-  project: "123" # GitHub project number, Jira project key, Notion database ID
+  type: github  # github | jira | notion | none
+  project: "123"  # GitHub project number, Jira project key, Notion database ID
 ```
 
-This tells `/implement` how to move issues through stages (GitHub → In Progress, Jira → IN PROGRESS, etc.).
+- `project_type` tells skills whether to skip optional phases (solo skips `/spec`, `/design`, `/code-review`)
+- `issue_tracker` tells `/implement` how to move issues through stages (GitHub → In Progress, Jira → IN PROGRESS, etc.)
 
 ---
 

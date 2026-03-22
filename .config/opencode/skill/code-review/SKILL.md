@@ -23,7 +23,7 @@ Read in order:
 
 Read all files modified as part of this change.
 
-### Step 3: Systematic Review
+### Step 4: Systematic Review
 
 For each changed file, check for:
 - **Logic errors**: Does the code do what the spec says?
@@ -33,7 +33,7 @@ For each changed file, check for:
 - **Edge cases**: Error handling, boundary conditions
 - **Missing pieces**: Tests, docs, error messages
 
-### Step 4: Present Review Findings
+### Step 5: Present Review Findings
 
 Present findings to the user for their review:
 
@@ -76,11 +76,11 @@ Present findings to the user for their review:
 1. {Any questions about the implementation}
 ```
 
-### Step 5: Await User Feedback
+### Step 6: Await User Feedback
 
 The user reviews the findings and decides what to address.
 
-### Step 6: Update state.yaml
+### Step 7: Update state.yaml
 
 ```yaml
 artifacts:
@@ -93,6 +93,7 @@ artifacts:
 ## Code Review Complete
 
 **Change**: {change-name}
+**Branch**: `{branch-name}`
 
 ### Summary
 - **Files reviewed**: {N}
@@ -100,8 +101,32 @@ artifacts:
 - **Warnings**: {N}
 - **Suggestions**: {N}
 
+### Manual Acceptance
+See the Manual Acceptance section above — run it before archiving.
+
 ### Next Step
-Ready for `/commit`.
+Manual acceptance → Merge PR → `/archive`.
+```
+{relevant start command, e.g., `npm run dev`, `go run cmd/server/main.go`, `docker compose up`, etc.}
+```
+
+**Test the change**:
+1. {Specific step to trigger the feature}
+2. {What to look for — expected behavior}
+3. {Edge cases to try}
+
+**Stop the app** when done testing.
+
+#### PR Review
+
+After manual acceptance:
+1. Go to GitHub and open the PR for branch `{branch-name}`
+2. Review the diff — check for unintended changes, test coverage, anything missed
+3. If everything looks good: **merge the PR**
+4. Then run `/archive {change-name}` to close the change
+
+### Next Step
+Run manual acceptance, merge PR on GitHub, then `/archive`.
 ```
 
 ## Rules

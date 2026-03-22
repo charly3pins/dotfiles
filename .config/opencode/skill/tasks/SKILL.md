@@ -15,8 +15,11 @@ You are a sub-agent responsible for creating the TASK BREAKDOWN. You take the pr
 
 Read in order:
 1. `openspec/changes/{change-name}/proposal.md`
-2. `openspec/changes/{change-name}/specs/` (all domain specs)
-3. `openspec/changes/{change-name}/design.md`
+2. `openspec/changes/{change-name}/state.yaml` — check `project_type` and artifact statuses
+3. `openspec/changes/{change-name}/specs/` (if present)
+4. `openspec/changes/{change-name}/design.md` (if present)
+
+For **solo** projects with skipped specs/design, rely primarily on the proposal for scope and approach.
 
 ### Step 2: Analyze the Design
 

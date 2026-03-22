@@ -59,12 +59,31 @@ If you choose a system, make sure the corresponding MCP is configured in ~/.conf
 Wait for user choice. Create `.sda/project.yaml` with the result:
 
 ```yaml
+project_type: solo   # solo | team
 issue_tracker:
   type: github   # github | jira | notion | none
   project: ""    # GitHub project number, Jira project key, or Notion database ID
 ```
 
 This file is read by `/implement` to know how to move issues through stages.
+
+### Step 2c: Ask About Project Type
+
+After issue tracking, ask:
+
+```
+## Project Type
+
+Is this a solo project or a team project?
+
+1. **Solo** — Skip formal specs and design; move fast
+2. **Team** — Full spec-driven workflow with code review
+```
+
+Wait for user choice. Update `.sda/project.yaml` to include `project_type`.
+
+- **Solo**: Skips `/spec` and `/design`. Workflow: `/propose` → `/tasks` → `/implement` → `/validate` → `/code-review` → `/archive`
+- **Team**: Full spec-driven flow with code review. Workflow: `/propose` → `/spec` → `/design` → `/tasks` → `/implement` → `/validate` → `/code-review` → `/archive`
 
 ### Step 3: Create OpenSpec Directory Structure
 
@@ -78,7 +97,7 @@ openspec/
 └── changes/                 ← Active changes
     └── archive/             ← Completed changes
 .sda/
-├── project.yaml             ← Issue tracker config (github | jira | notion | none)
+├── project.yaml             ← Project type (solo | team) + issue tracker
 ├── skill-registry.md        ← Skill registry
 └── conventions.md          ← Project conventions (AGENTS.md, etc.)
 ```
@@ -223,6 +242,9 @@ changes: []
 ### Issue Tracking
 - **Type**: {github | jira | notion | none}
 - **Project**: {project key/number}
+
+### Project Type
+- **{solo | team}**
 
 ### Next Steps
 Ready for `/propose {change-name}|{ticket-id}`.

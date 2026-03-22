@@ -11,14 +11,28 @@ You are a sub-agent responsible for ARCHIVING. You merge delta specs into the ma
 
 ## What to Do
 
+### Step 0: Verify PR is Merged
+
+Before running archive, confirm:
+- [ ] Manual acceptance passed
+- [ ] PR is merged on GitHub
+
+Archive is the **last step** — after merging. If the PR is not merged yet, do that first.
+
 ### Step 1: Read Context
 
-Read `openspec/changes/{change-name}/verify-report.md` if it exists.
+Read:
+1. `openspec/changes/{change-name}/verify-report.md` if it exists
+2. `openspec/changes/{change-name}/state.yaml` — check `project_type`
+
 Check verdict — if FAIL (critical issues), warn and STOP.
 
 ### Step 2: Sync Delta Specs to Main Specs
 
-For each delta spec in `openspec/changes/{change-name}/specs/`:
+If `project_type: solo` and `artifacts.spec: skipped`:
+- Skip this step — no specs were written to sync.
+
+Otherwise, for each delta spec in `openspec/changes/{change-name}/specs/`:
 
 #### If Main Spec Exists (`openspec/specs/{domain}/spec.md`)
 
@@ -64,6 +78,7 @@ Update `openspec/changes/.state.yaml` to remove this change from active list.
 
 **Change**: {change-name}
 **Archived to**: `openspec/changes/archive/{YYYY-MM-DD}-{change-name}/`
+**PR Merged**: ✅
 
 ### Specs Synced
 | Domain | Action | Details |
@@ -72,13 +87,13 @@ Update `openspec/changes/.state.yaml` to remove this change from active list.
 
 ### Archive Contents
 - proposal.md ✅
-- specs/ ✅
-- design.md ✅
+- specs/ ✅ (or skipped for solo)
+- design.md ✅ (or skipped for solo)
 - tasks.md ✅
 - verify-report.md ✅
 
 ### Spec-Driven Cycle Complete
-The change has been fully planned, implemented, verified, and archived.
+The change has been fully planned, implemented, verified, code-reviewed, manually accepted, and archived.
 Ready for the next change.
 ```
 

@@ -15,10 +15,11 @@ You are a sub-agent responsible for VERIFICATION. You prove that the implementat
 
 Read in order:
 1. `openspec/changes/{change-name}/proposal.md`
-2. `openspec/changes/{change-name}/specs/` (all domain specs)
-3. `openspec/changes/{change-name}/design.md`
+2. `openspec/changes/{change-name}/specs/` (if present)
+3. `openspec/changes/{change-name}/design.md` (if present)
 4. `openspec/changes/{change-name}/tasks.md`
-5. `openspec/config.yaml`
+5. `openspec/changes/{change-name}/state.yaml` — check `project_type`
+6. `openspec/config.yaml`
 
 ### Step 2: Check Completeness
 
@@ -123,7 +124,7 @@ Return the same content as `verify-report.md`.
 - **Compliance**: {N}/{total} scenarios compliant
 
 ### Next Step
-{Ready for /code-review / Blocked by critical issues}
+Ready for `/code-review` → `/archive`.
 ```
 
 ## Rules

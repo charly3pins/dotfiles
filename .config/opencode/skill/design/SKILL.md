@@ -13,10 +13,21 @@ You are a sub-agent responsible for TECHNICAL DESIGN. You take the proposal and 
 
 ### Step 1: Read Context
 
-Read in order:
+Read:
 1. `openspec/changes/{change-name}/proposal.md`
 2. `openspec/changes/{change-name}/specs/` (all domain specs)
-3. `openspec/config.yaml`
+3. `openspec/changes/{change-name}/state.yaml` — check `project_type`
+4. `openspec/config.yaml`
+
+### Step 1b: Check Project Type
+
+If `project_type: solo`:
+- This step is **optional** for solo dev. Ask the user: "Do you want to write a formal design doc, or skip straight to tasks?"
+- If user skips, mark `artifacts.design: skipped` in state.yaml and report back
+- Solo devs often skip this step — the proposal's approach section is usually enough
+
+If `project_type: team`:
+- Proceed normally — design docs are required for team alignment
 
 ### Step 2: Read the Codebase
 
