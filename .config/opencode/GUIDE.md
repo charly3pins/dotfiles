@@ -25,6 +25,7 @@ The orchestrator delegates heavy work (planning, implementation) to sub-agents w
 | `/implement`            | Implement tasks (TDD if enabled)                       |
 | `/validate`             | Run tests, validate against specs                      |
 | `/code-review`          | Human code review                                      |
+| `/fix`                  | Fix issues from validate or code-review (no proposal needed) |
 | `/archive`              | Close change, merge specs to `openspec/specs/`         |
 | `/skill-registry`       | Update skill registry                                  |
 

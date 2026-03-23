@@ -85,11 +85,19 @@ Phase 2: Core Implementation
   └─ Main logic, business rules, core behavior
 
 Phase 3: Testing
-  └─ Unit tests, integration tests
+  └─ Unit tests (required for every new feature), integration/e2e tests (if applicable)
 
 Phase 4: Cleanup
   └─ Documentation, remove dead code
 ```
+
+### Testing Requirements
+
+Every change that introduces new functionality MUST include at least unit tests in Phase 3. 100% coverage is not the goal, but every new feature needs tests covering its core behavior.
+
+- **Unit tests**: required for every new feature — no exceptions
+- **E2E / integration tests**: add when the feature crosses system boundaries or involves user-facing flows
+- If a task genuinely has no testable behavior (e.g., config change, doc update), annotate it with `# no unit test needed` — make it a conscious decision, not an oversight
 
 ### Step 4: Update state.yaml
 

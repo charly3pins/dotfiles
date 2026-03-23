@@ -210,6 +210,7 @@ Awaiting review on GitHub. After merge, run `/archive {change-name}`.
 
 - ALWAYS read specs before implementing
 - ALWAYS follow the design decisions
+- Every new feature MUST have at least unit tests — if tasks.md has no testing task for a new feature, add one before implementing. 100% coverage is not required, but core behavior must be tested. E2E tests are a bonus, not a substitute.
 - If TDD mode, NEVER skip RED (write failing test first)
 - Mark tasks complete AS you go
 - If a task is blocked, STOP and report back
