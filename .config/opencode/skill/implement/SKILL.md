@@ -27,7 +27,9 @@ Read in order:
 4. `openspec/changes/{change-name}/tasks.md`
 5. `openspec/config.yaml` (check `rules.apply.tdd`)
 
-### Step 2: Create Branch
+### Step 2: Create Branch FIRST — BEFORE Writing Any Code
+
+> ⚠️ **CRITICAL**: You MUST create a branch before writing any code. Never write code on main.
 
 If project conventions exist (`.sda/conventions.md`), follow the branch creation rules:
 
@@ -101,7 +103,26 @@ FOR EACH TASK:
 3. Read design decisions
 4. Write the code
 
-### Step 4: Mark Tasks Complete
+### Step 5: Commit Each Phase
+
+After completing each phase, commit the changes. NEVER let uncommitted work accumulate.
+
+For each completed phase:
+
+1. `git add {specific files changed in this phase}` — never use `-A` or `.`
+2. `git commit -S -m "{conventional commit message}"` — use `-S` for GPG signing if configured
+
+Commit message format: `{type}: {brief description}`
+- `feat:` — new functionality
+- `fix:` — bug fix
+- `chore:` — tooling, config
+- `docs:` — documentation
+- `test:` — tests
+- `refactor:` — restructuring without behavior change
+
+Example: `git commit -S -m "feat: add JWT validation middleware"`
+
+### Step 6: Mark Tasks Complete
 
 Update `tasks.md` — change `- [ ]` to `- [x]`:
 
@@ -113,55 +134,76 @@ Update `tasks.md` — change `- [ ]` to `- [x]`:
 - [ ] 1.3 Add auth routes to `internal/server/server.go`  ← still pending
 ```
 
-### Step 5: Update state.yaml
+### Step 7: Update state.yaml
 
 ```yaml
 status: in_progress
 artifacts:
   tasks: present
+  pr_open: true
+```
+
+### Step 8: Rebase onto Main
+
+After ALL tasks are complete and committed, BEFORE opening the PR:
+
+```
+git fetch origin && git rebase origin/main
+```
+
+Resolve any conflicts. Run tests after rebase to confirm everything still works.
+
+### Step 9: Push Branch
+
+```
+git push -u origin {branch-name}
+```
+
+### Step 10: Open Pull Request
+
+```
+gh pr create --title "{type}: {brief description}" --body "Closes #{issue-number}
+
+## Summary
+- {one-line summary of what this PR does}
+
+## Testing
+- [ ] Tests pass
+- [ ] Manual acceptance passed
+"
+```
+
+Move GitHub issue to **IN REVIEW** if using project board:
+```
+gh project item-edit {item-id} --field "Status" --value "In Review"
 ```
 
 ## Return Summary
 
 ```
-## Implementation Progress
+## Implementation Complete
 
 **Change**: {change-name}
 **Mode**: {TDD | Standard}
-**Project Type**: {solo | team}
-
-### Completed Tasks
-- [x] {task 1.1 description}
-- [x] {task 1.2 description}
-
-### Files Changed
-| File | Action | What Was Done |
-|------|--------|---------------|
-| `path/to/file.ext` | Created | {brief description} |
-| `path/to/other.ext` | Modified | {brief description} |
-
-### Branch Created
 **Branch**: `{branch-name}`
-**Status**: Ready on `{branch-name}`
+**PR**: {URL}
+
+### Commits ({N})
+| # | Message |
+|---|---------|
+| 1 | {feat: add auth middleware} |
+| 2 | {feat: add auth routes} |
 
 ### Tests (TDD mode only)
 | Task | RED | GREEN | REFACTOR |
 |------|-----|-------|----------|
 | 1.1 | ✅ Failed as expected | ✅ Passed | ✅ Clean |
-| 1.2 | ✅ Failed as expected | ✅ Passed | ✅ Clean |
-
-### Deviations from Design
-{List any places where the implementation deviated, or "None — implementation matches design."}
-
-### Remaining Tasks
-- [ ] {next task}
-- [ ] {next task}
 
 ### Status
-{N}/{total} tasks complete.
+All {N} tasks complete. PR open for review.
 
 ### Next Step
-{Ready for next batch / Ready for /validate / Blocked by X}
+Awaiting review on GitHub. After merge, run `/archive {change-name}`.
 ```
 
 ## Rules
@@ -172,4 +214,8 @@ artifacts:
 - Mark tasks complete AS you go
 - If a task is blocked, STOP and report back
 - Never implement tasks that weren't assigned to you
+- **BRANCH FIRST** — create branch BEFORE writing any code, never work on main
+- **COMMIT AFTER EACH PHASE** — never let uncommitted work accumulate on main
+- **ALWAYS open a PR after all tasks are complete**
+- **ALWAYS rebase onto main before opening the PR**
 - Return a structured envelope with: `status`, `executive_summary`, `artifacts`, `next_recommended`, `risks`

@@ -14,6 +14,7 @@ You are a sub-agent responsible for ARCHIVING. You merge delta specs into the ma
 ### Step 0: Verify PR is Merged
 
 Before running archive, confirm:
+
 - [ ] Manual acceptance passed
 - [ ] PR is merged on GitHub
 
@@ -22,6 +23,7 @@ Archive is the **last step** — after merging. If the PR is not merged yet, do 
 ### Step 1: Read Context
 
 Read:
+
 1. `openspec/changes/{change-name}/verify-report.md` if it exists
 2. `openspec/changes/{change-name}/state.yaml` — check `project_type`
 
@@ -30,6 +32,7 @@ Check verdict — if FAIL (critical issues), warn and STOP.
 ### Step 2: Sync Delta Specs to Main Specs
 
 If `project_type: solo` and `artifacts.spec: skipped`:
+
 - Skip this step — no specs were written to sync.
 
 Otherwise, for each delta spec in `openspec/changes/{change-name}/specs/`:
@@ -37,6 +40,7 @@ Otherwise, for each delta spec in `openspec/changes/{change-name}/specs/`:
 #### If Main Spec Exists (`openspec/specs/{domain}/spec.md`)
 
 Read existing spec, apply delta:
+
 - ADDED Requirements → Append to main spec
 - MODIFIED Requirements → Replace matching requirement
 - REMOVED Requirements → Delete from main spec
@@ -44,6 +48,7 @@ Read existing spec, apply delta:
 #### If Main Spec Does NOT Exist
 
 Copy delta spec directly:
+
 ```
 openspec/changes/{change-name}/specs/{domain}/spec.md
   → openspec/specs/{domain}/spec.md
@@ -63,6 +68,7 @@ Use today's date in ISO format.
 ### Step 4: Verify Archive
 
 Confirm:
+
 - [ ] Main specs updated correctly
 - [ ] Change folder moved to archive
 - [ ] Archive contains all artifacts
@@ -100,6 +106,7 @@ Ready for the next change.
 ## Rules
 
 - NEVER archive a change that has CRITICAL issues
+- NEVER archive before the PR is merged
 - ALWAYS sync delta specs BEFORE moving to archive
 - Use ISO date format (YYYY-MM-DD) for archive folder
 - The archive is an AUDIT TRAIL — never delete or modify archived changes
