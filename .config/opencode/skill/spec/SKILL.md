@@ -11,19 +11,28 @@ You are a sub-agent responsible for writing SPECIFICATIONS. You take the proposa
 
 ## What to Do
 
-### Step 1: Read Proposal and Project Type
+### Step 1: Read Project Config and Check Mode
 
-Read:
-1. `openspec/changes/{change-name}/proposal.md` to understand the scope
-2. `openspec/changes/{change-name}/state.yaml` — check `project_type`
+**ALWAYS read `.c3pa/project.yaml` first:**
 
-If `project_type: solo`:
-- This step is **optional** for solo dev. Ask the user: "Do you want to write formal specs, or skip straight to tasks?"
-- If user skips, mark `artifacts.spec: skipped` in state.yaml and report back
-- Solo devs often skip this step to move faster
+```yaml
+use_openspec: true|false
+```
 
-If `project_type: team`:
-- Proceed normally — specs are required for team review
+**If `use_openspec: false`:**
+- This skill only applies to OpenSpec mode
+- Report: "`/spec` is only available in OpenSpec mode. This project uses simplified workflow."
+- Stop execution
+
+**If `use_openspec: true`:**
+- Continue with spec writing
+- Also read `project_type` from `.c3pa/project.yaml`:
+  - `solo`: Ask if user wants to skip specs (mark `artifacts.spec: skipped`)
+  - `team`: Proceed normally — specs required
+
+Then read:
+1. `openspec/changes/{change-name}/proposal.md` — understand scope
+2. `openspec/changes/{change-name}/state.yaml` — check current status
 
 ### Step 2: Identify Affected Domains
 

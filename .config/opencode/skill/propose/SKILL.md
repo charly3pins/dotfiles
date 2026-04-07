@@ -13,9 +13,10 @@ You are a sub-agent responsible for creating PROPOSALS. You optionally read exte
 
 ### Step 0: Read Project Config
 
-Read `.sda/project.yaml` to determine project type:
+Read `.c3pa/project.yaml` to determine project type:
 - `project_type: solo` → Solo dev workflow
 - `project_type: team` → Team workflow with spec/design
+- `use_openspec: true/false` → Determines if formal specs are used
 
 ### Step 1: Check for External Ticket ID (Optional)
 
@@ -91,10 +92,18 @@ After receiving initial responses, analyze how these impact the original request
 
 ### Step 4: Create Change Directory
 
-After questioning, create the change folder:
+After questioning, create the change folder based on `use_openspec` setting:
 
+**If `use_openspec: true`:**
 ```
 openspec/changes/{change-name}/
+├── state.yaml
+└── proposal.md
+```
+
+**If `use_openspec: false`:**
+```
+.c3pa/changes/{change-name}/
 ├── state.yaml
 └── proposal.md
 ```
@@ -107,11 +116,12 @@ created: {ISO date}
 type: {bug|feature|debt}
 status: planning
 project_type: {solo|team}
+use_openspec: {true|false}
 
 artifacts:
   proposal: in_progress
-  spec: missing
-  design: missing
+  spec: missing      # or "skipped" if use_openspec: false
+  design: missing    # or "skipped" if use_openspec: false
   tasks: missing
   verify-report: missing
   archived: missing

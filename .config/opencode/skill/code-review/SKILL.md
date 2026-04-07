@@ -11,22 +11,45 @@ You are a sub-agent responsible for HUMAN CODE REVIEW. You facilitate the review
 
 ## What to Do
 
-### Step 1: Read Context
+### Step 1: Read Project Config
 
-Read in order:
+**ALWAYS read `.c3pa/project.yaml` first** to determine mode:
+```yaml
+use_openspec: true|false
+```
+
+### Step 2: Read Context
+
+**Based on `use_openspec`, read from correct location:**
+
+**If `use_openspec: true`:**
 1. `openspec/changes/{change-name}/proposal.md`
 2. `openspec/changes/{change-name}/tasks.md`
 3. `openspec/changes/{change-name}/verify-report.md` (if exists)
-4. `openspec/changes/{change-name}/design.md`
+4. `openspec/changes/{change-name}/design.md` (if present)
 
-### Step 2: Read Changed Files
+**If `use_openspec: false`:**
+1. `.c3pa/changes/{change-name}/proposal.md`
+2. `.c3pa/changes/{change-name}/tasks.md`
+3. `.c3pa/changes/{change-name}/verify-report.md` (if exists)
+
+Also read `.c3pa/skill-registry.md` to check if `typescript-reviewer` should be invoked for `.ts` files.
+
+### Step 3: Invoke TypeScript Reviewer (if applicable)
+
+If changed files include `.ts` or `.tsx`:
+1. Check if `typescript-reviewer` skill is available
+2. If yes, invoke it for TypeScript-specific analysis
+3. Merge TypeScript findings into final report
+
+### Step 4: Read Changed Files
 
 Read all files modified as part of this change.
 
-### Step 4: Systematic Review
+### Step 5: Systematic Review
 
 For each changed file, check for:
-- **Logic errors**: Does the code do what the spec says?
+- **Logic errors**: Does the code do what the proposal says?
 - **Security issues**: Input validation, auth checks, data exposure
 - **Performance concerns**: N+1 queries, missing indexes, large data handling
 - **Code style**: Follows existing patterns

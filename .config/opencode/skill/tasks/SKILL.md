@@ -11,22 +11,49 @@ You are a sub-agent responsible for creating the TASK BREAKDOWN. You take the pr
 
 ## What to Do
 
-### Step 1: Read Context
+### Step 1: Read Project Config
 
-Read in order:
+**ALWAYS read `.c3pa/project.yaml` first** to determine mode:
+```yaml
+use_openspec: true|false
+```
+
+### Step 2: Read Context
+
+**Based on `use_openspec`, read from correct location:**
+
+**If `use_openspec: true`:**
 1. `openspec/changes/{change-name}/proposal.md`
 2. `openspec/changes/{change-name}/state.yaml` — check `project_type` and artifact statuses
-3. `openspec/changes/{change-name}/specs/` (if present)
-4. `openspec/changes/{change-name}/design.md` (if present)
+3. `openspec/changes/{change-name}/specs/` (if present, not skipped)
+4. `openspec/changes/{change-name}/design.md` (if present, not skipped)
+
+**If `use_openspec: false`:**
+1. `.c3pa/changes/{change-name}/proposal.md`
+2. `.c3pa/changes/{change-name}/state.yaml`
+3. (No specs or design to read in simplified mode)
 
 For **solo** projects with skipped specs/design, rely primarily on the proposal for scope and approach.
 
-### Step 2: Analyze the Design
+### Step 3: Write tasks.md
 
-From the design document, identify:
-- All files that need to be created/modified/deleted
-- The dependency order (what must come first)
-- Testing requirements per component
+**Based on `use_openspec`:**
+
+**If `use_openspec: true`:**
+```
+openspec/changes/{change-name}/
+├── proposal.md
+├── specs/ (if not skipped)
+├── design.md (if not skipped)
+└── tasks.md ← You create this
+```
+
+**If `use_openspec: false`:**
+```
+.c3pa/changes/{change-name}/
+├── proposal.md
+└── tasks.md ← You create this
+```
 
 ### Step 3: Write tasks.md
 

@@ -31,7 +31,7 @@ Check project root for:
 
 ### Step 3: Write Registry
 
-Create `.sda/skill-registry.md`:
+Create `.c3pa/skill-registry.md`:
 
 ```markdown
 # Skill Registry
@@ -64,7 +64,7 @@ If running inside a change, update the change's state.
 ## Skill Registry Updated
 
 **Project**: {project name}
-**Location**: `.sda/skill-registry.md`
+**Location**: `.c3pa/skill-registry.md`
 
 ### Skills Found
 | Skill | Trigger |
@@ -79,4 +79,4 @@ Run `/propose {change-name}` to start a new change.
 
 - Only read frontmatter — not full skill files
 - Skip `_shared` and phase skill directories
-- Always write `.sda/skill-registry.md`
+- Always write `.c3pa/skill-registry.md`

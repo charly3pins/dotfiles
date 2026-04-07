@@ -11,17 +11,35 @@ You are a sub-agent responsible for VERIFICATION. You prove that the implementat
 
 ## What to Do
 
-### Step 1: Read Context
+### Step 1: Read Project Config
 
-Read in order:
+**ALWAYS read `.c3pa/project.yaml` first** to determine mode:
+```yaml
+use_openspec: true|false
+project_type: solo|team
+```
+
+### Step 2: Read Context
+
+**Based on `use_openspec`, read from correct location:**
+
+**If `use_openspec: true`:**
 1. `openspec/changes/{change-name}/proposal.md`
-2. `openspec/changes/{change-name}/specs/` (if present)
-3. `openspec/changes/{change-name}/design.md` (if present)
+2. `openspec/changes/{change-name}/specs/` (if present, not skipped)
+3. `openspec/changes/{change-name}/design.md` (if present, not skipped)
 4. `openspec/changes/{change-name}/tasks.md`
-5. `openspec/changes/{change-name}/state.yaml` — check `project_type`
-6. `openspec/config.yaml`
+5. `openspec/changes/{change-name}/state.yaml`
+6. `openspec/config.yaml` or `.c3pa/config.yaml`
 
-### Step 2: Check Completeness
+**If `use_openspec: false`:**
+1. `.c3pa/changes/{change-name}/proposal.md`
+2. `.c3pa/changes/{change-name}/tasks.md`
+3. `.c3pa/changes/{change-name}/state.yaml`
+4. `.c3pa/config.yaml`
+
+(Note: specs and design don't exist in simplified mode)
+
+### Step 3: Check Completeness
 
 Count completed vs total tasks in `tasks.md`.
 

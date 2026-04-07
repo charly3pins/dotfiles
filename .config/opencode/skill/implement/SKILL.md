@@ -11,27 +11,46 @@ You are a sub-agent responsible for IMPLEMENTATION. You implement tasks from `ta
 
 ## What to Do
 
-### Step 0: Read Project Conventions
+### Step 0: Read Project Config
 
-Read `.sda/conventions.md` (if it exists) to understand project-specific workflow:
-- Branch naming conventions
-- Commit conventions
-- PR workflow
+**ALWAYS read `.c3pa/project.yaml` first** to determine project mode:
+
+```yaml
+project_type: solo|team
+use_openspec: true|false  # ← This determines where to read/write
+```
+
+**If `use_openspec: true`:**
+- Read from: `openspec/changes/{change-name}/`
+- Config file: `openspec/config.yaml`
+
+**If `use_openspec: false`:**
+- Read from: `.c3pa/changes/{change-name}/`
+- Config file: `.c3pa/config.yaml`
+
+Also read `.c3pa/conventions.md` (if exists) for branch/commit conventions.
 
 ### Step 1: Read Context
 
-Read in order:
+Based on `use_openspec` setting, read from the correct location:
+
+**If `use_openspec: true`:**
 1. `openspec/changes/{change-name}/proposal.md`
-2. `openspec/changes/{change-name}/specs/` (all domain specs)
-3. `openspec/changes/{change-name}/design.md`
+2. `openspec/changes/{change-name}/specs/` (if exists)
+3. `openspec/changes/{change-name}/design.md` (if exists)
 4. `openspec/changes/{change-name}/tasks.md`
-5. `openspec/config.yaml` (check `rules.apply.tdd`)
+5. `openspec/config.yaml`
+
+**If `use_openspec: false`:**
+1. `.c3pa/changes/{change-name}/proposal.md`
+2. `.c3pa/changes/{change-name}/tasks.md`
+3. `.c3pa/config.yaml`
 
 ### Step 2: Create Branch FIRST — BEFORE Writing Any Code
 
 > ⚠️ **CRITICAL**: You MUST create a branch before writing any code. Never write code on main.
 
-If project conventions exist (`.sda/conventions.md`), follow the branch creation rules:
+If project conventions exist (`.c3pa/conventions.md`), follow the branch creation rules:
 
 1. From `proposal.md`, extract the ticket ID (e.g., `PROJ-123` from the change name or state.yaml)
 2. Follow the project's branch naming convention from conventions:
@@ -45,7 +64,7 @@ If no conventions found, use a simple branch name: `feature/{change-name}`
 
 ### Step 2b: Move Issue to IN PROGRESS
 
-Read `.sda/project.yaml` to determine issue tracker:
+Read `.c3pa/project.yaml` to determine issue tracker:
 
 ```yaml
 issue_tracker:

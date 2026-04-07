@@ -1,13 +1,17 @@
 ---
 name: bootstrap
 description: >
-  Initialize Spec-Driven Development context in a project. Detects stack, conventions, and bootstraps OpenSpec.
-  Trigger: When user says "/bootstrap" or "initialize" or "openspec init".
+  Initialize C3PA (Charly3Pins Agent) context in a project. Detects stack, conventions, and sets up OpenSpec or simplified mode.
+  Trigger: When user says "/bootstrap" or "initialize" or "c3pa init".
 ---
 
 ## Purpose
 
-You are a sub-agent responsible for initializing the Spec-Driven Development context in a project. You detect the tech stack and conventions, then bootstrap the OpenSpec directory structure.
+You are a sub-agent responsible for initializing the C3PA context in a project. You detect the tech stack and conventions, then bootstrap either:
+- **OpenSpec mode**: Full spec-driven development with Given/When/Then specs
+- **Simplified mode**: Lightweight workflow without formal specs
+
+The user chooses the mode during bootstrap.
 
 ## What to Do
 
@@ -46,7 +50,7 @@ After stack validation, ask:
 ```
 ## Issue Tracking
 
-Do you want to track issues with Spec-Driven Development?
+Do you want to track issues with C3PA?
 
 1. **GitHub Issues** — uses `gh issue` and `gh project` commands
 2. **Jira** — uses Jira API (requires MCP or CLI configured)
@@ -56,10 +60,11 @@ Do you want to track issues with Spec-Driven Development?
 If you choose a system, make sure the corresponding MCP is configured in ~/.config/opencode/opencode.json and enabled for this project.
 ```
 
-Wait for user choice. Create `.sda/project.yaml` with the result:
+Wait for user choice. Create `.c3pa/project.yaml` with the result:
 
 ```yaml
 project_type: solo   # solo | team
+use_openspec: true  # true | false
 issue_tracker:
   type: github   # github | jira | notion | none
   project: ""    # GitHub project number, Jira project key, or Notion database ID
@@ -80,15 +85,39 @@ Is this a solo project or a team project?
 2. **Team** — Full spec-driven workflow with code review
 ```
 
-Wait for user choice. Update `.sda/project.yaml` to include `project_type`.
+Wait for user choice. Update `.c3pa/project.yaml` to include `project_type`.
 
-- **Solo**: Skips `/spec` and `/design`. Workflow: `/propose` → `/tasks` → `/implement` → `/validate` → `/code-review` → `/archive`
-- **Team**: Full spec-driven flow with code review. Workflow: `/propose` → `/spec` → `/design` → `/tasks` → `/implement` → `/validate` → `/code-review` → `/archive`
+### Step 2d: Ask About OpenSpec
 
-### Step 3: Create OpenSpec Directory Structure
+After project type, ask:
 
-After validation, create:
+```
+## OpenSpec Workflow
 
+Do you want to use the full OpenSpec workflow with formal specifications?
+
+1. **Yes** — Full spec-driven development with Given/When/Then scenarios
+   - Creates: openspec/specs/, openspec/changes/, formal specs
+   - Phases: /propose → /spec → /design → /tasks → /implement → /validate → /archive
+
+2. **No** — Simplified workflow without formal specs
+   - No openspec/ directory structure
+   - Phases: /propose → /tasks → /implement → /validate → /code-review
+   - Faster for small projects or when specs aren't needed
+```
+
+Wait for user choice. Update `.c3pa/project.yaml` to include `use_openspec: true|false`.
+
+**Solo + OpenSpec**: `/propose` → `/spec` (optional) → `/design` (optional) → `/tasks` → `/implement` → `/validate` → `/code-review` → `/archive`
+**Solo + No OpenSpec**: `/propose` → `/tasks` → `/implement` → `/validate` → `/code-review`
+**Team + OpenSpec**: `/propose` → `/spec` → `/design` → `/tasks` → `/implement` → `/validate` → `/code-review` → `/archive`
+**Team + No OpenSpec**: `/propose` → `/tasks` → `/implement` → `/validate` → `/code-review` → `/archive`
+
+### Step 3: Create Directory Structure
+
+Based on `use_openspec` setting:
+
+**If `use_openspec: true`:**
 ```
 openspec/
 ├── config.yaml              ← Project-specific config
@@ -96,13 +125,30 @@ openspec/
 │   └── .gitkeep
 └── changes/                 ← Active changes
     └── archive/             ← Completed changes
-.sda/
-├── project.yaml             ← Project type (solo | team) + issue tracker
+.c3pa/
+├── project.yaml             ← Project config (type, tracker, use_openspec)
 ├── skill-registry.md        ← Skill registry
 └── conventions.md          ← Project conventions (AGENTS.md, etc.)
 ```
 
+**If `use_openspec: false`:**
+```
+.c3pa/
+├── project.yaml             ← Project config (type, tracker, use_openspec)
+├── skill-registry.md        ← Skill registry
+├── conventions.md          ← Project conventions (AGENTS.md, etc.)
+└── changes/                 ← Track changes without formal specs
+    └── {change-name}/
+        ├── proposal.md
+        ├── tasks.md
+        └── state.yaml
+```
+
+Create only the directories needed based on the choice.
+
 ### Step 4: Generate Config
+
+**If `use_openspec: true`:**
 
 Create `openspec/config.yaml`:
 
@@ -153,6 +199,26 @@ rules:
     - Warn before merging destructive deltas
 ```
 
+**If `use_openspec: false`:**
+
+Create `.c3pa/config.yaml` (minimal config):
+
+```yaml
+context: |
+  Tech stack: {detected stack}
+  Architecture: {detected patterns}
+  Testing: {detected test framework}
+  Style: {detected linting/formatting}
+
+rules:
+  apply:
+    tdd: false
+    test_command: ""
+  verify:
+    test_command: ""
+    build_command: ""
+```
+
 ### Step 5: Build Skill Registry
 
 Scan skill directories for available discipline skills:
@@ -161,7 +227,7 @@ Scan skill directories for available discipline skills:
 
 For each skill found (skip `_shared`, `*-*` workflow skills), extract trigger from description.
 
-Write `.sda/skill-registry.md`:
+Write `.c3pa/skill-registry.md`:
 
 ```markdown
 # Skill Registry
@@ -190,12 +256,12 @@ Check project root for agent/convention files:
 - .github/AGENTS.md
 ```
 
-If found, write to `.sda/conventions.md`:
+If found, write to `.c3pa/conventions.md`:
 
 ```markdown
 # Project Conventions
 
-**Read this file before any Spec-Driven work.**
+**Read this file before any C3PA work.**
 
 ## Files Found
 
@@ -215,7 +281,9 @@ If found, write to `.sda/conventions.md`:
 - Cross-cutting rules (what to always do / never do)
 ```
 
-### Step 7: Update state.yaml
+### Step 7: Initialize State Tracker
+
+**If `use_openspec: true`:**
 
 Create `openspec/changes/.state.yaml` as a tracker (empty initially):
 
@@ -223,28 +291,74 @@ Create `openspec/changes/.state.yaml` as a tracker (empty initially):
 changes: []
 ```
 
+**If `use_openspec: false`:**
+
+Create `.c3pa/changes/.state.yaml`:
+
+```yaml
+changes: []
+```
+
 ## Return Summary
+
+**If `use_openspec: true`:**
 
 ```
 ## Spec-Driven Development Initialized
 
 **Project**: {project name}
 **Stack**: {detected stack}
+**Mode**: Full OpenSpec
 
 ### Structure Created
 - `openspec/config.yaml` ← Project config
 - `openspec/specs/` ← Ready for specifications
 - `openspec/changes/` ← Ready for changes
-- `.sda/project.yaml` ← Issue tracker ({type})
-- `.sda/skill-registry.md` ← Skill registry
-- `.sda/conventions.md` ← Project conventions (AGENTS.md, etc.)
+- `.c3pa/project.yaml` ← Project configuration
+- `.c3pa/skill-registry.md` ← Skill registry
+- `.c3pa/conventions.md` ← Project conventions (AGENTS.md, etc.)
 
-### Issue Tracking
-- **Type**: {github | jira | notion | none}
+### Configuration
+- **Type**: {solo | team}
+- **OpenSpec**: Enabled
+- **Issue Tracking**: {github | jira | notion | none}
 - **Project**: {project key/number}
 
-### Project Type
-- **{solo | team}**
+### Workflow
+Full spec-driven: `/propose` → `/spec` → `/design` → `/tasks` → `/implement` → `/validate` → `/code-review` → `/archive`
+
+### Next Steps
+Ready for `/propose {change-name}|{ticket-id}`.
+```
+
+**If `use_openspec: false`:**
+
+```
+## C3PA Development Initialized
+
+**Project**: {project name}
+**Stack**: {detected stack}
+**Mode**: Simplified (No OpenSpec)
+
+### Structure Created
+- `.c3pa/config.yaml` ← Minimal project config
+- `.c3pa/project.yaml` ← Project configuration
+- `.c3pa/skill-registry.md` ← Skill registry
+- `.c3pa/conventions.md` ← Project conventions (AGENTS.md, etc.)
+- `.c3pa/changes/` ← Change tracking (without formal specs)
+
+### Configuration
+- **Type**: {solo | team}
+- **OpenSpec**: Disabled
+- **Issue Tracking**: {github | jira | notion | none}
+- **Project**: {project key/number}
+
+### Workflow
+Simplified: `/propose` → `/tasks` → `/implement` → `/validate` → `/code-review`
+
+### Next Steps
+Ready for `/propose {change-name}|{ticket-id}`.
+```
 
 ### Next Steps
 Ready for `/propose {change-name}|{ticket-id}`.
