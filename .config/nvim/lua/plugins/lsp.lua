@@ -88,6 +88,28 @@ return {
           },
         },
       })
+
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        pattern = { "*.ts", "*.tsx", "*.js", "*.jsx" },
+        callback = function(args)
+          local clients = vim.lsp.get_clients { bufnr = args.buf }
+          for _, client in ipairs(clients) do
+            if client.name == "ts_ls" then
+              local params = vim.lsp.util.make_range_params(vim.fn.bufwinid(args.buf), client.offset_encoding)
+              params.context = { only = { "source.organizeImports" } }
+              client.request("textDocument/codeAction", params, function(err, res)
+                if err or not res or #res == 0 then
+                  return
+                end
+                local action = res[1]
+                if action.edit then
+                  vim.lsp.util.apply_workspace_edit(action.edit)
+                end
+              end, args.buf)
+            end
+          end
+        end,
+      })
     end,
   },
 }

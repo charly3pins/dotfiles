@@ -16,26 +16,20 @@ return {
     opts = {
       formatters_by_ft = {
         lua = { "stylua" },
-        javascript = { "eslint_d" },
-        typescript = { "eslint_d" },
-        javascriptreact = { "eslint_d" },
-        typescriptreact = { "eslint_d" },
         json = { "prettier" },
         html = { "prettier" },
         css = { "prettier" },
         markdown = { "prettier" },
         go = { "goimports" },
-      },
-
-      formatters = {
-        eslint_d = {
-          args = { "--fix-to-stdout", "--stdin", "--stdin-filename", "$FILENAME" },
-        },
+        javascript = { "prettier" },
+        typescript = { "prettier" },
+        javascriptreact = { "prettier" },
+        typescriptreact = { "prettier" },
       },
 
       format_on_save = {
         timeout_ms = 2000,
-        lsp_fallback = false,
+        lsp_fallback = true,
       },
     },
   },
