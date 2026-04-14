@@ -122,28 +122,15 @@ FOR EACH TASK:
 3. Read design decisions
 4. Write the code
 
-### Step 5: Commit Each Phase
+### Step 5: Mark Tasks Complete (No Git Operations!)
 
-After completing each phase, commit the changes. NEVER let uncommitted work accumulate.
+**IMPORTANT: This sub-agent does NOT handle git operations.** 
 
-For each completed phase:
+All git work (branch creation, commits, PRs) is delegated to the `git-expert` sub-agent by the orchestrator.
 
-1. `git add {specific files changed in this phase}` — never use `-A` or `.`
-2. `git commit -S -m "{conventional commit message}"` — use `-S` for GPG signing if configured
+You only need to:
 
-Commit message format: `{type}: {brief description}`
-- `feat:` — new functionality
-- `fix:` — bug fix
-- `chore:` — tooling, config
-- `docs:` — documentation
-- `test:` — tests
-- `refactor:` — restructuring without behavior change
-
-Example: `git commit -S -m "feat: add JWT validation middleware"`
-
-### Step 6: Mark Tasks Complete
-
-Update `tasks.md` — change `- [ ]` to `- [x]`:
+1. Update `tasks.md` — change `- [ ]` to `- [x]`:
 
 ```markdown
 ## Phase 1: Foundation
@@ -153,35 +140,43 @@ Update `tasks.md` — change `- [ ]` to `- [x]`:
 - [ ] 1.3 Add auth routes to `internal/server/server.go`  ← still pending
 ```
 
-### Step 7: Update state.yaml
+2. Update `state.yaml`:
 
 ```yaml
 status: in_progress
 artifacts:
   tasks: present
-  pr_open: true
+changes_made:
+  - file: internal/auth/middleware.go
+    action: created
+    description: JWT validation middleware
+  - file: internal/config/config.go
+    action: modified
+    description: Added AuthConfig struct
 ```
 
-### Step 8: Rebase onto Main
+### Step 6: Prepare Git Summary
 
-After ALL tasks are complete and committed, BEFORE opening the PR:
-
-```
-git fetch origin && git rebase origin/main
-```
-
-Resolve any conflicts. Run tests after rebase to confirm everything still works.
-
-### Step 9: Push Branch
+Create a summary for the orchestrator of what needs to be committed:
 
 ```
-git push -u origin {branch-name}
+## Implementation Summary for git-expert
+
+**Branch**: feature/{change-name} (created during Step 2)
+**Files Changed**:
+  - internal/auth/middleware.go (created)
+  - internal/config/config.go (modified)
+  
+**Suggested Commits**:
+1. "feat: add JWT validation middleware"
+   - files: internal/auth/middleware.go
+2. "feat: add AuthConfig struct"
+   - files: internal/config/config.go
+
+**Ready for**: PR creation after validation passes
 ```
 
-### Step 10: Open Pull Request
-
-```
-gh pr create --title "{type}: {brief description}" --body "Closes #{issue-number}
+**NOTE**: The orchestrator will automatically call `git-expert` to handle commits and PR creation after you return. Do NOT run git commands yourself.
 
 ## Summary
 - {one-line summary of what this PR does}

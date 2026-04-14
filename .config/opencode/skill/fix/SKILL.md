@@ -54,16 +54,29 @@ If a test command is configured in `openspec/config.yaml`, run it after fixes:
 
 Confirm tests pass before committing.
 
-### Step 4: Commit Fixes
+### Step 4: Prepare Fix Summary (No Git Operations!)
 
-For each logical group of fixes, create an atomic commit:
+**IMPORTANT: This sub-agent does NOT handle git operations.** 
+
+All git work (commits, pushes) is delegated to the `git-expert` sub-agent by the orchestrator.
+
+Simply prepare a summary of changes:
 
 ```
-git add {specific files}
-git commit -S -m "fix: {brief description of what was fixed}"
+## Fix Summary for git-expert
+
+**Files Changed**:
+  - src/components/Button.tsx (fixed accessibility)
+  - src/utils/validation.ts (fixed edge case)
+  
+**Suggested Commits**:
+1. "fix: button accessibility aria-label"
+   - files: src/components/Button.tsx
+2. "fix: validation edge case for empty strings"
+   - files: src/utils/validation.ts
 ```
 
-Use `fix:` prefix for bug fixes, `refactor:` for code quality improvements.
+The orchestrator will automatically call `git-expert` to commit these changes.
 
 ### Step 5: Update verify-report.md (optional)
 

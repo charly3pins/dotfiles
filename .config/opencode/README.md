@@ -97,12 +97,74 @@ Both modes support **Solo** and **Team** configurations:
 
 Skills are loaded automatically when relevant:
 
-| Trigger                 | Skill                     | Purpose                                  |
-| ----------------------- | ------------------------- | ---------------------------------------- |
-| testing, tdd            | `test-driven-development` | RED → GREEN → REFACTOR                   |
-| debugging, bug          | `systematic-debugging`    | Root cause before fixes                  |
-| ideas, design           | `brainstorming`           | Collaborative exploration                |
-| frontend, ui, component | `frontend-design`         | Distinctive, production-grade interfaces |
+| Trigger | Skill | Purpose |
+|---------|-------|---------|
+| testing, tdd | `test-driven-development` | RED → GREEN → REFACTOR |
+| debugging, bug | `systematic-debugging` | Root cause before fixes |
+| ideas, design | `brainstorming` | Collaborative exploration |
+| frontend, ui, component | `frontend-design` | Distinctive, production-grade interfaces |
+| **database, sql, query, migration, schema, postgres** | `database-reviewer` | **PostgreSQL specialist for optimization, schemas, RLS** |
+| **git, github, commit, branch, pr** | `git-expert` | **The ONLY agent for ALL git/GitHub operations** |
+
+### Sub-Agent Delegation
+
+All work is delegated to specialized sub-agents:
+
+**Core Workflow Agents:**
+- `bootstrap`, `propose`, `spec`, `design`, `tasks`, `implement`, `validate`
+- `code-review`, `security-review`, `fix`, `build-fix`, `archive`
+
+**Specialized Review Agents:**
+- `typescript-reviewer` — TypeScript-specific code review
+- `database-reviewer` — PostgreSQL specialist (queries, migrations, RLS)
+- `security-review` — Vulnerability scanning
+- `frontend-design` — UI/UX design
+
+**Operations Agent:**
+- `git-expert` — **Git and GitHub operations specialist. The ONLY agent authorized to run `git` and `gh` commands.**
+
+### Orchestrator Philosophy
+
+**The orchestrator is a ROUTER, not a WORKER:**
+- ✅ Finds the appropriate sub-agent or skill
+- ✅ Delegates ALL work to sub-agents
+- ✅ Coordinates between multiple agents
+- ❌ **NEVER** writes code directly
+- ❌ **NEVER** edits files
+- ❌ **NEVER** runs git/gh commands (always delegates to `git-expert`)
+- ❌ **NEVER** reviews code directly (delegates to specialized reviewers)
+
+### How Sub-Agents Coordinate
+
+**Sub-agents are specialists, not generalists.** When `implement` or `fix` needs git operations, they don't do it themselves — they prepare a summary and let the orchestrator coordinate with `git-expert`.
+
+**Example Workflow:**
+```
+User: "Implement the authentication feature"
+  ↓
+Orchestrator: delegates to `implement`
+  ↓
+Implement: 
+  - Writes code ✍️
+  - Updates tasks.md ✓
+  - Returns summary: "Created 3 files, modified 2"
+  ↓
+Orchestrator: detects changes, delegates to `git-expert`
+  ↓
+git-expert:
+  - Creates branch
+  - Commits with conventional format
+  - Pushes to origin
+  - Opens PR
+  ↓
+Orchestrator: reports back to user
+```
+
+**Why this matters:**
+- Each sub-agent stays focused on its specialty
+- `git-expert` ensures all git operations follow conventions
+- Orchestrator optimizes token usage by routing efficiently
+- No agent "does it all" — proper separation of concerns
 
 ---
 
@@ -252,6 +314,47 @@ rules:
     tdd: true
     test_command: "npm test"
 ```
+
+---
+
+## Git & GitHub Operations (Important!)
+
+### git-expert Sub-Agent
+
+**`git-expert` is the ONLY authorized agent for git and GitHub operations.**
+
+All other agents (including `implement`, `fix`, `archive`) **MUST NOT** run `git` or `gh` commands directly.
+
+### How It Works
+
+**When the orchestrator detects git/GitHub keywords** (`commit`, `branch`, `pr`, `merge`, etc.), it **automatically delegates to `git-expert`** instead of executing commands itself.
+
+**Sub-agents needing git operations** should be designed to:
+1. Focus on their core task (implementation, fixing, etc.)
+2. Return results to the orchestrator
+3. Let the orchestrator call `git-expert` for git operations
+
+Example flow:
+```
+User: "Implement the authentication feature"
+  ↓
+Orchestrator: delegates to `implement`
+  ↓
+Implement: writes code, returns "Implementation complete"
+  ↓
+Orchestrator: detects git is needed, delegates to `git-expert`
+  ↓
+git-expert: creates branch, commits, pushes, opens PR
+  ↓
+Orchestrator: reports back to user
+```
+
+### Direct git-expert Invocation
+
+You can also call git-expert explicitly:
+- `/git-expert create branch feature/auth`
+- `/git-expert commit "feat: add authentication"`
+- `/git-expert open PR for issue #123`
 
 ---
 

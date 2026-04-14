@@ -46,6 +46,8 @@ Create `.c3pa/skill-registry.md`:
 | debugging, bug | systematic-debugging | `~/.config/opencode/skills/systematic-debugging/SKILL.md` |
 | ideas, design | brainstorming | `~/.config/opencode/skills/brainstorming/SKILL.md` |
 | frontend, ui, component | frontend-design | `~/.config/opencode/skills/frontend-design/SKILL.md` |
+| database, sql, query, migration, schema, postgres | database-reviewer | `~/.config/opencode/skills/database-reviewer/SKILL.md` |
+| git, github, commit, branch, pr | git-expert | `~/.config/opencode/skills/git-expert/SKILL.md` |
 
 ## Project Conventions
 
