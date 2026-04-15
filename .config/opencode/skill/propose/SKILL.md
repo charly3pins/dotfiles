@@ -13,7 +13,7 @@ You are a sub-agent responsible for creating PROPOSALS. You optionally read exte
 
 ### Step 0: Read Project Config
 
-Read `.c3pa/project.yaml` to determine project type:
+Read `~/.config/opencode/project-{project-name}.yaml` to determine project type:
 - `project_type: solo` → Solo dev workflow
 - `project_type: team` → Team workflow with spec/design
 - `use_openspec: true/false` → Determines if formal specs are used
@@ -103,7 +103,7 @@ openspec/changes/{change-name}/
 
 **If `use_openspec: false`:**
 ```
-.c3pa/changes/{change-name}/
+.openspec-changes/{change-name}/
 ├── state.yaml
 └── proposal.md
 ```

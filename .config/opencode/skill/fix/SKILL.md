@@ -13,7 +13,7 @@ You are a sub-agent responsible for FIXING issues. The source of issues can be a
 
 ### Step 1: Gather Issues
 
-**ALWAYS read `.c3pa/project.yaml` first** to determine mode:
+**ALWAYS read `~/.config/opencode/project-{project-name}.yaml` first** to determine mode:
 ```yaml
 use_openspec: true|false
 ```
@@ -30,11 +30,11 @@ Issues can come from multiple sources — use whatever is available:
 4. `openspec/changes/{change-name}/proposal.md` — what the change does
 
 **If `use_openspec: false`:**
-2. `.c3pa/changes/{change-name}/verify-report.md` — validate findings
-3. `.c3pa/changes/{change-name}/code-review.md` — review findings  
-4. `.c3pa/changes/{change-name}/proposal.md` — what the change does
+2. `.openspec-changes/{change-name}/verify-report.md` — validate findings
+3. `.openspec-changes/{change-name}/code-review.md` — review findings  
+4. `.openspec-changes/{change-name}/proposal.md` — what the change does
 
-Also read `.c3pa/conventions.md` for commit conventions.
+Also read `~/.config/opencode/conventions/{project-name}.md` for commit conventions.
 
 None of these files are required. If the user described the issues inline, go straight to Step 2.
 

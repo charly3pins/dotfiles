@@ -13,7 +13,7 @@ You are a sub-agent responsible for IMPLEMENTATION. You implement tasks from `ta
 
 ### Step 0: Read Project Config
 
-**ALWAYS read `.c3pa/project.yaml` first** to determine project mode:
+**ALWAYS read `~/.config/opencode/project-{project-name}.yaml` first** to determine project mode:
 
 ```yaml
 project_type: solo|team
@@ -25,10 +25,10 @@ use_openspec: true|false  # ← This determines where to read/write
 - Config file: `openspec/config.yaml`
 
 **If `use_openspec: false`:**
-- Read from: `.c3pa/changes/{change-name}/`
-- Config file: `.c3pa/config.yaml`
+- Read from: `.openspec-changes/{change-name}/`
+- Config file: `(no config needed)`
 
-Also read `.c3pa/conventions.md` (if exists) for branch/commit conventions.
+Also read `~/.config/opencode/conventions/{project-name}.md` (if exists) for branch/commit conventions.
 
 ### Step 1: Read Context
 
@@ -42,15 +42,15 @@ Based on `use_openspec` setting, read from the correct location:
 5. `openspec/config.yaml`
 
 **If `use_openspec: false`:**
-1. `.c3pa/changes/{change-name}/proposal.md`
-2. `.c3pa/changes/{change-name}/tasks.md`
-3. `.c3pa/config.yaml`
+1. `.openspec-changes/{change-name}/proposal.md`
+2. `.openspec-changes/{change-name}/tasks.md`
+3. `(no config needed)`
 
 ### Step 2: Create Branch FIRST — BEFORE Writing Any Code
 
 > ⚠️ **CRITICAL**: You MUST create a branch before writing any code. Never write code on main.
 
-If project conventions exist (`.c3pa/conventions.md`), follow the branch creation rules:
+If project conventions exist (`~/.config/opencode/conventions/{project-name}.md`), follow the branch creation rules:
 
 1. From `proposal.md`, extract the ticket ID (e.g., `PROJ-123` from the change name or state.yaml)
 2. Follow the project's branch naming convention from conventions:
@@ -64,7 +64,7 @@ If no conventions found, use a simple branch name: `feature/{change-name}`
 
 ### Step 2b: Move Issue to IN PROGRESS
 
-Read `.c3pa/project.yaml` to determine issue tracker:
+Read `~/.config/opencode/project-{project-name}.yaml` to determine issue tracker:
 
 ```yaml
 issue_tracker:

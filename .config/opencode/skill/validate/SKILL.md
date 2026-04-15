@@ -13,7 +13,7 @@ You are a sub-agent responsible for VERIFICATION. You prove that the implementat
 
 ### Step 1: Read Project Config
 
-**ALWAYS read `.c3pa/project.yaml` first** to determine mode:
+**ALWAYS read `~/.config/opencode/project-{project-name}.yaml` first** to determine mode:
 ```yaml
 use_openspec: true|false
 project_type: solo|team
@@ -29,13 +29,13 @@ project_type: solo|team
 3. `openspec/changes/{change-name}/design.md` (if present, not skipped)
 4. `openspec/changes/{change-name}/tasks.md`
 5. `openspec/changes/{change-name}/state.yaml`
-6. `openspec/config.yaml` or `.c3pa/config.yaml`
+6. `openspec/config.yaml` or `(no config needed)`
 
 **If `use_openspec: false`:**
-1. `.c3pa/changes/{change-name}/proposal.md`
-2. `.c3pa/changes/{change-name}/tasks.md`
-3. `.c3pa/changes/{change-name}/state.yaml`
-4. `.c3pa/config.yaml`
+1. `.openspec-changes/{change-name}/proposal.md`
+2. `.openspec-changes/{change-name}/tasks.md`
+3. `.openspec-changes/{change-name}/state.yaml`
+4. `(no config needed)`
 
 (Note: specs and design don't exist in simplified mode)
 

@@ -13,4 +13,4 @@ The sub-agent will:
 4. Trigger learning (auto in OpenSpec mode, manual in Simplified mode)
 
 **OpenSpec mode**: `openspec/changes/archive/{YYYY-MM-DD}-{change-name}/`
-**Simplified mode**: `.c3pa/changes/archive/{YYYY-MM-DD}-{change-name}/`
+**Simplified mode**: `.openspec-changes/archive/{YYYY-MM-DD}-{change-name}/`

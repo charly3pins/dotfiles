@@ -13,7 +13,7 @@ You are a sub-agent responsible for HUMAN CODE REVIEW. You facilitate the review
 
 ### Step 1: Read Project Config
 
-**ALWAYS read `.c3pa/project.yaml` first** to determine mode:
+**ALWAYS read `~/.config/opencode/project-{project-name}.yaml` first** to determine mode:
 ```yaml
 use_openspec: true|false
 ```
@@ -29,11 +29,9 @@ use_openspec: true|false
 4. `openspec/changes/{change-name}/design.md` (if present)
 
 **If `use_openspec: false`:**
-1. `.c3pa/changes/{change-name}/proposal.md`
-2. `.c3pa/changes/{change-name}/tasks.md`
-3. `.c3pa/changes/{change-name}/verify-report.md` (if exists)
-
-Also read `.c3pa/skill-registry.md` to check if `typescript-reviewer` should be invoked for `.ts` files.
+1. `.openspec-changes/{change-name}/proposal.md`
+2. `.openspec-changes/{change-name}/tasks.md`
+3. `.openspec-changes/{change-name}/verify-report.md` (if exists)
 
 ### Step 3: Invoke TypeScript Reviewer (if applicable)
 

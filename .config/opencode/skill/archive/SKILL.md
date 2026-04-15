@@ -11,12 +11,7 @@ You are a sub-agent responsible for ARCHIVING. You merge delta specs into the ma
 
 ## What to Do
 
-### Step 0: Read Project Config and Verify PR
-
-**ALWAYS read `.c3pa/project.yaml` first** to determine mode:
-```yaml
-use_openspec: true|false
-```
+### Step 0: Verify PR Merged
 
 Before running archive, confirm:
 - [ ] Manual acceptance passed
@@ -33,8 +28,8 @@ Archive is the **last step** — after merging. If the PR is not merged yet, do 
 2. `openspec/changes/{change-name}/state.yaml` — check `project_type`
 
 **If `use_openspec: false`:**
-1. `.c3pa/changes/{change-name}/verify-report.md` if it exists
-2. `.c3pa/changes/{change-name}/state.yaml`
+1. `.openspec-changes/{change-name}/verify-report.md` if it exists (project root, gitignore this)
+2. `.openspec-changes/{change-name}/state.yaml`
 
 Check verdict — if FAIL (critical issues), warn and STOP.
 
@@ -84,8 +79,8 @@ openspec/changes/{change-name}/
 
 **If `use_openspec: false`:**
 ```
-.c3pa/changes/{change-name}/
-  → .c3pa/changes/archive/{YYYY-MM-DD}-{change-name}/
+.openspec-changes/{change-name}/      ← In project root (gitignore this)
+  → ~/.config/opencode/archive/{YYYY-MM-DD}-{change-name}/  ← Global archive
 ```
 
 Use today's date in ISO format.
@@ -105,11 +100,9 @@ Confirm:
 Update `openspec/changes/.state.yaml` to remove this change from active list.
 
 **If `use_openspec: false`:**
-Update `.c3pa/changes/.state.yaml` to remove this change from active list.
+No `.state.yaml` to update in simplified mode — just archive to global location.
 
-### Step 6: Trigger Learning (Optional)
-
-If `use_openspec: true` in `.c3pa/project.yaml`:
+### Step 6: Trigger Learning
 
 After successful archive, suggest running `/learn` to extract patterns:
 
@@ -129,28 +122,12 @@ This extracts workflow patterns from the completed change for future personaliza
 **IMPORTANT**: After /archive and /learn complete, the orchestrator MUST commit and push the changes to main:
 
 ```bash
-git add .c3pa/changes/archive/ .c3pa/instincts/ SPEC.md
+git add ~/.config/opencode/archive/ ~/.config/opencode/instincts/ SPEC.md
 git commit -m "chore: archive {change-name} and learn patterns"
 git push origin main
 ```
 
 Without this step, the archive and learned instincts won't be persisted.
-
-If `use_openspec: true` in `.c3pa/config.yaml` (or `.c3pa/project.yaml`):
-
-After successful archive, automatically trigger `/learn` to extract patterns:
-
-```
-## Archive Complete
-
-... (rest of summary)
-
-### Learning
-📚 Analyzing change for patterns... 
-Run `/instinct-status` to see learned patterns.
-```
-
-This extracts workflow patterns from the completed change for future personalization.
 
 ## Return Summary
 

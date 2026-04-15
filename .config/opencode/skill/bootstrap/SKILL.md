@@ -60,9 +60,10 @@ Do you want to track issues with C3PA?
 If you choose a system, make sure the corresponding MCP is configured in ~/.config/opencode/opencode.json and enabled for this project.
 ```
 
-Wait for user choice. Create `.c3pa/project.yaml` with the result:
+Wait for user choice. Create `~/.config/opencode/project-{project-name}.yaml` with the result:
 
 ```yaml
+# Project: {project-name}
 project_type: solo   # solo | team
 use_openspec: true  # true | false
 issue_tracker:
@@ -85,7 +86,7 @@ Is this a solo project or a team project?
 2. **Team** — Full spec-driven workflow with code review
 ```
 
-Wait for user choice. Update `.c3pa/project.yaml` to include `project_type`.
+Wait for user choice. Update `~/.config/opencode/project-{project-name}.yaml` to include `project_type`.
 
 ### Step 2d: Ask About OpenSpec
 
@@ -106,7 +107,7 @@ Do you want to use the full OpenSpec workflow with formal specifications?
    - Faster for small projects or when specs aren't needed
 ```
 
-Wait for user choice. Update `.c3pa/project.yaml` to include `use_openspec: true|false`.
+Wait for user choice. Update `~/.config/opencode/project-{project-name}.yaml` to include `use_openspec: true|false`.
 
 **Solo + OpenSpec**: `/propose` → `/spec` (optional) → `/design` (optional) → `/tasks` → `/implement` → `/validate` → `/code-review` → `/archive`
 **Solo + No OpenSpec**: `/propose` → `/tasks` → `/implement` → `/validate` → `/code-review`
@@ -120,29 +121,24 @@ Based on `use_openspec` setting:
 **If `use_openspec: true`:**
 ```
 openspec/
-├── config.yaml              ← Project-specific config
-├── specs/                   ← Source of truth (empty initially)
+├── config.yaml              ← Project-specific config (in project)
+├── specs/                   ← Source of truth (in project)
 │   └── .gitkeep
-└── changes/                 ← Active changes
-    └── archive/             ← Completed changes
-.c3pa/
-├── project.yaml             ← Project config (type, tracker, use_openspec)
-├── skill-registry.md        ← Skill registry
-└── conventions.md          ← Project conventions (AGENTS.md, etc.)
+└── changes/                 ← Active changes (in project)
+    └── archive/             ← Completed changes (in project)
 ```
+This stays in project — specs are project-specific.
 
 **If `use_openspec: false`:**
 ```
-.c3pa/
-├── project.yaml             ← Project config (type, tracker, use_openspec)
-├── skill-registry.md        ← Skill registry
-├── conventions.md          ← Project conventions (AGENTS.md, etc.)
-└── changes/                 ← Track changes without formal specs
-    └── {change-name}/
-        ├── proposal.md
-        ├── tasks.md
-        └── state.yaml
+.openspec-changes/           ← In project root (gitignore this)
+├── {change-name}/
+│   ├── proposal.md
+│   ├── tasks.md
+│   └── state.yaml
+└── .state.yaml
 ```
+Changes stay in project during work. After archive, they move to global `~/.config/opencode/archive/`.
 
 Create only the directories needed based on the choice.
 
@@ -201,50 +197,9 @@ rules:
 
 **If `use_openspec: false`:**
 
-Create `.c3pa/config.yaml` (minimal config):
+No config file needed in simplified mode. Context is detected on-the-fly.
 
-```yaml
-context: |
-  Tech stack: {detected stack}
-  Architecture: {detected patterns}
-  Testing: {detected test framework}
-  Style: {detected linting/formatting}
-
-rules:
-  apply:
-    tdd: false
-    test_command: ""
-  verify:
-    test_command: ""
-    build_command: ""
-```
-
-### Step 5: Build Skill Registry
-
-Scan skill directories for available discipline skills:
-
-- `~/.config/opencode/skills/` — look for skills with frontmatter
-
-For each skill found (skip `_shared`, `*-*` workflow skills), extract trigger from description.
-
-Write `.c3pa/skill-registry.md`:
-
-```markdown
-# Skill Registry
-
-**Orchestrator use only.**
-
-## Discipline Skills
-
-| Trigger                 | Skill                   | Path                                                         |
-| ----------------------- | ----------------------- | ------------------------------------------------------------ |
-| tdd, testing            | test-driven-development | `~/.config/opencode/skills/test-driven-development/SKILL.md` |
-| debugging, bug          | systematic-debugging    | `~/.config/opencode/skills/systematic-debugging/SKILL.md`    |
-| ideas, design           | brainstorming           | `~/.config/opencode/skills/brainstorming/SKILL.md`           |
-| frontend, ui, component | frontend-design         | `~/.config/opencode/skills/frontend-design/SKILL.md`         |
-```
-
-### Step 6: Scan Project Conventions
+### Step 5: Scan Project Conventions
 
 Check project root for agent/convention files:
 
@@ -256,12 +211,12 @@ Check project root for agent/convention files:
 - .github/AGENTS.md
 ```
 
-If found, write to `.c3pa/conventions.md`:
+If found, write to `~/.config/opencode/conventions/{project-name}.md`:
 
 ```markdown
-# Project Conventions
+# Project Conventions: {project-name}
 
-**Read this file before any C3PA work.**
+**Read this file before any C3PA work in this project.**
 
 ## Files Found
 
@@ -281,7 +236,7 @@ If found, write to `.c3pa/conventions.md`:
 - Cross-cutting rules (what to always do / never do)
 ```
 
-### Step 7: Initialize State Tracker
+### Step 6: Initialize State Tracker
 
 **If `use_openspec: true`:**
 
@@ -293,11 +248,7 @@ changes: []
 
 **If `use_openspec: false`:**
 
-Create `.c3pa/changes/.state.yaml`:
-
-```yaml
-changes: []
-```
+No state tracker needed in simplified mode — changes are tracked in `.openspec-changes/` in the project root.
 
 ## Return Summary
 
@@ -311,12 +262,11 @@ changes: []
 **Mode**: Full OpenSpec
 
 ### Structure Created
-- `openspec/config.yaml` ← Project config
-- `openspec/specs/` ← Ready for specifications
-- `openspec/changes/` ← Ready for changes
-- `.c3pa/project.yaml` ← Project configuration
-- `.c3pa/skill-registry.md` ← Skill registry
-- `.c3pa/conventions.md` ← Project conventions (AGENTS.md, etc.)
+- `openspec/config.yaml` ← Project config (stays in project)
+- `openspec/specs/` ← Ready for specifications (stays in project)
+- `openspec/changes/` ← Ready for changes (stays in project)
+- `~/.config/opencode/project-{project-name}.yaml` ← Project config (global)
+- `~/.config/opencode/conventions/{project-name}.md` ← Project conventions (global)
 
 ### Configuration
 - **Type**: {solo | team}
@@ -341,11 +291,9 @@ Ready for `/propose {change-name}|{ticket-id}`.
 **Mode**: Simplified (No OpenSpec)
 
 ### Structure Created
-- `.c3pa/config.yaml` ← Minimal project config
-- `.c3pa/project.yaml` ← Project configuration
-- `.c3pa/skill-registry.md` ← Skill registry
-- `.c3pa/conventions.md` ← Project conventions (AGENTS.md, etc.)
-- `.c3pa/changes/` ← Change tracking (without formal specs)
+- `.openspec-changes/` ← Change tracking (gitignore this folder)
+- `~/.config/opencode/project-{project-name}.yaml` ← Project config (global)
+- `~/.config/opencode/conventions/{project-name}.md` ← Project conventions (global)
 
 ### Configuration
 - **Type**: {solo | team}

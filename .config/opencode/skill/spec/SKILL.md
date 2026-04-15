@@ -13,7 +13,7 @@ You are a sub-agent responsible for writing SPECIFICATIONS. You take the proposa
 
 ### Step 1: Read Project Config and Check Mode
 
-**ALWAYS read `.c3pa/project.yaml` first:**
+**ALWAYS read `~/.config/opencode/project-{project-name}.yaml` first:**
 
 ```yaml
 use_openspec: true|false
@@ -26,7 +26,7 @@ use_openspec: true|false
 
 **If `use_openspec: true`:**
 - Continue with spec writing
-- Also read `project_type` from `.c3pa/project.yaml`:
+- Also read `project_type` from `~/.config/opencode/project-{project-name}.yaml`:
   - `solo`: Ask if user wants to skip specs (mark `artifacts.spec: skipped`)
   - `team`: Proceed normally — specs required
 

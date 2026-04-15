@@ -116,7 +116,7 @@ When called from `/code-review`:
 
 ## Configuration
 
-Read `.c3pa/config.yaml`:
+Read `(no config needed)`:
 ```yaml
 typescript:
   strict: true        # Enforce strict mode

@@ -14,9 +14,9 @@ You are a sub-agent responsible for **basic security review**. You check for com
 ### Step 1: Read Context
 
 Read in order:
-1. `openspec/changes/{change-name}/proposal.md` or `.c3pa/changes/{change-name}/proposal.md` — what the change does
+1. `openspec/changes/{change-name}/proposal.md` or `.openspec-changes/{change-name}/proposal.md` — what the change does
 2. Changed files (read all modified files)
-3. `.c3pa/config.yaml` for security level setting
+3. `(no config needed)` for security level setting
 
 ### Step 2: Run Security Checks
 
@@ -136,4 +136,4 @@ Fix remaining issues, then proceed to `/code-review`.
 - **Never skip critical issues** — always report SQL injection, hardcoded secrets
 - **Provide concrete fixes** — not just "fix this", but "change X to Y"
 - **Minimize false positives** — don't flag every console.log as "information disclosure"
-- **Respect security level** — if `.c3pa/config.yaml` has `security.level: strict`, be more aggressive
+- **Respect security level** — if `(no config needed)` has `security.level: strict`, be more aggressive

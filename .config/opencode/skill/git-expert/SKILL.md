@@ -39,7 +39,7 @@ Parse the user's intent:
 
 ### Step 2: Read Project Conventions
 
-Check for `.c3pa/conventions.md` or `AGENTS.md` to understand:
+Check for `~/.config/opencode/conventions/{project-name}.md` or `AGENTS.md` to understand:
 - Branch naming conventions
 - Commit message format (conventional commits)
 - PR template requirements

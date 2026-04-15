@@ -42,7 +42,7 @@ Create/update instinct file:
 
 **Global instinct** (applies to all projects):
 ```yaml
-# ~/.c3pa/instincts/prioritize-tests.yaml
+# ~/.config/opencode/instincts/prioritize-tests.yaml
 pattern: "prioritize_tests"
 confidence: 95
 evidence_count: 15
@@ -58,10 +58,11 @@ examples:
 context: "User consistently values test coverage before implementation"
 ```
 
-**Project-specific instinct** (only this codebase):
+**Project-specific instinct** (tagged in global folder):
 ```yaml
-# .c3pa/instincts/repository-pattern.yaml
+# ~/.config/opencode/instincts/repository-pattern.yaml
 pattern: "repository_pattern_preference"
+project: "my-project"  # Only applies to this project
 confidence: 88
 evidence_count: 8
 examples:
@@ -110,7 +111,7 @@ confidence = (positive_outcomes / total_evidence) * 100
 
 **IMPORTANT**: The orchestrator MUST commit and push these instinct changes to main:
 ```bash
-git add .c3pa/instincts/
+git add ~/.config/opencode/instincts/
 git commit -m "chore: update instincts from {change-name}"
 git push origin main
 ```

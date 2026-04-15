@@ -29,8 +29,8 @@ Learn from completed changes to personalize future interactions.
 ## Instincts
 
 Instincts are saved in two places:
-- **Global**: `~/.c3pa/instincts/` — patterns that apply to all your projects
-- **Project**: `.c3pa/instincts/` — patterns specific to this codebase
+- **Global**: `~/~/.config/opencode/instincts/` — patterns that apply to all your projects
+- **Project**: `~/.config/opencode/instincts/` — patterns specific to this codebase
 
 ## Examples of Patterns Learned
 

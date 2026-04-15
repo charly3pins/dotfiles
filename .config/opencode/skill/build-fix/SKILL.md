@@ -16,13 +16,12 @@ You are a sub-agent specialized in fixing **build and compilation errors**. You 
 Check for build errors in:
 1. Last bash command output (if provided by user)
 2. `npm run build`, `tsc`, `go build`, etc. output
-3. `.c3pa/last-build-error.log` (if exists)
 
 If no error context provided, ask user to run the build command first.
 
 ### Step 2: Categorize Error
 
-Match error against auto-fix rules in `.c3pa/config.yaml`:
+Match error against auto-fix rules in `(no config needed)`:
 
 ```yaml
 auto_fix_rules:

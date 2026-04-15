@@ -37,7 +37,6 @@ The orchestrator delegates heavy work (planning, implementation) to sub-agents w
 | `/learn {change-name?}` | Extract patterns from completed changes                |
 | `/instinct-status`      | View learned patterns with confidence scores           |
 | `/evolve`               | Convert patterns (≥80% confidence) into skills         |
-| `/skill-registry`       | Update skill registry                                  |
 | `/typescript-review`    | Deep TypeScript type analysis                          |
 
 ---
@@ -55,7 +54,7 @@ For complex projects requiring formal specifications and audit trail.
 
 **Creates:**
 - `openspec/` directory with specs, changes, archive
-- `.c3pa/` with config, conventions, skill-registry
+- `` with config, conventions
 - Formal Given/When/Then specifications
 
 ### Mode 2: Simplified (No OpenSpec)
@@ -68,8 +67,8 @@ For smaller projects or when formal specs aren't needed.
 ```
 
 **Creates:**
-- `.c3pa/` only (no `openspec/`)
-- Changes tracked in `.c3pa/changes/`
+- `` only (no `openspec/`)
+- Changes tracked in `.openspec-changes/`
 - No formal specs, but still structured
 
 ### Solo vs Team
@@ -193,7 +192,7 @@ openspec/changes/{name}/
 
 ## Project Config
 
-During `/bootstrap`, project config is saved to `.c3pa/project.yaml`:
+During `/bootstrap`, project config is saved to `~/.config/opencode/project-{project-name}.yaml`:
 
 ```yaml
 project_type: solo  # solo | team
@@ -211,7 +210,7 @@ issue_tracker:
 
 ## Project Conventions
 
-During `/bootstrap`, project conventions are detected and saved to `.c3pa/conventions.md`:
+During `/bootstrap`, project conventions are detected and saved to `~/.config/opencode/conventions/{project-name}.md`:
 
 - `AGENTS.md`, `CLAUDE.md`, `.cursorrules`, etc.
 - Branch creation, commit conventions, PR workflow
@@ -232,8 +231,8 @@ C3PA learns from your patterns and evolves with you.
 - Saves as "instincts" with confidence scores
 
 **2. Instinct Accumulation**
-- Global instincts (apply to all projects): `~/.c3pa/instincts/`
-- Project instincts (specific to this codebase): `.c3pa/instincts/`
+- Global instincts (apply to all projects): `~/~/.config/opencode/instincts/`
+- Project instincts (specific to this codebase): `~/.config/opencode/instincts/`
 - View with `/instinct-status`
 
 **3. Evolution (`/evolve`)**
@@ -269,7 +268,7 @@ confidence: 95% (38 evidence)
 
 ## Configuration
 
-### Project Config (`.c3pa/project.yaml`)
+### Project Config (`~/.config/opencode/project-{project-name}.yaml`)
 
 ```yaml
 project_type: solo  # solo | team
@@ -279,7 +278,7 @@ issue_tracker:
   project: "123"  # GitHub project number, Jira project key, Notion database ID
 ```
 
-### Learning Config (`~/.c3pa/config.yaml`)
+### Learning Config (`~/~/.config/opencode/project-{project-name}.yaml`)
 
 ```yaml
 learn:
@@ -306,7 +305,7 @@ typescript:
 
 ## TDD Mode
 
-Enable in `openspec/config.yaml` or `.c3pa/config.yaml`:
+Enable in `openspec/config.yaml` or `~/.config/opencode/project-{project-name}.yaml`:
 
 ```yaml
 rules:

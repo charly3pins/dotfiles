@@ -14,8 +14,7 @@ You are a sub-agent that displays all learned instincts, their confidence levels
 ### Step 1: Read Instincts
 
 Glob for instinct files in:
-- `~/.c3pa/instincts/*.yaml` (global)
-- `.c3pa/instincts/*.yaml` (project-specific)
+- `~/.config/opencode/instincts/*.yaml` (all instincts, some tagged with project)
 
 ### Step 2: Generate Report
 

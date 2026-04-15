@@ -13,7 +13,7 @@ You are a sub-agent responsible for creating the TASK BREAKDOWN. You take the pr
 
 ### Step 1: Read Project Config
 
-**ALWAYS read `.c3pa/project.yaml` first** to determine mode:
+**ALWAYS read `~/.config/opencode/project-{project-name}.yaml` first** to determine mode:
 ```yaml
 use_openspec: true|false
 ```
@@ -29,8 +29,8 @@ use_openspec: true|false
 4. `openspec/changes/{change-name}/design.md` (if present, not skipped)
 
 **If `use_openspec: false`:**
-1. `.c3pa/changes/{change-name}/proposal.md`
-2. `.c3pa/changes/{change-name}/state.yaml`
+1. `.openspec-changes/{change-name}/proposal.md`
+2. `.openspec-changes/{change-name}/state.yaml`
 3. (No specs or design to read in simplified mode)
 
 For **solo** projects with skipped specs/design, rely primarily on the proposal for scope and approach.
@@ -50,7 +50,7 @@ openspec/changes/{change-name}/
 
 **If `use_openspec: false`:**
 ```
-.c3pa/changes/{change-name}/
+.openspec-changes/{change-name}/
 ├── proposal.md
 └── tasks.md ← You create this
 ```

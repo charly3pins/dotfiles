@@ -74,8 +74,6 @@ When `/implement` starts:
 
 Save to `~/.config/opencode/skills/generated/{skill-name}/SKILL.md`
 
-Update `~/.config/opencode/skill-registry.md`
-
 ### Step 5: Mark Instincts as Evolved
 
 Update instinct files:
@@ -109,7 +107,6 @@ evolved_date: 2026-01-20
 ### Next Steps
 
 New skills are immediately available:
-- `/skill-registry` to see all skills
 - Skills auto-trigger based on context
 - Edit skills in `~/.config/opencode/skills/generated/`
 ```
