@@ -1,0 +1,11 @@
+pattern: explicit_user_requirements_over_ai
+confidence: 100
+evidence_count: 1
+created: 2026-04-15
+last_updated: 2026-04-15
+examples:
+  - change: "agent-tools-manage"
+    evidence: "User explicitly stated 'NO AI re-categorization' in proposal. updateCategory tool implemented with only explicit category assignment, no AI categorization logic. Security review confirmed no AI usage."
+    outcome: positive
+context: "When user explicitly excludes AI from a feature ('NO AI re-categorization'), respect this absolutely. Do not add 'smart' features, auto-detection, or AI assistance even if it seems helpful. Follow explicit user constraints over best practices."
+project: "fintrack"

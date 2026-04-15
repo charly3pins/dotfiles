@@ -1,0 +1,19 @@
+---
+pattern: "predefined_ui_palettes"
+confidence: 88
+evidence_count: 1
+created: 2026-04-15
+last_updated: 2026-04-15
+project: "fintrack"
+examples:
+  - change: "transaction-management-ui"
+    evidence: "Defined 20-color palette (Tailwind colors) for category selection instead of free-form color picker"
+    outcome: positive
+  - change: "transaction-management-ui"
+    evidence: "Mapped 70 Lucide icons to predefined options instead of allowing any icon name"
+    outcome: positive
+  - change: "transaction-management-ui"
+    evidence: "Palette approach ensures visual consistency and prevents clashing colors in UI"
+    outcome: positive
+context: "For UI customization (colors, icons), provide predefined palettes/options rather than free-form inputs. This maintains design consistency, prevents visual chaos, and simplifies the UX."
+---

@@ -1,0 +1,11 @@
+pattern: strict_security_validation
+confidence: 98
+evidence_count: 1
+created: 2026-04-15
+last_updated: 2026-04-15
+examples:
+  - change: "agent-tools-manage"
+    evidence: "Project configured with security.level: strict. Security review caught SQL injection vulnerability that MUST be fixed before deployment. User required all high severity issues resolved."
+    outcome: positive
+context: "When security level is 'strict', treat all HIGH severity issues as blockers. Run security review before code review. Never deploy with SQL injection, XSS, or secret exposure vulnerabilities. Security takes precedence over feature completeness."
+project: "fintrack"

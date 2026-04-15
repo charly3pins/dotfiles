@@ -1,0 +1,10 @@
+pattern: sql_injection_escape_like_pattern
+confidence: 95
+evidence_count: 1
+created: 2026-04-15
+last_updated: 2026-04-15
+examples:
+  - change: "agent-tools-manage"
+    evidence: "Fixed SQL injection vulnerability in update-category.ts where descriptionContains filter used string interpolation. Created escapeLikePattern utility to escape % and _ wildcards before LIKE queries."
+    outcome: positive
+context: "When building SQL LIKE patterns with user input in LLM tools, always escape % and _ wildcard characters using a utility like escapeLikePattern. Never use direct string interpolation in SQL patterns even with ORMs. This is critical for security in AI agent contexts where LLMs might generate unexpected input."
