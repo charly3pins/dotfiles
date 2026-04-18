@@ -3,15 +3,6 @@
   "autoupdate": false,
   "model": "minimax/minimax-m2.5:free",
   "small_model": "minimax/minimax-m2.5:free",
-  "plugin": ["opencode-with-claude"],
-  "provider": {
-    "anthropic": {
-      "options": {
-        "baseURL": "http://127.0.0.1:3456",
-        "apiKey": "dummy"
-      }
-    }
-  },
   "mcp": {
     "context7": {
       "type": "remote",
