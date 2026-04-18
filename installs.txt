@@ -167,9 +167,6 @@ ln -s ~/dotfiles/.config/opencode ~/.config/opencode
 UV (FOR SERENA MVP)
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
-CLAUDE
-ln -s ~/dotfiles/.config/claude ~/.config/claude
-
 DIRENV
 sudo apt install direnv
 ln -sf ~/.dotfiles/.config/opencode/sword.json ~/.config/opencode/sword.json
