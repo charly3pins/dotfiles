@@ -20,6 +20,9 @@ bindkey '^[[B' history-search-forward
 # Zoxide (better cd)
 eval "$(zoxide init zsh)"
 
+# direnv
+eval "$(direnv hook zsh)"
+
 # Load fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

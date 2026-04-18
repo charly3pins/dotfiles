@@ -169,3 +169,10 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 
 CLAUDE
 ln -s ~/dotfiles/.config/claude ~/.config/claude
+
+DIRENV
+sudo apt install direnv
+ln -sf ~/.dotfiles/.config/opencode/sword.json ~/.config/opencode/sword.json
+ln -sf ~/.dotfiles/.config/opencode/code.json ~/.config/opencode/code.json
+ln -sf ~/.dotfiles/envrc/code.envrc ~/Code/.envrc
+ln -sf ~/.dotfiles/envrc/sword.envrc ~/Code/SWORD/.envrc
