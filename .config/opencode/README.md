@@ -1,367 +1,294 @@
-# C3PA: Charly3Pins Agent
+# OpenCode Configuration
 
-A structured, personalized workflow for building features with less context bloat. Supports both full Spec-Driven Development (OpenSpec) and simplified modes.
+Slim agent-based setup for OpenCode. No file generation, no complex workflows - just smart delegation.
 
----
+## Philosophy
+
+- **Lead** routes everything - never implements
+- **4 specialist agents** for specific tasks
+- **Skills as tools** - auto-invoked when needed
+- **No commands** - just talk to Lead naturally
+- **No file generation** - pure conversational workflow
+
+## Agents
+
+| Agent | Purpose |
+|-------|---------|
+| **Lead** | Routes all requests, maintains context, never implements |
+| **Scout** | Fast codebase exploration |
+| **Architect** | Design debates, asks questions, creates proposals |
+| **Researcher** | Doc/API lookups |
+| **Builder** | Implementation, fixes, validation |
+
+**Models**: Use whatever you want. Copilot, Zen, Anthropic proxy - just set it with `/models` and the agents will use it.
 
 ## How It Works
 
-The orchestrator delegates heavy work (planning, implementation) to sub-agents with fresh context. The main thread stays clean.
-
-**Ad-hoc questions**: answered directly  
-**Structured work**: use commands below
-
----
-
-## Commands
-
-### Core Flow
-| Command                 | What it does                                           |
-| ----------------------- | ------------------------------------------------------ |
-| `/bootstrap`            | Init project — detect stack, choose OpenSpec or not  |
-| `/propose {ticket-id?}` | Read external ticket (optional) → create `proposal.md` |
-| `/spec`                 | Write Given/When/Then specs (OpenSpec mode only)      |
-| `/design`               | Write architecture decisions (optional)                |
-| `/tasks`                | Create implementation checklist                        |
-| `/implement`            | Implement tasks with iterative retrieval               |
-| `/validate`             | Run tests, validate against specs                      |
-| `/security-review`      | Check for vulnerabilities (SQL injection, XSS, etc.)   |
-| `/code-review`          | Human code review + TypeScript checks                |
-| `/build-fix`            | Fix build/compilation errors automatically           |
-| `/fix`                  | Fix general issues from validate/code-review           |
-| `/archive`              | Close change, merge specs, trigger learning            |
-
-### Learning & Personalization
-| Command                 | What it does                                           |
-| ----------------------- | ------------------------------------------------------ |
-| `/learn {change-name?}` | Extract patterns from completed changes                |
-| `/instinct-status`      | View learned patterns with confidence scores           |
-| `/evolve`               | Convert patterns (≥80% confidence) into skills         |
-| `/typescript-review`    | Deep TypeScript type analysis                          |
-
----
-
-## Workflows
-
-### Mode 1: Full OpenSpec (Formal Specs)
-
-For complex projects requiring formal specifications and audit trail.
+Just talk to **Lead** naturally. It figures out the rest:
 
 ```
-/bootstrap → /propose → /spec → /design → /tasks → /implement → /validate → 
-/security-review → /code-review → /fix or /build-fix → /archive → [/learn auto]
-```
-
-**Creates:**
-- `openspec/` directory with specs, changes, archive
-- `` with config, conventions
-- Formal Given/When/Then specifications
-
-### Mode 2: Simplified (No OpenSpec)
-
-For smaller projects or when formal specs aren't needed.
-
-```
-/bootstrap → /propose → /tasks → /implement → /validate → 
-/security-review → /code-review → /fix → [/learn manual]
-```
-
-**Creates:**
-- `` only (no `openspec/`)
-- Changes tracked in `.openspec-changes/`
-- No formal specs, but still structured
-
-### Solo vs Team
-
-Both modes support **Solo** and **Team** configurations:
-
-**Solo:**
-- Skips optional phases (`/spec`, `/design`)
-- Faster iteration
-- Manual code review (self-review)
-
-**Team:**
-- Full workflow with formal specs
-- Required code review before merge
-- PR-based workflow
-
-> **Note**: During `/bootstrap`, you'll choose:
-> 1. **Solo or Team?** → Workflow complexity
-> 2. **OpenSpec or Simplified?** → Formal specs yes/no
-> 3. **Issue tracker?** → GitHub/Jira/Notion/None
-
----
-
-## Discipline Skills
-
-Skills are loaded automatically when relevant:
-
-| Trigger | Skill | Purpose |
-|---------|-------|---------|
-| testing, tdd | `test-driven-development` | RED → GREEN → REFACTOR |
-| debugging, bug | `systematic-debugging` | Root cause before fixes |
-| ideas, design | `brainstorming` | Collaborative exploration |
-| frontend, ui, component | `frontend-design` | Distinctive, production-grade interfaces |
-| **database, sql, query, migration, schema, postgres** | `database-reviewer` | **PostgreSQL specialist for optimization, schemas, RLS** |
-| **git, github, commit, branch, pr** | `git-expert` | **The ONLY agent for ALL git/GitHub operations** |
-
-### Sub-Agent Delegation
-
-All work is delegated to specialized sub-agents:
-
-**Core Workflow Agents:**
-- `bootstrap`, `propose`, `spec`, `design`, `tasks`, `implement`, `validate`
-- `code-review`, `security-review`, `fix`, `build-fix`, `archive`
-
-**Specialized Review Agents:**
-- `typescript-reviewer` — TypeScript-specific code review
-- `database-reviewer` — PostgreSQL specialist (queries, migrations, RLS)
-- `security-review` — Vulnerability scanning
-- `frontend-design` — UI/UX design
-
-**Operations Agent:**
-- `git-expert` — **Git and GitHub operations specialist. The ONLY agent authorized to run `git` and `gh` commands.**
-
-### Orchestrator Philosophy
-
-**The orchestrator is a ROUTER, not a WORKER:**
-- ✅ Finds the appropriate sub-agent or skill
-- ✅ Delegates ALL work to sub-agents
-- ✅ Coordinates between multiple agents
-- ❌ **NEVER** writes code directly
-- ❌ **NEVER** edits files
-- ❌ **NEVER** runs git/gh commands (always delegates to `git-expert`)
-- ❌ **NEVER** reviews code directly (delegates to specialized reviewers)
-
-### How Sub-Agents Coordinate
-
-**Sub-agents are specialists, not generalists.** When `implement` or `fix` needs git operations, they don't do it themselves — they prepare a summary and let the orchestrator coordinate with `git-expert`.
-
-**Example Workflow:**
-```
-User: "Implement the authentication feature"
+User: "Add JWT auth to the API"
   ↓
-Orchestrator: delegates to `implement`
+Lead → Scout: "Explore current auth setup"
   ↓
-Implement: 
-  - Writes code ✍️
-  - Updates tasks.md ✓
-  - Returns summary: "Created 3 files, modified 2"
+Lead → Architect: "Design JWT approach"
   ↓
-Orchestrator: detects changes, delegates to `git-expert`
+Lead → Builder: "Implement it"
   ↓
-git-expert:
-  - Creates branch
-  - Commits with conventional format
-  - Pushes to origin
-  - Opens PR
-  ↓
-Orchestrator: reports back to user
+Lead: "Done. JWT auth added with refresh tokens."
 ```
 
-**Why this matters:**
-- Each sub-agent stays focused on its specialty
-- `git-expert` ensures all git operations follow conventions
-- Orchestrator optimizes token usage by routing efficiently
-- No agent "does it all" — proper separation of concerns
+Lead automatically chains agents when needed. You never think about it.
 
----
+## Skills (Auto-Invoked by Builder)
 
-## OpenSpec Structure
+| Skill | Trigger | Purpose |
+|-------|---------|---------|
+| git-expert | "commit", "branch", "PR" | Git operations |
+| database-reviewer | "SQL", "migration", "schema" | DB validation |
+| typescript-reviewer | `.ts` files | Type checking |
+| security-review | "auth", "input", "sanitize" | Security scan |
+| frontend-design | "component", "UI" | UI/UX guidance |
 
+## Usage
+
+### Simple Requests (Lead handles directly)
 ```
-openspec/
-├── config.yaml              ← project config
-├── specs/                   ← living documentation
-└── changes/                 ← active changes
-    └── archive/             ← completed changes
-```
-
-Each change creates:
-
-```
-openspec/changes/{name}/
-├── proposal.md
-├── specs/{domain}/spec.md
-├── design.md
-├── tasks.md
-└── verify-report.md
+"What's the weather?"
+"Explain this error"
+"How do I do X?"
 ```
 
----
-
-## Project Config
-
-During `/bootstrap`, project config is saved to `~/.config/opencode/project-{project-name}.yaml`:
-
-```yaml
-project_type: solo  # solo | team
-use_openspec: true  # true | false
-issue_tracker:
-  type: github  # github | jira | notion | none
-  project: "123"  # GitHub project number, Jira project key, Notion database ID
+### Codebase Questions (Scout)
+```
+"How is this project structured?"
+"Find where auth is handled"
+"What patterns does this codebase use?"
 ```
 
-- `project_type` tells skills whether to skip optional phases (solo skips `/spec`, `/design`, `/code-review`)
-- `use_openspec` enables/disables the formal OpenSpec workflow with Given/When/Then specs
-- `issue_tracker` tells `/implement` how to move issues through stages (GitHub → In Progress, Jira → IN PROGRESS, etc.)
-
----
-
-## Project Conventions
-
-During `/bootstrap`, project conventions are detected and saved to `~/.config/opencode/conventions/{project-name}.md`:
-
-- `AGENTS.md`, `CLAUDE.md`, `.cursorrules`, etc.
-- Branch creation, commit conventions, PR workflow
-
-Sub-agents read these conventions before executing. Your existing project workflow is preserved.
-
----
-
-## Continuous Learning
-
-C3PA learns from your patterns and evolves with you.
-
-### How It Works
-
-**1. Pattern Extraction (`/learn`)**
-- After each archived change, the system analyzes your decisions
-- Extracts patterns: "User always asks for tests first", "User prefers interfaces over types"
-- Saves as "instincts" with confidence scores
-
-**2. Instinct Accumulation**
-- Global instincts (apply to all projects): `~/~/.config/opencode/instincts/`
-- Project instincts (specific to this codebase): `~/.config/opencode/instincts/`
-- View with `/instinct-status`
-
-**3. Evolution (`/evolve`)**
-When ≥10 instincts reach 80%+ confidence:
-- Run `/evolve` to convert patterns into reusable skills
-- Generated skills: `~/.config/opencode/skills/generated/`
-- Auto-trigger based on context
-
-### Example
-
-After 15 changes where you consistently:
-1. Asked for tests before implementation
-2. Requested edge case coverage
-3. Verified test metrics
-
-**Evolution creates:**
-```yaml
-name: user-testing-preference
-triggers: Before /implement
-action: Suggest "Based on your patterns, write tests first?"
-confidence: 95% (38 evidence)
+### Design Decisions (Architect)
+```
+"Should I use JWT or sessions?"
+"What's the best way to handle retries?"
+"Help me design the payment flow"
 ```
 
-### Commands
+### Research (Researcher)
+```
+"Look up the best practices for X"
+"How does the Y API work?"
+"Find examples of Z pattern"
+```
 
-| Command | Purpose |
-|---------|---------|
-| `/instinct-status` | View all patterns with confidence scores |
-| `/evolve` | Convert high-confidence patterns (≥80%) to skills |
-| `/learn {change-name?}` | Manual pattern extraction |
+### Implementation (Builder)
+```
+"Add user authentication"
+"Fix the bug where..."
+"Refactor the payment service"
+"Build a login page"
+```
 
----
+### Complex Flows (Auto-chained)
+```
+"I want to add auth to the API"
+  → Scout explores → Architect designs → Builder implements
+
+"Fix this bug where users can't login"
+  → Scout finds it → Builder fixes it
+
+"How should I structure the database?"
+  → Architect debates → Researcher looks up patterns
+```
+
+## Instincts
+
+Lead learns your patterns over time and stores them in:
+
+```
+~/.local/share/opencode/instincts/
+```
+
+These are **personal patterns** - "User always asks for tests first", "User prefers interfaces over types", etc.
+
+- Auto-extracted silently (confidence > 85%)
+- Used to personalize suggestions
+- Sync via private dotfiles repo (separate from this public one)
+- Can delete anytime to reset
 
 ## Configuration
 
-### Project Config (`~/.config/opencode/project-{project-name}.yaml`)
+### Model Tiers
 
-```yaml
-project_type: solo  # solo | team
-use_openspec: true  # true | false
-issue_tracker:
-  type: github  # github | jira | notion | none
-  project: "123"  # GitHub project number, Jira project key, Notion database ID
+Each agent uses a model tier based on its responsibility. The `model_tier` parameter is passed when Lead delegates via the Task tool.
+
+| Agent | Tier | Purpose | Why This Tier |
+|-------|------|---------|---------------|
+| **Lead** | Main model | Routing, context management | Uses whatever you set with `/models` |
+| **Scout** | `fast` | Quick exploration | Cheap for lots of file reading, no complex reasoning |
+| **Architect** | `powerful` | Complex design | Best reasoning for trade-offs and architecture |
+| **Researcher** | `balanced` | Doc synthesis | Good reasoning for API lookups and best practices |
+| **Builder** | `balanced` | Implementation | Cost-effective for coding and skill coordination |
+
+### How Tier Mapping Works
+
+**OpenCode** handles the mapping automatically. You just set your main model with `/models`, and OpenCode knows which models to use for each tier based on your provider.
+
+**The flow:**
+1. You run `/models` and pick your main model (what Lead uses)
+2. Lead spawns subagents via `task` tool with `model_tier: "fast"`, `"balanced"`, or `"powerful"`
+3. OpenCode automatically maps those tiers to appropriate models for your provider
+
+**Example with Copilot**:
+```
+/models
+→ Select: github-copilot/claude-sonnet-4  (Lead uses this)
+→ OpenCode automatically sets:
+  - fast tier → github-copilot/gpt-5-mini      (Scout)
+  - balanced tier → github-copilot/claude-sonnet-4  (Researcher/Builder)
+  - powerful tier → github-copilot/claude-opus-4    (Architect)
 ```
 
-### Learning Config (`~/~/.config/opencode/project-{project-name}.yaml`)
-
-```yaml
-learn:
-  auto_after_archive: true
-  auto_suggest_evolve_threshold: 10
-  require_manual_approval: true
-
-evolve:
-  min_confidence: 80
-  min_evidence: 5
-
-auto_fix:
-  mode: "smart"  # always_fix simple, ask_before_fix complex, never_fix_auto breaking
-
-security:
-  level: "standard"  # basic | standard | strict
-
-typescript:
-  strict: true
-  target: "ES2022"
+**Example with Zen**:
 ```
+/models
+→ Select: anthropic/claude-sonnet-4
+→ OpenCode automatically sets:
+  - fast tier → openai/gpt-4.1-mini or anthropic/claude-3.5-haiku
+  - balanced tier → anthropic/claude-sonnet-4
+  - powerful tier → anthropic/claude-opus-4
+```
+
+**You don't configure the mapping** - OpenCode knows the right cheap/expensive models for each provider.
+
+**Cost optimization**: Scout (`fast` tier) is ~10x cheaper than Architect (`powerful` tier). You only pay for expensive models when actually needed (complex design work).
+
+### MCPs
+
+Context7 is enabled by default for library docs. Add others as needed:
+
+```json
+{
+  "mcp": {
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "enabled": true
+    }
+  }
+}
+```
+
+## File Structure
+
+```
+.config/opencode/
+├── opencode.json          # Agent definitions
+├── tui.json               # Keybinds
+├── README.md              # This file
+└── skill/                 # 5 skill docs only
+    ├── git-expert.md
+    ├── database-reviewer.md
+    ├── typescript-reviewer.md
+    ├── security-review.md
+    └── frontend-design.md
+```
+
+**No more:**
+- `command/` folder (deleted)
+- `instincts/` folder (moved to `~/.local/share/`)
+- File generation (`openspec/`, `changes/`, etc.)
+- Complex workflows (`/bootstrap`, `/archive`, `/learn`, etc.)
+
+## Key Rules
+
+### Lead NEVER:
+- Writes code
+- Edits files
+- Runs git commands
+- Makes decisions you should make
+
+### Lead ALWAYS:
+- Analyzes your intent
+- Routes to right agent
+- Passes context between agents
+- Asks when unclear
+
+## Examples
+
+### Exploring a New Codebase
+```
+User: What is this project?
+Lead: Let me explore for you.
+  → Scout: Explore codebase structure
+Lead: This is a Go API with PostgreSQL. It uses:
+  - Chi router
+  - SQLC for queries
+  - Docker for dev
+```
+
+### Making a Change
+```
+User: Add rate limiting to the API
+Lead: I'll explore the current setup first.
+  → Scout: Find API structure
+Lead: Now I'll design the approach.
+  → Architect: Ask about strategy (token bucket vs fixed window)
+User: Token bucket
+Lead: Now implementing.
+  → Builder: Add rate limiting middleware
+     - Auto-calls typescript-reviewer (it's .ts)
+     - Auto-calls git-expert to commit
+Lead: Done. Rate limiting added to all endpoints.
+```
+
+### Getting Help
+```
+User: What's the best way to handle OAuth?
+Lead: Let me research current best practices.
+  → Researcher: Look up OAuth 2.1, PKCE
+Lead: Here are the recommended patterns for 2024...
+  → Architect: Discuss trade-offs for your use case
+```
+
+## Migration from Old C3PA
+
+If you used the old C3PA setup:
+
+1. **Instincts moved** from `.config/opencode/instincts/` to `~/.local/share/opencode/instincts/`
+2. **No more commands** - just talk naturally
+3. **No file generation** - no `openspec/`, no proposals
+4. **Agents reduced** from 24+ to 4
+5. **Workflow simplified** - no `/bootstrap`, `/archive`, `/learn`
+
+Your instincts are preserved in the local share directory.
+
+## Private Instincts Repo
+
+To sync instincts across machines:
+
+```bash
+# Create private repo for instincts
+cd ~/.local/share/opencode/instincts
+git init
+git remote add origin git@github.com:yourusername/opencode-instincts-private.git
+git add .
+git commit -m "Initial instincts"
+git push -u origin main
+```
+
+Then on new machines:
+```bash
+git clone git@github.com:yourusername/opencode-instincts-private.git ~/.local/share/opencode/instincts
+```
+
+## Tips
+
+1. **Be specific** - Lead routes better with clear intent
+2. **Let it chain** - Don't micro-manage the agent flow
+3. **Correct it** - If Lead routes wrong, just say "actually, just explore" or "skip to implementation"
+4. **Trust Builder** - It auto-invokes skills when needed
+5. **Iterate** - "Almost, but fix X" works perfectly
 
 ---
 
-## TDD Mode
-
-Enable in `openspec/config.yaml` or `~/.config/opencode/project-{project-name}.yaml`:
-
-```yaml
-rules:
-  apply:
-    tdd: true
-    test_command: "npm test"
-```
-
----
-
-## Git & GitHub Operations (Important!)
-
-### git-expert Sub-Agent
-
-**`git-expert` is the ONLY authorized agent for git and GitHub operations.**
-
-All other agents (including `implement`, `fix`, `archive`) **MUST NOT** run `git` or `gh` commands directly.
-
-### How It Works
-
-**When the orchestrator detects git/GitHub keywords** (`commit`, `branch`, `pr`, `merge`, etc.), it **automatically delegates to `git-expert`** instead of executing commands itself.
-
-**Sub-agents needing git operations** should be designed to:
-1. Focus on their core task (implementation, fixing, etc.)
-2. Return results to the orchestrator
-3. Let the orchestrator call `git-expert` for git operations
-
-Example flow:
-```
-User: "Implement the authentication feature"
-  ↓
-Orchestrator: delegates to `implement`
-  ↓
-Implement: writes code, returns "Implementation complete"
-  ↓
-Orchestrator: detects git is needed, delegates to `git-expert`
-  ↓
-git-expert: creates branch, commits, pushes, opens PR
-  ↓
-Orchestrator: reports back to user
-```
-
-### Direct git-expert Invocation
-
-You can also call git-expert explicitly:
-- `/git-expert create branch feature/auth`
-- `/git-expert commit "feat: add authentication"`
-- `/git-expert open PR for issue #123`
-
----
-
-## Next Steps
-
-1. **Bootstrap a project**: `/bootstrap` — choose your mode (OpenSpec or Simplified)
-2. **Make a change**: `/propose → /tasks → /implement → /validate → /archive`
-3. **Check what you learned**: `/instinct-status`
-4. **Evolve when ready**: `/evolve` (when ≥10 high-confidence instincts)
-
-**Happy coding! 🚀**
+**Simple. Delegated. Effective.**
