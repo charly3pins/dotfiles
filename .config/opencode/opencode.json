@@ -35,7 +35,7 @@
         "read": true,
         "write": false,
         "edit": false,
-        "bash": false,
+        "bash": true,
         "grep": true,
         "glob": true
       }
