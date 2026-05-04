@@ -46,6 +46,7 @@ ZSH
 sudo apt install zsh
 chsh -s $(which zsh)
 ln -s ~/dotfiles/.config/zsh ~/.config/zsh
+ln -sf dotfiles/.config/zsh/.zshenv ~/.zshenv
 
 OHMYZSH
 install ohmyzsh
