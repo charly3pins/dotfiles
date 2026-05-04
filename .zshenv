@@ -55,5 +55,8 @@ export PATH=$HOME/.opencode/bin:$PATH
 # claude
 export CLAUDE_CONFIG_DIR="$XDG_CONFIG_HOME/claude"
 
+# pi
+export PI_CODING_AGENT_DIR="$XDG_CONFIG_HOME/pi"
+
 # Local
 [ -f ~/.local.env ] && source ~/.local.env

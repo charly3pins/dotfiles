@@ -173,3 +173,6 @@ ln -sf ~/dotfiles/.config/opencode/sword.json ~/.config/opencode/sword.json
 ln -sf ~/dotfiles/.config/opencode/code.json ~/.config/opencode/code.json
 ln -sf ~/dotfiles/envrc/code.envrc ~/Code/.envrc
 ln -sf ~/dotfiles/envrc/sword.envrc ~/Code/SWORD/.envrc
+
+Pi
+curl -fsSL https://pi.dev/install.sh | sh

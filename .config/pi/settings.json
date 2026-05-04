@@ -1,0 +1,24 @@
+{
+  "sessionDir": "~/.local/state/pi/sessions",
+  "defaultProvider": "opencode-go",
+  "defaultModel": "deepseek-v4-flash",
+  "defaultThinkingLevel": "high",
+  "theme": "tokyonight",
+  "compaction": {
+    "enabled": true,
+    "reserveTokens": 16384,
+    "keepRecentTokens": 20000
+  },
+  "retry": {
+    "enabled": true,
+    "maxRetries": 3
+  },
+  "warnings": {
+    "anthropicExtraUsage": true
+  },
+  "terminal": {
+    "showTerminalProgress": true
+  },
+  "showHardwareCursor": true,
+  "lastChangelogVersion": "0.72.1"
+}
