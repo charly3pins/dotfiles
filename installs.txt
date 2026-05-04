@@ -177,3 +177,4 @@ ln -sf ~/dotfiles/envrc/sword.envrc ~/Code/SWORD/.envrc
 
 Pi
 curl -fsSL https://pi.dev/install.sh | sh
+ln -s ~/dotfiles/.config/pi ~/.config/pi
