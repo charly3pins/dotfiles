@@ -44,7 +44,6 @@ Lead automatically chains agents when needed. You never think about it.
 
 | Skill | Trigger | Purpose |
 |-------|---------|---------|
-| git-expert | "commit", "branch", "PR" | Git operations |
 | database-reviewer | "SQL", "migration", "schema" | DB validation |
 | typescript-reviewer | `.ts` files | Type checking |
 | security-review | "auth", "input", "sanitize" | Security scan |
@@ -185,8 +184,7 @@ Context7 is enabled by default for library docs. Add others as needed:
 ├── opencode.json          # Agent definitions
 ├── tui.json               # Keybinds
 ├── README.md              # This file
-└── skill/                 # 5 skill docs only
-    ├── git-expert.md
+└── skill/                 # 4 skill docs only
     ├── database-reviewer.md
     ├── typescript-reviewer.md
     ├── security-review.md
@@ -237,7 +235,6 @@ User: Token bucket
 Lead: Now implementing.
   → Builder: Add rate limiting middleware
      - Auto-calls typescript-reviewer (it's .ts)
-     - Auto-calls git-expert to commit
 Lead: Done. Rate limiting added to all endpoints.
 ```
 
