@@ -1,56 +1,112 @@
 # OpenCode Configuration
 
-Slim agent-based setup for OpenCode. No file generation, no complex workflows - just smart delegation.
+Agent-based setup for OpenCode with a full feature development workflow: grill → PRD → issues → TDD implementation.
 
 ## Philosophy
 
 - **Lead** routes everything - never implements
-- **4 specialist agents** for specific tasks
-- **Skills as tools** - auto-invoked when needed
+- **5 specialist agents** for specific tasks
+- **Skills as tools** - auto-invoked when keywords match, or invoked manually with `ctrl+k` or `/skill-name`
+- **Full workflow**: grill-me → to-prd → to-issues → tdd
 - **No commands** - just talk to Lead naturally
-- **No file generation** - pure conversational workflow
 
 ## Agents
 
 | Agent | Purpose |
 |-------|---------|
-| **Lead** | Routes all requests, maintains context, never implements |
+| **Lead** | Routes all requests, maintains context, runs PRD/issue skills directly |
 | **Scout** | Fast codebase exploration |
 | **Architect** | Design debates, asks questions, creates proposals |
 | **Researcher** | Doc/API lookups |
-| **Builder** | Implementation, fixes, validation |
+| **Builder** | Implementation, fixes, validation (TDD-first) |
+| **Code Reviewer** | Code reviews, quality checks |
 
 **Models**: Use whatever you want. Copilot, Zen, Anthropic proxy - just set it with `/models` and the agents will use it.
 
-## How It Works
+## Full Feature Workflow
 
-Just talk to **Lead** naturally. It figures out the rest:
+The recommended flow for building new features from scratch:
 
 ```
-User: "Add JWT auth to the API"
+1. Grill-Me (Architect)
+   "Grill me on adding auth to the API"
+   → Relentless interview to resolve every design decision
+   → Shared understanding of what to build
+
+2. To-PRD (Lead)
+   "Create a PRD from our discussion"
+   → Synthesizes conversation into a structured PRD
+   → Problem, solution, user stories, implementation decisions, testing decisions
+
+3. To-Issues (Lead)
+   "Break the PRD into issues"
+   → Splits PRD into vertical slices (tracer bullets)
+   → Each slice is end-to-end: schema → API → UI → tests
+   → NOT horizontal layers (not "db layer", "service layer", "controller layer")
+   → Each slice is independently demoable and deployable
+
+4. TDD (Builder)
+   "Implement issue #1"
+   → Red-Green-Refactor loop
+   → One test → minimal code → refactor → repeat
+   → Tests verify behavior through public interfaces, not implementation details
+```
+
+```
+User: "I want to add a payment system"
   ↓
-Lead → Scout: "Explore current auth setup"
+Lead → Architect (grill-me): Interview on payment approach (Stripe vs Paddle, webhooks, etc.)
   ↓
-Lead → Architect: "Design JWT approach"
+Lead (to-prd): Synthesize into PRD with user stories and decisions
   ↓
-Lead → Builder: "Implement it"
+Lead (to-issues): Break PRD into vertical slices:
+  - #1: Basic checkout flow (schema → API → UI → tests)
+  - #2: Webhook handling (schema → API → tests)
+  - #3: Payment history page (schema → API → UI → tests)
   ↓
-Lead: "Done. JWT auth added with refresh tokens."
+User: "Implement #1"
+Lead → Builder (tdd): Test-first implementation
+  ↓
+Lead: "Done. Checkout flow implemented with full test coverage."
 ```
 
 Lead automatically chains agents when needed. You never think about it.
 
-## Skills (Auto-Invoked by Builder)
+## Skills
+
+Skills are auto-invoked when keywords match, or invoked manually with `ctrl+k` or `/skill-name`.
+
+### Lead Skills
 
 | Skill | Trigger | Purpose |
 |-------|---------|---------|
-| database-reviewer | "SQL", "migration", "schema" | DB validation |
+| to-prd | "PRD", "product requirements", "spec" | Turn conversation into a PRD |
+| to-issues | "break into issues", "create tickets" | Break plan into vertical-slice issues |
+
+### Architect Skills
+
+| Skill | Trigger | Purpose |
+|-------|---------|---------|
+| grill-me | "grill me", "stress-test" | Relentless design interview |
+| frontend-design | "component", "page", "UI" | UI/UX design guidance |
+
+### Builder Skills
+
+| Skill | Trigger | Purpose |
+|-------|---------|---------|
+| tdd | "TDD", "red-green-refactor", "test-first" | Test-driven development (ALWAYS used) |
+| database-reviewer | "SQL", "migration", "schema" | PostgreSQL validation |
 | typescript-reviewer | `.ts` files | Type checking |
 | security-review | "auth", "input", "sanitize" | Security scan |
 | frontend-design | "component", "UI" | UI/UX guidance |
-| grill-me | "grill me", "stress-test" | Relentless design interview |
-| tdd | "TDD", "red-green-refactor", "test-first" | Test-driven development |
-| to-issues | "break into issues", "create tickets" | Break plan into issues |
+
+### Code Reviewer Skills
+
+| Skill | Trigger | Purpose |
+|-------|---------|---------|
+| database-reviewer | SQL, migration, schema | DB validation |
+| typescript-reviewer | `.ts` files, type, interface | Type checking |
+| security-review | auth, input, sanitize | Security scan |
 
 ## Usage
 
@@ -81,6 +137,18 @@ Lead automatically chains agents when needed. You never think about it.
 "Stress-test my plan for X"
 ```
 
+### Create a PRD (Lead + to-prd)
+```
+"Create a PRD from our discussion"
+"Write up the requirements"
+```
+
+### Break into Issues (Lead + to-issues)
+```
+"Break the PRD into implementation issues"
+"Create tickets for this plan"
+```
+
 ### Research (Researcher)
 ```
 "Look up the best practices for X"
@@ -88,21 +156,21 @@ Lead automatically chains agents when needed. You never think about it.
 "Find examples of Z pattern"
 ```
 
-### Implementation (Builder)
+### Implementation (Builder + tdd)
 ```
+"Implement issue #1"
 "Add user authentication"
 "Fix the bug where..."
-"Refactor the payment service"
 "Build a login page"
 ```
 
 ### Complex Flows (Auto-chained)
 ```
 "I want to add auth to the API"
-  → Scout explores → Architect designs → Builder implements
+  → Grill-me → to-prd → to-issues → Builder (TDD)
 
 "Fix this bug where users can't login"
-  → Scout finds it → Builder fixes it
+  → Scout finds it → Builder fixes it (TDD)
 
 "How should I structure the database?"
   → Architect debates → Researcher looks up patterns
@@ -193,13 +261,14 @@ Context7 is enabled by default for library docs. Add others as needed:
 ├── opencode.json          # Agent definitions
 ├── tui.json               # Keybinds
 ├── README.md              # This file
-└── skills/                # 5 skill definitions
+└── skills/                # 8 skill definitions
     ├── database-reviewer/SKILL.md
     ├── frontend-design/SKILL.md
     ├── grill-me/SKILL.md
     ├── security-review/SKILL.md
     ├── tdd/SKILL.md
     ├── to-issues/SKILL.md
+    ├── to-prd/SKILL.md
     └── typescript-reviewer/SKILL.md
 ```
 
@@ -236,6 +305,28 @@ Lead: This is a Go API with PostgreSQL. It uses:
   - Docker for dev
 ```
 
+### Full Feature Flow (Grill → PRD → Issues → TDD)
+```
+User: I want to add a payment system
+Lead: Let me grill you on the approach first.
+  → Architect (grill-me): Interview on Stripe vs Paddle, webhooks, etc.
+
+User: OK, now create a PRD
+Lead: Synthesizing our discussion...
+  → Lead (to-prd): PRD created with user stories and decisions
+
+User: Break it into issues
+Lead: Splitting into vertical slices...
+  → Lead (to-issues): 3 issues created, each end-to-end
+
+User: Implement #1
+Lead: Building with TDD...
+  → Builder (tdd): Red-Green-Refactor loop
+     - Auto-calls typescript-reviewer (.ts files)
+     - Auto-calls security-review (payment handling)
+Lead: Done. Checkout flow implemented with full test coverage.
+```
+
 ### Making a Change
 ```
 User: Add rate limiting to the API
@@ -266,7 +357,7 @@ If you used the old C3PA setup:
 1. **Instincts moved** from `.config/opencode/instincts/` to `~/.local/share/opencode/instincts/`
 2. **No more commands** - just talk naturally
 3. **No file generation** - no `openspec/`, no proposals
-4. **Agents reduced** from 24+ to 4
+4. **Agents reduced** from 24+ to 5
 5. **Workflow simplified** - no `/bootstrap`, `/archive`, `/learn`
 
 Your instincts are preserved in the local share directory.
@@ -295,8 +386,10 @@ git clone git@github.com:yourusername/opencode-instincts-private.git ~/.local/sh
 1. **Be specific** - Lead routes better with clear intent
 2. **Let it chain** - Don't micro-manage the agent flow
 3. **Correct it** - If Lead routes wrong, just say "actually, just explore" or "skip to implementation"
-4. **Trust Builder** - It auto-invokes skills when needed
+4. **Trust Builder** - It auto-invokes skills when needed (ALWAYS uses TDD)
 5. **Iterate** - "Almost, but fix X" works perfectly
+6. **Use the full flow** - For new features: grill → PRD → issues → TDD
+7. **Manual skills** - Press `ctrl+k` or type `/skill-name` to invoke any skill directly
 
 ---
 
