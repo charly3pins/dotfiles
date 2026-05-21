@@ -80,4 +80,18 @@ Or "None - can start immediately" if no blockers.
 
 </issue-template>
 
+### 6. Update the parent PRD tracking
+
+After publishing all issues, update the parent PRD file (found in `thoughts/prd-*.md` or referenced in conversation) to include the issue tracking section:
+
+```markdown
+## Status: In Progress
+
+## Issues
+- #<number> — <title> — [ ] pending
+- #<number> — <title> — [ ] pending
+```
+
+Use the actual GitHub issue numbers and titles. One line per issue, in dependency order.
+
 Do NOT close or modify any parent issue.

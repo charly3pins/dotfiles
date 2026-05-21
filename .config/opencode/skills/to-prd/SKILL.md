@@ -72,3 +72,34 @@ A description of the things that are out of scope for this PRD.
 Any further notes about the feature.
 
 </prd-template>
+
+### 4. Save the PRD to the repo
+
+Save the PRD as a markdown file in `thoughts/prd-<slug>.md` (e.g. `thoughts/prd-onboarding-redesign.md`).
+
+The PRD file MUST start with a tracking section:
+
+```markdown
+## Status: In Progress
+
+## Issues
+- #<issue_number> — <issue_title> — [ ] pending
+```
+
+The `## Status` tracks the overall PRD state: `In Progress` → `Complete` when all issues are closed.
+The `## Issues` section lists all child issues from the `to-issues` breakdown. As each issue is closed, update its checkbox to `[x] done`.
+
+### 5. Archive on completion
+
+When all issues are closed, update the PRD:
+- Change `## Status: In Progress` to `## Status: Complete`
+- Move the file to `thoughts/completed/prd-<slug>.md`
+- Add a completion date inside the doc (not the filename):
+
+```markdown
+## Completed
+- Date: YYYY-MM-DD
+- Summary: brief summary of what was delivered
+```
+
+If `thoughts/completed/` doesn't exist, create it.
