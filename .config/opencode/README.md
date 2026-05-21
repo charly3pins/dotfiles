@@ -49,6 +49,8 @@ Lead automatically chains agents when needed. You never think about it.
 | security-review | "auth", "input", "sanitize" | Security scan |
 | frontend-design | "component", "UI" | UI/UX guidance |
 | grill-me | "grill me", "stress-test" | Relentless design interview |
+| tdd | "TDD", "red-green-refactor", "test-first" | Test-driven development |
+| to-issues | "break into issues", "create tickets" | Break plan into issues |
 
 ## Usage
 
@@ -196,6 +198,8 @@ Context7 is enabled by default for library docs. Add others as needed:
     ├── frontend-design/SKILL.md
     ├── grill-me/SKILL.md
     ├── security-review/SKILL.md
+    ├── tdd/SKILL.md
+    ├── to-issues/SKILL.md
     └── typescript-reviewer/SKILL.md
 ```
 
