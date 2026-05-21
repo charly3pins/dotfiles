@@ -1,3 +1,8 @@
+---
+name: frontend-design
+description: Create distinctive, production-grade frontend interfaces with high design quality.
+---
+
 # frontend-design Skill
 
 **Trigger**: "component", "page", "UI", "frontend", "React", "Vue", "CSS", "design"

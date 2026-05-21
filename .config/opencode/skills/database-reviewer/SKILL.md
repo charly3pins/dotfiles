@@ -1,3 +1,8 @@
+---
+name: database-reviewer
+description: PostgreSQL specialist for query optimization, schema design, security, and performance.
+---
+
 # database-reviewer Skill
 
 **Trigger**: "SQL", "migration", "schema", "query", "postgres", "database", "prisma", "drizzle", "kysely", "index", "N+1", "slow query"

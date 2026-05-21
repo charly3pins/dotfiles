@@ -1,3 +1,8 @@
+---
+name: security-review
+description: Basic security review for common vulnerabilities.
+---
+
 # security-review Skill
 
 **Trigger**: "auth", "input", "sanitize", "password", "token", "SQL", "XSS"

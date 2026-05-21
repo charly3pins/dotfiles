@@ -1,3 +1,8 @@
+---
+name: typescript-reviewer
+description: TypeScript-specific code review for type safety and modern patterns.
+---
+
 # typescript-reviewer Skill
 
 **Trigger**: `.ts` files, "type", "interface", "generic", "typescript"

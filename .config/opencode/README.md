@@ -48,6 +48,7 @@ Lead automatically chains agents when needed. You never think about it.
 | typescript-reviewer | `.ts` files | Type checking |
 | security-review | "auth", "input", "sanitize" | Security scan |
 | frontend-design | "component", "UI" | UI/UX guidance |
+| grill-me | "grill me", "stress-test" | Relentless design interview |
 
 ## Usage
 
@@ -70,6 +71,12 @@ Lead automatically chains agents when needed. You never think about it.
 "Should I use JWT or sessions?"
 "What's the best way to handle retries?"
 "Help me design the payment flow"
+```
+
+### Stress-Test a Plan (Architect + grill-me)
+```
+"Grill me on this architecture"
+"Stress-test my plan for X"
 ```
 
 ### Research (Researcher)
@@ -184,11 +191,12 @@ Context7 is enabled by default for library docs. Add others as needed:
 ├── opencode.json          # Agent definitions
 ├── tui.json               # Keybinds
 ├── README.md              # This file
-└── skill/                 # 4 skill docs only
-    ├── database-reviewer.md
-    ├── typescript-reviewer.md
-    ├── security-review.md
-    └── frontend-design.md
+└── skills/                # 5 skill definitions
+    ├── database-reviewer/SKILL.md
+    ├── frontend-design/SKILL.md
+    ├── grill-me/SKILL.md
+    ├── security-review/SKILL.md
+    └── typescript-reviewer/SKILL.md
 ```
 
 **No more:**
