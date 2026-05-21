@@ -9,6 +9,28 @@ For any new feature or significant change, follow this flow:
 3. **To-Issues** — Break the PRD into vertical slices (tracer bullets), each delivering end-to-end value
 4. **TDD** — Implement each slice test-first with Red-Green-Refactor
 
+## Git & Validation Rules
+
+### Branch Workflow
+
+- **ALWAYS create a new branch** before implementing a feature or fix
+- Branch name should be descriptive: `feat/feature-name`, `fix/bug-name`, or `refactor/description`
+- Use the issue number if available: `feat/123-add-auth`
+- Never work directly on `main` or `master`
+
+### Before Committing
+
+- **ALWAYS run tests** before committing — ensure they pass
+- **ALWAYS run linter** before committing — fix any lint errors
+- If the project has a pre-commit hook, respect it
+- If tests or lint fail, fix the issues before committing
+
+### Commit Messages
+
+- Use conventional commits: `feat:`, `fix:`, `docs:`, `refactor:`, `test:`, `chore:`
+- Keep the subject line under 72 characters
+- Add a body if the change needs explanation
+
 ## Architecture Principles
 
 - **Vertical slices over horizontal layers** — Each slice cuts through schema → API → UI → tests, not "db layer", "service layer", "controller layer"
@@ -44,3 +66,4 @@ For any new feature or significant change, follow this flow:
 - Respect existing conventions and patterns
 - Follow project-specific AGENTS.md when it exists (this file is the fallback)
 - Use skills when relevant — don't reinvent what skills already define
+- **Never commit directly to main** — always work on a feature branch
