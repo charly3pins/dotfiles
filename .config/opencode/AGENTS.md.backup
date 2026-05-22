@@ -1,22 +1,5 @@
 # Global Rules
 
-## Skills
-
-Use skills when relevant — don't reinvent what skills already define.
-
-| Skill                 | When to load                                                        |
-| --------------------- | ------------------------------------------------------------------- |
-| `tdd`                 | Any implementation or bug fix — load FIRST, before reading any file |
-| `typescript-reviewer` | Any `.ts` or `.tsx` work                                            |
-| `database-reviewer`   | SQL, migrations, schema changes                                     |
-| `security-review`     | Auth, tokens, passwords, user-facing input/output                   |
-| `frontend-design`     | UI components, pages, any frontend work                             |
-| `grill-me`            | Stress-testing a plan, design decisions, "grill me"                 |
-| `to-prd`              | "PRD", "spec", "product requirements", "write up requirements"      |
-| `to-issues`           | "break into issues", "create tickets", "implementation plan"        |
-
-**Gate rule:** load all applicable skills before reading any file or writing any code.
-
 ## Workflow — New Features
 
 For any new feature or significant change, follow this flow:
@@ -82,4 +65,5 @@ For any new feature or significant change, follow this flow:
 - Always explore the codebase before making changes
 - Respect existing conventions and patterns
 - Follow project-specific AGENTS.md when it exists (this file is the fallback)
+- Use skills when relevant — don't reinvent what skills already define
 - **Never commit directly to main** — always work on a feature branch
