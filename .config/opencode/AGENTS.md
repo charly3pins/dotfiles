@@ -2,78 +2,82 @@
 
 ## Skills
 
-Use skills when relevant — don't reinvent what skills already define.
+Use skills when relevant. Invoke manually with `ctrl+k` or `/skill-name`.
 
-| Skill                 | When to load                                                        |
-| --------------------- | ------------------------------------------------------------------- |
-| `tdd`                 | Any implementation or bug fix — load FIRST, before reading any file |
-| `typescript-reviewer` | Any `.ts` or `.tsx` work                                            |
-| `database-reviewer`   | SQL, migrations, schema changes                                     |
-| `security-review`     | Auth, tokens, passwords, user-facing input/output                   |
-| `frontend-design`     | UI components, pages, any frontend work                             |
-| `grill-me`            | Stress-testing a plan, design decisions, "grill me"                 |
-| `to-prd`              | "PRD", "spec", "product requirements", "write up requirements"      |
-| `to-issues`           | "break into issues", "create tickets", "implementation plan"        |
+| Skill              | When to use                                                         |
+| ------------------ | ------------------------------------------------------------------- |
+| `tdd`              | Any implementation or bug fix, load FIRST                           |
+| `grill-me`         | Stress-testing a plan, design decisions                             |
+| `to-prd`           | "PRD", "spec", "product requirements"                               |
+| `to-issues`        | "break into issues", "create tickets", "implementation plan"        |
+| `diagnosing-bugs`  | Bug reports, "debug this", something broken/failing/slow            |
+| `code-review`      | "review since X", review a branch, post-implementation review       |
+| `retro`            | Session retrospective, improve agent environment                    |
+| `handoff`          | Switching sessions, passing context to next agent                   |
 
 **Gate rule:** load all applicable skills before reading any file or writing any code.
 
-## Workflow — New Features
+## Workflow: New Features
 
-For any new feature or significant change, follow this flow:
+1. **Grill-me**: interview relentlessly about design decisions
+2. **To-PRD**: synthesize into a structured PRD
+3. **To-Issues**: break into vertical slices (tracer bullets)
+4. **TDD**: implement each slice test-first
+5. **Code-review**: review the diff against standards and spec
 
-1. **Grill-me** — Interview the user relentlessly about every design decision until reaching shared understanding
-2. **To-PRD** — Synthesize the conversation into a structured PRD with problem, solution, user stories, and decisions
-3. **To-Issues** — Break the PRD into vertical slices (tracer bullets), each delivering end-to-end value
-4. **TDD** — Implement each slice test-first with Red-Green-Refactor
+## Workflow: Bugs
+
+1. **Diagnosing-bugs**: build feedback loop, reproduce, hypothesize, fix
+2. **Code-review**: review the fix
+
+## Workflow: Session End
+
+- **Retro**: suggest improvements to the agent environment
+- **Handoff**: compact context for the next session
 
 ## Git & Validation Rules
 
 ### Branch Workflow
 
-- **ALWAYS create a new branch** before implementing a feature or fix
-- Branch name should be descriptive: `feat/feature-name`, `fix/bug-name`, or `refactor/description`
-- Use the issue number if available: `feat/123-add-auth`
+- ALWAYS create a new branch before implementing a feature or fix
+- Branch name: `feat/feature-name`, `fix/bug-name`, `refactor/description`
+- Use issue number if available: `feat/123-add-auth`
 - Never work directly on `main` or `master`
 
 ### Before Committing
 
-- **ALWAYS run tests** before committing — ensure they pass
-- **ALWAYS run linter** before committing — fix any lint errors
-- If the project has a pre-commit hook, respect it
-- If tests or lint fail, fix the issues before committing
+- ALWAYS run tests before committing
+- ALWAYS run linter before committing
+- Fix issues before committing
 
 ### Commit Messages
 
-- Use conventional commits: `feat:`, `fix:`, `docs:`, `refactor:`, `test:`, `chore:`
-- Keep the subject line under 72 characters
-- Add a body if the change needs explanation
+- Conventional commits: `feat:`, `fix:`, `docs:`, `refactor:`, `test:`, `chore:`
+- Subject line under 72 characters
+- Body if the change needs explanation
 
 ## Architecture Principles
 
-- **Vertical slices over horizontal layers** — Each slice cuts through schema → API → UI → tests, not "db layer", "service layer", "controller layer"
-- **Deep modules** — Small interface, deep implementation. Encapsulate complexity behind simple, testable APIs
-- **Composition over inheritance** — Prefer composition, avoid deep class hierarchies
-- **Fail fast, fail loud** — Validate early, throw descriptive errors
+- **Vertical slices over horizontal layers**
+- **Composition over inheritance**
+- **Fail fast, fail loud**
 
 ## Testing Philosophy
 
 - Tests verify **behavior** through public interfaces, not implementation details
-- A good test reads like a specification: "user can checkout with valid cart"
-- Bad tests break on refactor when behavior hasn't changed — those test implementation, not behavior
-- Red-Green-Refactor: one test → minimal code → refactor → repeat
-- **Never refactor while RED** — get to GREEN first
+- Red-Green-Refactor: one test, one implementation, repeat
+- **Never refactor while RED**
 
 ## Code Style
 
-- Name things for **what they do**, not how they do it
-- Use the project's domain language (glossary vocabulary) in names, tests, and interfaces
+- Name things for **what they do**
+- Use the project's domain language in names, tests, and interfaces
 - Prefer explicit over implicit
-- Keep functions focused — if it needs a comment to explain, it's probably doing too much
 
 ## Communication
 
 - Match the user's language (Catalan, Spanish, or English)
-- Be concise — no essays, no filler
+- Be concise
 - Show code examples instead of explaining concepts
 - When unsure, ask rather than assume
 
@@ -82,4 +86,4 @@ For any new feature or significant change, follow this flow:
 - Always explore the codebase before making changes
 - Respect existing conventions and patterns
 - Follow project-specific AGENTS.md when it exists (this file is the fallback)
-- **Never commit directly to main** — always work on a feature branch
+- Never commit directly to main
