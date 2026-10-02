@@ -1,8 +1,8 @@
 {
   "sessionDir": "~/.local/state/pi/sessions",
   "defaultProvider": "opencode-go",
-  "defaultModel": "deepseek-v4-flash",
-  "defaultThinkingLevel": "high",
+  "defaultModel": "minimax-m2.7",
+  "defaultThinkingLevel": "medium",
   "theme": "tokyonight",
   "compaction": {
     "enabled": true,
@@ -20,5 +20,6 @@
     "showTerminalProgress": true
   },
   "showHardwareCursor": true,
-  "lastChangelogVersion": "0.72.1"
+  "lastChangelogVersion": "0.72.1",
+  "hideThinkingBlock": true
 }
