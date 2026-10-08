@@ -5,7 +5,7 @@ argument-hint: "What will the next session be used for?"
 disable-model-invocation: true
 ---
 
-Write a handoff document summarising the current conversation so a fresh agent can continue the work. Save to the temporary directory of the user's OS - not the current workspace.
+Write a handoff document summarising the current conversation so a fresh agent can continue the work. Save it inside the current repository, in `docs/handoff/` (create the directory if it does not exist), named `handoff-YYYY-MM-DD.md` with today's date (add a short suffix if one already exists for today). Never save it to `/tmp` or any temporary directory: the next session only sees the repository. At the end, tell the user the repo-relative path so they can point the next session at it.
 
 Include a "suggested skills" section in the document, naming which skills the next agent should call the Skill tool for.
 
