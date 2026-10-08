@@ -12,6 +12,7 @@ Use skills when relevant. Invoke manually with `ctrl+k` or `/skill-name`.
 | `to-issues`        | "break into issues", "create tickets", "implementation plan"        |
 | `diagnosing-bugs`  | Bug reports, "debug this", something broken/failing/slow            |
 | `code-review`      | "review since X", review a branch, post-implementation review       |
+| `pr-review`        | Review someone else's PR(s) / ticket, comments to paste in GitHub   |
 | `retro`            | Session retrospective, improve agent environment                    |
 | `handoff`          | Switching sessions, passing context to next agent                   |
 
