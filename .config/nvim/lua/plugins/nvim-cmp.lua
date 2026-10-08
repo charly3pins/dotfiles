@@ -12,7 +12,6 @@ return {
       local cmp_select = { behavior = cmp.SelectBehavior.Insert }
       cmp.setup {
         sources = {
-          { name = "copilot" },
           { name = "nvim_lsp" },
         },
         window = {
