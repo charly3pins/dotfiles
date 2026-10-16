@@ -12,7 +12,6 @@ return {
       local cmp_select = { behavior = cmp.SelectBehavior.Insert }
       cmp.setup {
         sources = {
-          { name = "copilot" },
           { name = "nvim_lsp" },
         },
         window = {
@@ -33,10 +32,6 @@ return {
           ["<C-Space>"] = cmp.mapping.complete(),
           ["/"] = cmp.mapping.close(),
           ["<Tab>"] = cmp.mapping(function(fallback)
-            -- local copilot = require "copilot.suggestion"
-            -- if copilot.is_visible() then
-            --   copilot.accept()
-            -- else
             if cmp.visible() then
               cmp.select_next_item()
             else
