@@ -51,8 +51,10 @@ Single-agent setup with plan/build modes and skills for a full feature developme
 ## Configuration
 
 - `opencode.json`: model and MCP config
+- `cli.json`: terminal settings: theme, keybinds, session tabs, alerts
 - `AGENTS.md`: global rules, skill table, workflows, conventions
 - `skills/`: skill definitions (one directory per skill)
+- `plugins/tab-status/`: titles each new session by kind of work: 🟥 debugging, 🟩 feature, 🟦 docs, PRDs or tickets, 🟨 other. Test: `node --test plugins/tab-status/index.test.ts`
 
 ### MCPs
 
@@ -63,8 +65,11 @@ Context7 is enabled by default for library docs. Add others as needed in `openco
 ```
 .config/opencode/
 ├── opencode.json          # Model and MCP config
+├── cli.json               # Terminal settings
 ├── AGENTS.md              # Global rules and workflows
 ├── README.md              # This file
+├── plugins/
+│   └── tab-status/        # Session titles by kind of work
 └── skills/
     ├── code-review/SKILL.md
     ├── diagnosing-bugs/SKILL.md

@@ -81,6 +81,12 @@ Use skills when relevant. Invoke manually with `ctrl+k` or `/skill-name`.
 - Show code examples instead of explaining concepts
 - When unsure, ask rather than assume
 
+## Session Titles
+
+- The `tab-status` plugin titles new sessions `<square> <TICKET> <up to 5 words>`, e.g. `🟥 ABC-123 Login redirect fix`
+- 🟥 debugging and the fix that follows, 🟩 implementing a feature, 🟦 reading docs, PRDs or tickets, 🟨 anything else
+- When the kind of work or the topic changes, rename the session with `session_rename` in the same format; never in subagents
+
 ## General
 
 - Always explore the codebase before making changes
