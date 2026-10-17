@@ -13,16 +13,6 @@
     }
   },
   "mcp": {
-    "atlassian": {
-      "type": "local",
-      "command": [
-        "npx",
-        "-y",
-        "mcp-remote",
-        "https://mcp.atlassian.com/v1/sse"
-      ],
-      "enabled": false
-    },
     "context7": {
       "type": "remote",
       "url": "https://mcp.context7.com/mcp",
