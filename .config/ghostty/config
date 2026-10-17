@@ -13,3 +13,8 @@ window-save-state = always
 shell-integration = zsh
 
 gtk-titlebar = false
+
+# Leave these to OpenCode's session tabs
+keybind = ctrl+tab=unbind
+keybind = ctrl+shift+tab=unbind
+keybind = ctrl+shift+t=unbind
