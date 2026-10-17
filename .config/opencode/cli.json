@@ -14,5 +14,12 @@
     "scrollbar": true,
     "thinking": "hide"
   },
+  "tabs": {
+    "scope": "global"
+  },
+  "attention": {
+    "notifications": true,
+    "sound": true
+  },
   "animations": true
 }
