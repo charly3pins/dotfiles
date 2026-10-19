@@ -32,17 +32,17 @@ export default {
         const items = createMemo(() => usage(reply(), { now: Date.now() }));
         return (
           <Show when={props.showDetails && items().length > 0}>
-            <text fg={context.theme.text.muted} wrapMode="none" truncate flexShrink={1} minWidth={0}>
+            <text fg={context.theme.text.muted} wrapMode="none" truncate flexShrink={1} minWidth={0} marginRight={-1}>
               <For each={items()}>
                 {(item, index) => (
                   <>
-                    <Show when={index() > 0}>{" · "}</Show>
+                    <Show when={index() > 0}>{" / "}</Show>
                     <span style={{ fg: color(item.tone) }}>{item.text}</span>
                   </>
                 )}
               </For>
-              {/* Sits in the middle of the footer's two-space gap, before the context window section. */}
-              {"  ·"}
+              {/* The -1 right margin shrinks the footer's two-space gap to one, so sections read "a · b". */}
+              {" ·"}
             </text>
           </Show>
         );
