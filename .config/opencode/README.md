@@ -57,6 +57,7 @@ Single-agent setup with plan/build modes and skills for a full feature developme
 - `plugins/tab-status/`: titles each new session by kind of work: 🟥 debugging, 🟩 feature, 🟦 docs, PRDs or tickets, 🟨 other. Test: `node --test plugins/tab-status/index.test.ts`
 - `plugins/mcp-footer/`: shows every MCP server in the prompt footer, as a dot coloured by its state like in the sidebar, so the sidebar can stay hidden. Test: `node --test plugins/mcp-footer/dots.test.ts`
 - `plugins/skill-commands/`: adds a `/<name>` command for each skill in `skills/`, with the skill attached, like `/sh:<name>`. New or deleted skills need `opencode service restart`. Test: `node --test plugins/skill-commands/index.test.ts`
+- `plugins/usage-footer/`: shows your Claude plan's usage in the prompt footer, `sess 15% · week 16%`, read from the Meridian proxy that `opencode-with-claude` runs. From 80% a limit turns yellow and says when it resets; at the limit it turns red. Test: `node --test plugins/usage-footer/usage.test.ts`
 
 ### MCPs
 
@@ -73,7 +74,8 @@ Context7 is enabled by default for library docs. Add others as needed in `openco
 ├── plugins/
 │   ├── mcp-footer/        # MCP servers in the prompt footer
 │   ├── skill-commands/    # A /<name> command per skill
-│   └── tab-status/        # Session titles by kind of work
+│   ├── tab-status/        # Session titles by kind of work
+│   └── usage-footer/      # Claude plan usage in the prompt footer
 └── skills/
     ├── code-review/SKILL.md
     ├── diagnosing-bugs/SKILL.md
