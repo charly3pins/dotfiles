@@ -1,33 +1,45 @@
 ---
 name: code-review
-description: "Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes: Standards (does the code follow this repo's documented coding standards?) and Spec (does the code match what the originating issue/spec asked for?). Runs both reviews in parallel sub-agents and reports them side by side. Use when the user wants to review a branch, a PR, work-in-progress changes, or asks to \"review since X\"."
+description: "Review a diff along two axes: Standards (does the code follow this repo's documented coding standards?) and Spec (does it match the originating ticket/spec?). Works on your own work since a fixed point (commit, branch, tag) or on someone else's PR by number or URL. Runs the axes in parallel sub-agents and reports them side by side. Use when the user wants to review a branch, a PR, work-in-progress changes, or asks to \"review since X\"."
 ---
 
-Two-axis review of the diff between `HEAD` and a fixed point the user supplies:
+Two-axis review of a diff:
 
 - **Standards**: does the code conform to this repo's documented coding standards?
-- **Spec**: does the code faithfully implement the originating issue / spec?
+- **Spec**: does the code faithfully implement the originating ticket / spec?
 
-Both axes run as **parallel sub-agents** so they don't pollute each other's context, then this skill aggregates their findings.
+Both axes run as **parallel sub-agents** so they don't pollute each other's context, then this skill aggregates their findings. On someone else's PR a third axis, **Risk**, joins them when no current bug review exists (step 4).
 
 ## Process
 
-### 1. Pin the fixed point
+### 1. Pin the target
 
-Whatever the user said is the fixed point (a commit SHA, branch name, tag, `main`, `HEAD~5`, etc.). If they didn't specify one, ask for it.
+What the user passed decides the mode:
 
-Capture the diff command once: `git diff <fixed-point>...HEAD` (three-dot, so the comparison is against the merge-base). Also note the list of commits via `git log <fixed-point>..HEAD --oneline`.
+| Input | Mode | Diff | Commits |
+|---|---|---|---|
+| PR number or URL (`812`, `#812`, `github.com/…/pull/812`) | **PR** | `gh pr diff <N>` | `gh pr view <N> --json commits` |
+| commit, branch, tag, `main`, `HEAD~5` | **Local** | `git diff <point>...HEAD` (three-dot, against the merge-base) | `git log <point>..HEAD --oneline` |
+| nothing | ask which one | | |
 
-Before going further, confirm the fixed point resolves (`git rev-parse <fixed-point>`) and the diff is non-empty. A bad ref or empty diff should fail here, not inside two parallel sub-agents.
+In PR mode also read the PR itself, without checking anything out:
+
+```bash
+gh pr view <N> --json number,title,url,author,baseRefName,headRefName,headRefOid,body,reviews,comments
+```
+
+Before going further, confirm the target resolves (`git rev-parse <point>`, or `gh pr view` succeeding) and the diff is non-empty. A bad ref or empty diff should fail here, not inside parallel sub-agents.
 
 ### 2. Identify the spec source
 
 Look for the originating spec, in this order:
 
-1. Issue references in the commit messages (`#123`, `Closes #45`, GitLab `!67`, etc.). Fetch the issue body and comments via `gh issue view` or the project's issue tracker.
-2. A path the user passed as an argument.
-3. A spec file under `docs/`, `specs/`, `thoughts/`, or `.scratch/` matching the branch name or feature.
-4. If nothing is found, ask the user where the spec is. If they say there isn't one, the **Spec** sub-agent will skip and report "no spec available".
+1. A path or ticket the user passed as an argument.
+2. A ticket key in the PR title, branch name or commit messages (`ABC-123`, `XY-42`, any case). Look it up in your ticket tracker first, with its MCP tools (the request and its comments); not found → Jira. If the lookup fails, say which key could not be resolved.
+3. GitHub issue references in the commit messages (`#123`, `Closes #45`). Fetch the issue body and comments via `gh issue view`.
+4. PR mode: the PR's `## Summary`. Label it as the author's own description, not an independent spec.
+5. A spec file under `docs/`, `specs/`, `thoughts/`, or `.scratch/` matching the branch name or feature.
+6. If nothing is found, ask the user where the spec is. If they say there isn't one, the **Spec** sub-agent will skip and report "no spec available".
 
 ### 3. Identify the standards sources
 
@@ -53,21 +65,39 @@ Each smell reads *what it is* then *how to fix*; match it against the diff:
 - **Middle Man**: a class or function that mostly just delegates onward. Fix: cut it, call the real target direct.
 - **Refused Bequest**: a subclass or implementer that ignores or overrides most of what it inherits. Fix: drop the inheritance, use composition.
 
-### 4. Spawn both sub-agents in parallel
+### 3b. Existing review (PR mode only)
+
+Look for `/sh:review-pr`'s marker in the PR body, `<!-- sh:open-pr reviewed=<sha> -->`, and compare its sha to `headRefOid`:
+
+- **Same sha**: the bug/risk review is current. Pass its `## Code review` table to every sub-agent as already reported, so they don't repeat it.
+- **Different sha**: the review is stale. Note it, and run the Risk sub-agent.
+- **No marker**: `/sh:review-pr` never ran. Note it, and run the Risk sub-agent.
+
+Pass the other reviewers' comments (`reviews`, `comments`) to the sub-agents too, for the same reason: no repeats.
+
+### 4. Spawn the sub-agents in parallel
 
 **Standards sub-agent prompt** should include:
 
 - The full diff command and commit list.
 - The list of standards-source files you found in step 3, **plus the smell baseline from step 3** pasted in full (the sub-agent has no other access to it).
-- The brief: "Report, per file/hunk where relevant, (a) every place the diff violates a documented standard: cite the standard (file + the rule); and (b) any baseline smell you spot: name it and quote the hunk. Distinguish hard violations from judgement calls: documented-standard breaches can be hard, but baseline smells are always judgement calls, and a documented repo standard overrides the baseline. Skip anything tooling enforces. Under 400 words."
+- PR mode: the findings already reported (step 3b).
+- The brief: "Report, per file/hunk where relevant, (a) every place the diff violates a documented standard: cite the standard (file + the rule); and (b) any baseline smell you spot: name it and quote the hunk. Distinguish hard violations from judgement calls: documented-standard breaches can be hard, but baseline smells are always judgement calls, and a documented repo standard overrides the baseline. Skip anything tooling enforces or already reported. Under 400 words."
 
 **Spec sub-agent prompt** should include:
 
 - The diff command and commit list.
-- The path or fetched contents of the spec.
-- The brief: "Report: (a) requirements the spec asked for that are missing or partial; (b) behaviour in the diff that wasn't asked for (scope creep); (c) requirements that look implemented but where the implementation looks wrong. Quote the spec line for each finding. Under 400 words."
+- The path or fetched contents of the spec, and which source it came from.
+- PR mode: the findings already reported (step 3b).
+- The brief: "Report: (a) requirements the spec asked for that are missing or partial; (b) behaviour in the diff that wasn't asked for (scope creep); (c) requirements that look implemented but where the implementation looks wrong. Quote the spec line for each finding. Skip anything already reported. Under 400 words."
 
 If the spec is missing, skip the Spec sub-agent and note this in the final report.
+
+**Risk sub-agent prompt**, PR mode and only when step 3b calls for it, should include:
+
+- The diff command and commit list.
+- The other reviewers' comments.
+- The brief: "Report only high-confidence bugs, security issues (above all authorization against a path or query id instead of the caller's authenticated identity, an IDOR), behavioural regressions, data-loss risks, concurrency problems, API-contract breaks, and missing tests for changed behaviour. Read the changed files, the surrounding code and the call sites before asserting a break; no style nits, no speculation. Give the evidence for each finding. Under 400 words."
 
 ### 5. Aggregate
 
@@ -77,8 +107,15 @@ Present findings in this table format. Only issues; skip praise and "looks good"
 |---|---|---|---|
 | `path/to/file.ts` | 42 | Description of the issue | Standards |
 | `path/to/file.ts` | 78 | Description of the issue | Spec |
+| `path/to/file.ts` | 91 | Description of the issue | Risk |
 
 Below the table, a one-line summary: total findings per axis, and the worst issue within each axis (if any). Don't pick a single winner across axes: that's the reranking the separation exists to prevent.
+
+PR mode adds one line on the existing review: "`/sh:review-pr` current at `abc1234`, its 3 findings not repeated", "stale: reviewed `abc1234`, head is `def5678`", or "never run".
+
+### 6. Draft review comments (PR mode only)
+
+Offer once to turn the findings into a draft review: one comment per finding on its `path:line`, worded to post as is, Spec findings quoting the ticket line. On a yes, write `/tmp/code-review-<N>.json` for `gh api repos/{owner}/{repo}/pulls/<N>/reviews --input /tmp/code-review-<N>.json` with `event: COMMENT`, print the exact command, and **post only on a second yes**. Never approve or request changes.
 
 ## Why two axes
 
@@ -87,4 +124,4 @@ A change can pass one axis and fail the other:
 - Code that follows every standard but implements the wrong thing: **Standards pass, Spec fail.**
 - Code that does exactly what the issue asked but breaks the project's conventions: **Spec pass, Standards fail.**
 
-Reporting them separately stops one axis from masking the other.
+Reporting them separately stops one axis from masking the other. Risk is a third, separate axis, and it runs only when `/sh:review-pr` has not already covered the PR's head.
