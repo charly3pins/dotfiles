@@ -55,6 +55,7 @@ Single-agent setup with plan/build modes and skills for a full feature developme
 - `AGENTS.md`: global rules, skill table, workflows, conventions
 - `skills/`: skill definitions (one directory per skill)
 - `plugins/tab-status/`: titles each new session by kind of work: 🟥 debugging, 🟩 feature, 🟦 docs, PRDs or tickets, 🟨 other. Test: `node --test plugins/tab-status/index.test.ts`
+- `plugins/mcp-footer/`: shows every MCP server in the prompt footer, as a dot coloured by its state like in the sidebar, so the sidebar can stay hidden. Test: `node --test plugins/mcp-footer/dots.test.ts`
 
 ### MCPs
 
@@ -69,6 +70,7 @@ Context7 is enabled by default for library docs. Add others as needed in `openco
 ├── AGENTS.md              # Global rules and workflows
 ├── README.md              # This file
 ├── plugins/
+│   ├── mcp-footer/        # MCP servers in the prompt footer
 │   └── tab-status/        # Session titles by kind of work
 └── skills/
     ├── code-review/SKILL.md
