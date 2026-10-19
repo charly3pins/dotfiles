@@ -1,25 +1,46 @@
 {
   "$schema": "https://opencode.ai/v2/cli.json",
   "theme": {
-    "name": "tokyonight"
+    "name": "tokyonight",
+    "mode": "dark"
   },
   "keybinds": {
     "prompt.skills": "ctrl+k"
   },
   "diffs": {
-    "wrap": "word"
+    "wrap": "word",
+    "view": "auto",
+    "tree": true,
+    "single": false
   },
   "session": {
-    "sidebar": "auto",
+    "sidebar": "hide",
     "scrollbar": true,
-    "thinking": "hide"
+    "thinking": "hide",
+    "markdown": "rendered",
+    "grouping": "auto",
+    "verbosity": "medium",
+    "image_preview": true
   },
   "tabs": {
-    "scope": "global"
+    "scope": "global",
+    "mode": "auto",
+    "layout": "horizontal",
+    "indicators": "status"
   },
   "attention": {
     "notifications": true,
-    "sound": true
+    "sound": true,
+    "volume": 0.20000000000000015
   },
-  "animations": true
+  "animations": true,
+  "scroll": {
+    "acceleration": false
+  },
+  "terminal": {
+    "title": true
+  },
+  "debug": {
+    "devtools": false
+  }
 }
