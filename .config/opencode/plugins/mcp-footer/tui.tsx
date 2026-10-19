@@ -23,7 +23,7 @@ export default {
         // showDetails is off when the footer is short of room, and the built-in details give way too.
         return (
           <Show when={props.showDetails && servers().length > 0}>
-            <text fg={context.theme.text.muted} wrapMode="none" truncate flexShrink={1} minWidth={0}>
+            <text fg={context.theme.text.muted} wrapMode="none" truncate flexShrink={1} minWidth={0} marginRight={-1}>
               <For each={servers()}>
                 {(server, index) => (
                   <>
@@ -33,8 +33,8 @@ export default {
                   </>
                 )}
               </For>
-              {/* Sits in the middle of the footer's two-space gap, before the next section. */}
-              {"  ·"}
+              {/* The -1 right margin shrinks the footer's two-space gap to one, so sections read "a · b". */}
+              {" ·"}
             </text>
           </Show>
         );
