@@ -12,7 +12,7 @@ export interface QuotaReply {
   buckets: Bucket[];
 }
 
-const labels = { five_hour: "sess", seven_day: "week" };
+const labels = { five_hour: "s", seven_day: "w" };
 
 // A null reply means Meridian couldn't be reached.
 export function usage(

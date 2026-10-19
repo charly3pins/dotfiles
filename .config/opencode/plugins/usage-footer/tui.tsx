@@ -41,6 +41,8 @@ export default {
                   </>
                 )}
               </For>
+              {/* Sits in the middle of the footer's two-space gap, before the context window section. */}
+              {"  ·"}
             </text>
           </Show>
         );
