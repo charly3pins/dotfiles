@@ -15,39 +15,39 @@ const reply = (session: object = {}, week: object = {}) => ({
 
 test("below 80% the footer shows the session and the week as percentages only", () => {
   assert.deepEqual(usage(reply(), options), [
-    { text: "sess 12%", tone: "normal" },
-    { text: "week 15%", tone: "normal" },
+    { text: "s 12%", tone: "normal" },
+    { text: "w 15%", tone: "normal" },
   ]);
 });
 
 test("from 80% a limit turns yellow and shows when it resets, to the minute, as Claude's usage page does", () => {
   assert.deepEqual(usage(reply({ utilization: 0.85 }, { utilization: 0.8 }), options), [
-    { text: "sess 85% (resets Tue 01:20)", tone: "warning" },
-    { text: "week 80% (resets Sun 09:00)", tone: "warning" },
+    { text: "s 85% (resets Tue 01:20)", tone: "warning" },
+    { text: "w 80% (resets Sun 09:00)", tone: "warning" },
   ]);
 });
 
 test("a limit that resets later today shows just the time", () => {
   const inTwoHours = options.now + 2 * 60 * 60 * 1000;
   assert.deepEqual(usage(reply({ utilization: 0.9, resetsAt: inTwoHours }), options)[0], {
-    text: "sess 90% (resets 23:25)",
+    text: "s 90% (resets 23:25)",
     tone: "warning",
   });
 });
 
 test("at the limit it turns red, also when Meridian reports the limit hit just short of 100%", () => {
   assert.deepEqual(usage(reply({ utilization: 0.97, status: "rejected" }, { utilization: 1 }), options), [
-    { text: "sess 97% (resets Tue 01:20)", tone: "error" },
-    { text: "week 100% (resets Sun 09:00)", tone: "error" },
+    { text: "s 97% (resets Tue 01:20)", tone: "error" },
+    { text: "w 100% (resets Sun 09:00)", tone: "error" },
   ]);
 });
 
 test("a limit past 80% that Meridian has no reset time for still turns yellow, without one", () => {
-  assert.deepEqual(usage(reply({ utilization: 0.85, resetsAt: null }), options)[0], { text: "sess 85%", tone: "warning" });
+  assert.deepEqual(usage(reply({ utilization: 0.85, resetsAt: null }), options)[0], { text: "s 85%", tone: "warning" });
 });
 
 test("shows nothing for a limit Meridian has no figures for, or at all when Meridian can't be reached", () => {
-  assert.deepEqual(usage(reply({ utilization: null }), options), [{ text: "week 15%", tone: "normal" }]);
+  assert.deepEqual(usage(reply({ utilization: null }), options), [{ text: "w 15%", tone: "normal" }]);
   assert.deepEqual(usage({ buckets: [] }, options), []);
   assert.deepEqual(usage(null, options), []);
 });
