@@ -84,8 +84,14 @@ Use skills when relevant. Invoke manually with `ctrl+k` or `/skill-name`.
 ## Session Titles
 
 - The `tab-status` plugin titles new sessions `<square> <TICKET> <up to 5 words>`, e.g. `🟥 ABC-123 Login redirect fix`
-- 🟥 debugging and the fix that follows, 🟩 implementing a feature, 🟦 reading docs, PRDs or tickets, 🟨 anything else
-- When the kind of work or the topic changes, rename the session with `session_rename` in the same format; never in subagents
+- Pick the square from what the current step does; the first match wins:
+  - ⬜ the workbench, not the product: OpenCode, Claude Code, the terminal, plugins and skills, git/gcloud/VDI trouble, team reports, Jira or ticket-tracker admin
+  - 🟥 investigating or fixing something broken in the product: bugs, incidents, alerts, log triage, failing builds; a bug ticket is 🟥 from the first message
+  - 🟨 a finished change waits on a go/no-go: reviewing someone else's PR, QA in a team environment, "is it safe to ship", release order, deploy or release watch
+  - 🟩 writing a change: features, scope changes, scripts, collections, side projects
+  - 🟦 reading or answering, with nothing broken and nothing being changed: PRDs, ticket summaries, "how does X work", feasibility, overviews and cheatsheets, audits, drafting tickets
+- The user's own fix or feature keeps its 🟥 or 🟩 through its PR and self-review, and turns 🟨 at QA or release
+- When the square or the topic changes, rename the session with `session_rename` in the same format; never in subagents
 
 ## General
 
