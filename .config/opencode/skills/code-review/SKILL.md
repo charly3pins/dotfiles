@@ -35,7 +35,7 @@ Before going further, confirm the target resolves (`git rev-parse <point>`, or `
 Look for the originating spec, in this order:
 
 1. A path or ticket the user passed as an argument.
-2. A ticket key in the PR title, branch name or commit messages (`ABC-123`, `XY-42`, any case). Look it up in your ticket tracker first, with its MCP tools (the request and its comments); not found → Jira. If the lookup fails, say which key could not be resolved.
+2. A ticket key in the PR title, branch name or commit messages (`ABC-123`, `XY-42`, any case). Look it up with the MCP tools of whichever ticket tracker is connected (the ticket and its comments). If no tracker is connected or the lookup fails, say which key could not be resolved.
 3. GitHub issue references in the commit messages (`#123`, `Closes #45`). Fetch the issue body and comments via `gh issue view`.
 4. PR mode: the PR's `## Summary`. Label it as the author's own description, not an independent spec.
 5. A spec file under `docs/`, `specs/`, `thoughts/`, or `.scratch/` matching the branch name or feature.
@@ -67,11 +67,11 @@ Each smell reads *what it is* then *how to fix*; match it against the diff:
 
 ### 3b. Existing review (PR mode only)
 
-Look for `/sh:review-pr`'s marker in the PR body, `<!-- sh:open-pr reviewed=<sha> -->`, and compare its sha to `headRefOid`:
+Some projects run a bug/risk review before merge that leaves a marker in the PR body, `<!-- <name> reviewed=<sha> -->` (for example `<!-- sh:open-pr reviewed=<sha> -->`). Look for one and compare its sha to `headRefOid`:
 
 - **Same sha**: the bug/risk review is current. Pass its `## Code review` table to every sub-agent as already reported, so they don't repeat it.
 - **Different sha**: the review is stale. Note it, and run the Risk sub-agent.
-- **No marker**: `/sh:review-pr` never ran. Note it, and run the Risk sub-agent.
+- **No marker**: no earlier review. Run the Risk sub-agent.
 
 Pass the other reviewers' comments (`reviews`, `comments`) to the sub-agents too, for the same reason: no repeats.
 
@@ -111,7 +111,7 @@ Present findings in this table format. Only issues; skip praise and "looks good"
 
 Below the table, a one-line summary: total findings per axis, and the worst issue within each axis (if any). Don't pick a single winner across axes: that's the reranking the separation exists to prevent.
 
-PR mode adds one line on the existing review: "`/sh:review-pr` current at `abc1234`, its 3 findings not repeated", "stale: reviewed `abc1234`, head is `def5678`", or "never run".
+PR mode adds one line on the existing review: "current at `abc1234`, its 3 findings not repeated", "stale: reviewed `abc1234`, head is `def5678`", or "none".
 
 ### 6. Draft review comments (PR mode only)
 
@@ -124,4 +124,4 @@ A change can pass one axis and fail the other:
 - Code that follows every standard but implements the wrong thing: **Standards pass, Spec fail.**
 - Code that does exactly what the issue asked but breaks the project's conventions: **Spec pass, Standards fail.**
 
-Reporting them separately stops one axis from masking the other. Risk is a third, separate axis, and it runs only when `/sh:review-pr` has not already covered the PR's head.
+Reporting them separately stops one axis from masking the other. Risk is a third, separate axis, and it runs only when no earlier review already covers the PR's head.
