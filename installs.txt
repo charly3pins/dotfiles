@@ -170,10 +170,10 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 
 DIRENV
 sudo apt install direnv
-ln -sf ~/dotfiles/.config/opencode/sword.json ~/.config/opencode/sword.json
-ln -sf ~/dotfiles/.config/opencode/code.json ~/.config/opencode/code.json
-ln -sf ~/dotfiles/envrc/code.envrc ~/Code/.envrc
-ln -sf ~/dotfiles/envrc/sword.envrc ~/Code/SWORD/.envrc
+
+OPENCODE PER-FOLDER CONFIG (OpenCode reads opencode.json from every parent folder)
+ln -sf ~/dotfiles/.config/opencode/code.json ~/Code/opencode.json
+ln -sf ~/dotfiles/.config/opencode/sword.json ~/Code/SWORD/opencode.json
 
 Pi
 curl -fsSL https://pi.dev/install.sh | sh

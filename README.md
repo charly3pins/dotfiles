@@ -18,7 +18,6 @@ dotfiles/
 │   ├── rofi/          # Application launcher
 │   ├── tmux/          # Terminal multiplexer
 │   └── zsh/           # Shell config
-├── envrc/             # direnv environments
 ├── installs.txt       # Fresh machine setup steps
 └── .gitignore
 ```
