@@ -54,7 +54,7 @@ Single-agent setup with plan/build modes and skills for a full feature developme
 - `cli.json`: terminal settings: theme, keybinds, session tabs, alerts
 - `AGENTS.md`: global rules, skill table, workflows, conventions
 - `skills/`: skill definitions (one directory per skill)
-- `plugins/tab-status/`: titles each new session by kind of work: 🟥 debugging, 🟩 feature, 🟦 docs, PRDs or tickets, 🟨 other. Test: `node --test plugins/tab-status/index.test.ts`
+- `plugins/tab-status/`: titles each new session by what it does, the first match winning: ⬜ the workbench, 🟥 something broken, 🟨 a change waiting on a go/no-go, 🟩 writing a change, 🟦 reading or answering. Test: `node --test plugins/tab-status/index.test.ts`
 - `plugins/mcp-footer/`: shows every MCP server in the prompt footer, as a dot coloured by its state like in the sidebar, so the sidebar can stay hidden. Test: `node --test plugins/mcp-footer/dots.test.ts`
 - `plugins/skill-commands/`: adds a `/<name>` command for each skill in `skills/`, with the skill attached, like `/sh:<name>`. New or deleted skills need `opencode service restart`. Test: `node --test plugins/skill-commands/index.test.ts`
 - `plugins/usage-footer/`: shows your Claude plan's usage in the prompt footer, `s 15% / w 16%` for the 5-hour session and the week, read from the Meridian proxy that `opencode-with-claude` runs. From 80% a limit turns yellow and says when it resets; at the limit it turns red. Test: `node --test plugins/usage-footer/usage.test.ts`
