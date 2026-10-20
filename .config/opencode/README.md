@@ -20,7 +20,6 @@ Single-agent setup with plan/build modes and skills for a full feature developme
 | `code-review` | Two-axis review (Standards + Spec) with Fowler smell baseline |
 | `retro` | Session retrospective to improve the agent environment |
 | `handoff` | Compact context for the next session |
-| `sh-open-pr` | Commit, review, push, open/update a PR (gitignored) |
 
 ## Workflows
 
@@ -51,6 +50,7 @@ Single-agent setup with plan/build modes and skills for a full feature developme
 ## Configuration
 
 - `opencode.json`: model and MCP config
+- `code.json` / `sword.json`: per-folder overrides, symlinked as `~/Code/opencode.json` and `~/Code/SWORD/opencode.json`. OpenCode merges every `opencode.json` from the session's folder up to `/`, so Sword projects get both and `sword.json` wins. `sword.json` also loads the work plugin, keeping its skills and MCP servers out of personal projects. If the plugin's installer links it into `plugins/` again, delete that link: everything there loads in every project.
 - `cli.json`: terminal settings: theme, keybinds, session tabs, alerts
 - `AGENTS.md`: global rules, skill table, workflows, conventions
 - `skills/`: skill definitions (one directory per skill)
@@ -82,7 +82,6 @@ Context7 is enabled by default for library docs. Add others as needed in `openco
     ├── grill-me/SKILL.md
     ├── handoff/SKILL.md
     ├── retro/SKILL.md
-    ├── sh-open-pr/SKILL.md
     ├── tdd/SKILL.md
     │   ├── tests.md
     │   └── mocking.md
