@@ -58,6 +58,7 @@ Single-agent setup with plan/build modes and skills for a full feature developme
 - `plugins/mcp-footer/`: shows every MCP server in the prompt footer, as a dot coloured by its state like in the sidebar, so the sidebar can stay hidden. Test: `node --test plugins/mcp-footer/dots.test.ts`
 - `plugins/skill-commands/`: adds a `/<name>` command for each skill in `skills/`, with the skill attached, like `/sh:<name>`. New or deleted skills need `opencode service restart`. Test: `node --test plugins/skill-commands/index.test.ts`
 - `plugins/usage-footer/`: shows your Claude plan's usage in the prompt footer, `s 15% / w 16%` for the 5-hour session and the week, read from the Meridian proxy that `opencode-with-claude` runs. From 80% a limit turns yellow and says when it resets; at the limit it turns red. Test: `node --test plugins/usage-footer/usage.test.ts`
+- `plugins/copilot-oauth-only/`: stops OpenCode treating `GITHUB_TOKEN` as a GitHub Copilot login, so the token you export for `gh` and npm doesn't fill `/models` with Copilot models. Signing in to Copilot with `/connect` still works. A new plugin folder needs `opencode service restart`. Test: `node --test plugins/copilot-oauth-only/index.test.ts`
 
 ### MCPs
 
@@ -72,6 +73,7 @@ Context7 is enabled by default for library docs. Add others as needed in `openco
 ├── AGENTS.md              # Global rules and workflows
 ├── README.md              # This file
 ├── plugins/
+│   ├── copilot-oauth-only/ # GITHUB_TOKEN isn't a Copilot login
 │   ├── mcp-footer/        # MCP servers in the prompt footer
 │   ├── skill-commands/    # A /<name> command per skill
 │   ├── tab-status/        # Session titles by kind of work
