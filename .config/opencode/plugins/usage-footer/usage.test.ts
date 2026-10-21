@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { usage } from "./usage.ts";
+import { usage, type QuotaReply } from "./usage.ts";
 
 // Meridian's GET /v1/usage/quota reply, trimmed, as read on Monday 19 October at 21:25. Claude's usage page showed
 // these two limits as "Resets Tue 1:20 AM" and "Resets Sunday 9:00 AM".
@@ -50,4 +50,8 @@ test("shows nothing for a limit Meridian has no figures for, or at all when Meri
   assert.deepEqual(usage(reply({ utilization: null }), options), [{ text: "w 15%", tone: "normal" }]);
   assert.deepEqual(usage({ buckets: [] }, options), []);
   assert.deepEqual(usage(null, options), []);
+});
+
+test("shows nothing when the reply has no buckets, e.g. from another service on Meridian's port", () => {
+  assert.deepEqual(usage({} as QuotaReply, options), []);
 });

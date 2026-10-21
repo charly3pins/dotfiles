@@ -6,7 +6,7 @@
  */
 import type { Plugin } from "@opencode/plugin";
 
-const squares: Record<string, string> = { gray: "⬜", red: "🟥", yellow: "🟨", green: "🟩", blue: "🟦" };
+const squares: Record<string, string> = { gray: "⬜", grey: "⬜", red: "🟥", yellow: "🟨", green: "🟩", blue: "🟦" };
 
 const instructions = `You title a coding session so the user can find it in a row of tabs. Reply with one line and nothing else:
 
@@ -48,10 +48,11 @@ export default {
         .flatMap((part) => (part.type === "text" ? [part.text] : []))
         .join("\n\n");
       const { text } = await ctx.generate.text({ model: event.model, prompt: instructions + said });
-      // Models like to wrap the reply in **…** or quotes, and may skip the color or make one up. Blue is the color
-      // left when no other matches.
-      const reply = text.replace(/[*`"]/g, "").trim();
-      const [, color = "", title = reply] = reply.match(/^(\w+)\s*\|\s*(.+)$/) ?? [];
+      // Models like to wrap the reply in **…** or quotes, add a line before or after it, and may skip the color or
+      // make one up. Blue is the color left when no other matches.
+      const lines = text.replace(/[*`"]/g, "").split("\n").map((line) => line.trim()).filter(Boolean);
+      const line = lines.find((candidate) => /^\w+\s*\|/.test(candidate)) ?? lines[0] ?? "";
+      const [, color = "", title = line] = line.match(/^(\w+)\s*\|\s*(.+)$/) ?? [];
       event.result = `${squares[color.toLowerCase()] ?? squares.blue} ${title}`;
     });
   },

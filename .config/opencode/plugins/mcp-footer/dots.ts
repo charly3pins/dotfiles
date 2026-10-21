@@ -12,5 +12,5 @@ const tones: Record<McpServer["status"]["status"], Tone> = {
 };
 
 export function dots(servers: readonly McpServer[]): { name: string; tone: Tone }[] {
-  return servers.map((server) => ({ name: server.name, tone: tones[server.status.status] }));
+  return servers.map((server) => ({ name: server.name, tone: tones[server.status.status] ?? "muted" }));
 }

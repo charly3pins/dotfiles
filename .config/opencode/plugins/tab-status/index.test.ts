@@ -41,6 +41,10 @@ test("the other colors get their squares: ⬜ gray, 🟨 yellow, 🟩 green, �
   assert.equal((await titleSession("blue | XY-42 PRD feasibility")).title, "🟦 XY-42 PRD feasibility");
 });
 
+test("grey, the British spelling, gets ⬜ like gray", async () => {
+  assert.equal((await titleSession("grey | Terminal tab colors")).title, "⬜ Terminal tab colors");
+});
+
 test("the **…**, quotes and capitals the model adds don't reach the title", async () => {
   assert.equal((await titleSession("**Green | Dark mode toggle**\n")).title, "🟩 Dark mode toggle");
   assert.equal((await titleSession('"red | `auth-service` 500 errors"')).title, "🟥 auth-service 500 errors");
@@ -49,4 +53,10 @@ test("the **…**, quotes and capitals the model adds don't reach the title", as
 test("a reply without a known color still makes a title, with 🟦, the color left when no other matches", async () => {
   assert.equal((await titleSession("Release notes")).title, "🟦 Release notes");
   assert.equal((await titleSession("orange | Release notes")).title, "🟦 Release notes");
+});
+
+test("a reply that runs past one line is titled from its color line, or else its first line", async () => {
+  assert.equal((await titleSession("green | Dark mode toggle\nThe user wants a dark theme.")).title, "🟩 Dark mode toggle");
+  assert.equal((await titleSession("Here is the title:\ngreen | Dark mode toggle")).title, "🟩 Dark mode toggle");
+  assert.equal((await titleSession("Release notes\nfor the next version")).title, "🟦 Release notes");
 });
