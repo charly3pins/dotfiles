@@ -20,7 +20,7 @@ export function usage(
   options: { now: number; timeZone?: string },
 ): { text: string; tone: Tone }[] {
   return Object.entries(labels).flatMap(([type, label]) => {
-    const bucket = reply?.buckets.find((candidate) => candidate.type === type);
+    const bucket = reply?.buckets?.find((candidate) => candidate.type === type);
     if (bucket?.utilization == null) return [];
     const percent = Math.round(bucket.utilization * 100);
     const tone = bucket.status === "rejected" || percent >= 100 ? "error" : percent >= 80 ? "warning" : "normal";

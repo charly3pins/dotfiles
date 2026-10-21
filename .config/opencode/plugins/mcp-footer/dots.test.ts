@@ -27,3 +27,8 @@ test("as in the sidebar, a failed server is red, one waiting for you to sign in 
     { name: "playwright", tone: "muted" },
   ]);
 });
+
+test("a status OpenCode adds after this footer was written gets a grey dot", () => {
+  const servers = [{ name: "github", status: { status: "reconnecting" } }];
+  assert.deepEqual(dots(servers as never), [{ name: "github", tone: "muted" }]);
+});
