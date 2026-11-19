@@ -1,9 +1,10 @@
-local opencode_cmd = "opencode --port"
+local opencode_cmd = "opencode"
 local sidebar = { win = { position = "right", width = 0.4 } }
 
 return {
   "nickjvandyke/opencode.nvim",
-  version = "*",
+  -- main supports OpenCode v2; tagged releases are v1-only
+  branch = "main",
   event = "VeryLazy",
   dependencies = {
     {
@@ -42,13 +43,5 @@ return {
     vim.keymap.set("n", "goo", function()
       return require("opencode").operator "@this " .. "_"
     end, { desc = "Add line to opencode", expr = true })
-
-    vim.keymap.set("n", "<S-C-u>", function()
-      require("opencode").command "session.half.page.up"
-    end, { desc = "Scroll opencode up" })
-
-    vim.keymap.set("n", "<S-C-d>", function()
-      require("opencode").command "session.half.page.down"
-    end, { desc = "Scroll opencode down" })
   end,
 }
