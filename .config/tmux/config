@@ -42,6 +42,9 @@ bind-key -T copy-mode-vi 'v' send -X begin-selection
 bind-key -T copy-mode-vi 'y' send -X copy-selection
 bind-key -n C-S-v paste-buffer
 
+# let programs inside panes (e.g. nvim over ssh) set the laptop clipboard via OSC 52
+set -s set-clipboard on
+
 unbind -T copy-mode-vi MouseDragEnd1Pane # don't exit copy mode when dragging with mouse
 
 # remove delay for exiting insert mode with ESC in Neovim
