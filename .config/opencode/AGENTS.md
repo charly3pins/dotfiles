@@ -23,7 +23,7 @@ Use skills when relevant. Invoke manually with `ctrl+k` or `/skill-name`.
 2. **To-PRD**: synthesize into a structured PRD
 3. **To-Issues**: break into vertical slices (tracer bullets)
 4. **TDD**: implement each slice test-first
-5. **Code-review**: review the diff against standards and spec
+5. **Code-review**: review the diff against spec and risk
 
 ## Workflow: Bugs
 
