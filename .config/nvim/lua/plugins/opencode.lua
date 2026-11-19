@@ -32,6 +32,26 @@ return {
       require("opencode").ask "@this: "
     end, { desc = "Ask opencode about this" })
 
+    -- Types "path:Lx-Ly " into the sidebar input without submitting, so it can't land in another session
+    vim.keymap.set({ "n", "x" }, "<leader>oo", function()
+      local a, b = vim.fn.line ".", vim.fn.line "v"
+      if vim.fn.mode() == "n" then
+        b = a
+      end
+      local ref = require("opencode").format {
+        buf = 0,
+        from = { math.min(a, b) },
+        to = { math.max(a, b) },
+        rel = vim.fn.getcwd(),
+      }
+      if not ref then
+        return
+      end
+      local term = require("snacks.terminal").get(opencode_cmd, sidebar)
+      vim.api.nvim_chan_send(vim.bo[term.buf].channel, ref .. " ")
+      term:focus()
+    end, { desc = "Put code reference in opencode sidebar" })
+
     vim.keymap.set({ "n", "x" }, "<leader>os", function()
       require("opencode").select()
     end, { desc = "opencode prompts (explain/review/test…)" })
